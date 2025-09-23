@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+    <style>
+        .action-btn { margin-right: 8px; }
+    </style>
+    <th:block layout:fragment="styles"></th:block>
+</head>
+<body>
+<div layout:fragment="admin-content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Categories</h3>
+        <form class="d-flex" method="get" th:action="@{/admin/categories}">
+            <input class="form-control form-control-sm me-2" type="search" name="q" placeholder="Search by name" th:value="${q}">
+            <button class="btn btn-outline-secondary btn-sm me-2" type="submit"><i class="fa fa-search"></i></button>
+            <a class="btn btn-primary btn-sm" th:href="@{/admin/categories/create}"><i class="fa fa-plus me-1"></i>Add</a>
+        </form>
+    </div>
+
+    <th:block th:replace="~{layout/admin/main :: flashMessages}"></th:block>
+
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th class="text-end">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c, i : ${categories}">
+                <td th:text="${i.index + 1}"></td>
+                <td th:text="${c.name}"></td>
+                <td th:text="${c.description}"></td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-secondary action-btn" th:href="@{'/admin/categories/edit/' + ${c.id}}">
+                        <i class="fa fa-pen"></i>
+                    </a>
+                    <form th:action="@{'/admin/categories/delete/' + ${c.id}}" method="post" class="d-inline delete-form">
+                        <button type="button" class="btn btn-sm btn-danger btn-delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(categories)}">
+                <td colspan="4" class="text-center text-muted">No data</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav th:if="${page != null && page.totalPages > 1}" aria-label="Pagination">
+        <ul class="pagination pagination-sm justify-content-end">
+            <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+                <a class="page-link" th:href="@{/admin/categories(page=${page.number-1}, size=${page.size}, q=${q})}" aria-label="Previous">&laquo;</a>
+            </li>
+            <li class="page-item" th:each="i : ${#numbers.sequence(0, page.totalPages-1)}" th:classappend="${i==page.number} ? 'active'">
+                <a class="page-link" th:text="${i+1}" th:href="@{/admin/categories(page=${i}, size=${page.size}, q=${q})}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+                <a class="page-link" th:href="@{/admin/categories(page=${page.number+1}, size=${page.size}, q=${q})}" aria-label="Next">&raquo;</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<th:block layout:fragment="scripts">
+    <script>
+        $(function(){
+            $(document).on('click', '.btn-delete', function(){
+                const form = $(this).closest('form');
+                Swal.fire({
+                    title: 'Delete this category?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete',
+                    cancelButtonText: 'Cancel'
+                }).then((res)=>{ if(res.isConfirmed){ form.submit(); } });
+            });
+        });
+    </script>
+</th:block>
+</body>
+</html>
+
+

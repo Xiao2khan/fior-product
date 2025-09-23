@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer th:fragment="website-footer" class="mt-5 bg-dark text-light">
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-sm-6">
+                <h5 class="mb-3">Fiordelisi</h5>
+                <p class="mb-0 small">© <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span> Fiordelisi. All rights reserved.</p>
+            </div>
+            <div class="col-sm-6 text-sm-end mt-3 mt-sm-0">
+                <a class="text-decoration-none text-light me-3" th:href="@{/privacy}" th:text="#{footer.privacy}">Privacy</a>
+                <a class="text-decoration-none text-light" th:href="@{/terms}" th:text="#{footer.terms}">Terms</a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
+
+

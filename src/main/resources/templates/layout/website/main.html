@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} ?: 'Fiordelisi'"></title>
+    <th:block th:replace="~{layout/libs :: common-libs}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/website/style.css}">
+</head>
+<body>
+
+<th:block th:replace="~{layout/website/header :: website-header}"></th:block>
+
+<main class="site-content">
+    <div class="container py-4">
+        <div layout:fragment="website-content">
+            <!-- Content will be inserted here -->
+        </div>
+    </div>
+    
+</main>
+
+<th:block th:replace="~{layout/website/footer :: website-footer}"></th:block>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function(){
+        const links = document.querySelectorAll('.lang-switch');
+        links.forEach(function(link){
+            link.addEventListener('click', function(e){
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                const url = new URL(window.location.href);
+                const segments = url.pathname.split('/').filter(Boolean);
+                if (segments.length === 0) {
+                    segments.unshift(lang);
+                } else {
+                    if (segments[0] === 'en' || segments[0] === 'vi') {
+                        segments[0] = lang;
+                    } else {
+                        segments.unshift(lang);
+                    }
+                }
+                url.pathname = '/' + segments.join('/');
+                window.location.assign(url.toString());
+            });
+        });
+    });
+</script>
+
+<th:block layout:fragment="scripts"></th:block>
+</body>
+</html>
+
+

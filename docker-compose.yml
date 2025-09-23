@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-fiordelisi-product
+    restart: always
+    ports:
+      - "27029:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: fiordelisiproduct
+      MONGO_INITDB_DATABASE: fiordelisi-product
+      timeout: 10s
+      retries: 5
+    networks:
+      - fiordelisi-product-network
+    volumes:
+      - mongodb_fiordelisi_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+volumes:
+  mongodb_fiordelisi_data:
+networks:
+  fiordelisi-product-network:
+    driver: bridge

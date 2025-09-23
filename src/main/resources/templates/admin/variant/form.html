@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Variant</title>
+</head>
+<body>
+<div layout:fragment="admin-content">
+    <h3 th:text="${variant.id} != null ? 'Edit Variant' : 'Create Variant'"></h3>
+
+    <form th:action="${variant.id} != null ? @{'/admin/products/' + ${product.id} + '/variants/edit/' + ${variant.id}} : @{'/admin/products/' + ${product.id} + '/variants/create'}"
+          method="post"
+          th:object="${variant}">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Size (gram)</label>
+                <input type="number" min="0" class="form-control" th:field="*{sizeGram}" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('sizeGram')}" th:errors="*{sizeGram}"></div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Price (cents)</label>
+                <input type="number" min="0" class="form-control" th:field="*{priceCents}" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('priceCents')}" th:errors="*{priceCents}"></div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Quantity</label>
+                <input type="number" min="0" class="form-control" th:field="*{quantity}" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-primary" type="submit"><i class="fa fa-save me-1"></i>Save</button>
+            <a class="btn btn-secondary" th:href="@{'/admin/products/' + ${product.id} + '/variants'}">Back</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+
+

@@ -1,0 +1,15 @@
+/* Basic website styles */
+.site-hero {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.site-content {
+  min-height: 60vh;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+

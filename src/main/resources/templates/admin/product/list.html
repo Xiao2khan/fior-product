@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<div layout:fragment="admin-content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Products</h3>
+        <form class="d-flex" method="get" th:action="@{/admin/products}">
+            <input class="form-control form-control-sm me-2" type="search" name="q" placeholder="Search by name" th:value="${q}">
+            <button class="btn btn-outline-secondary btn-sm me-2" type="submit"><i class="fa fa-search"></i></button>
+            <a class="btn btn-primary btn-sm" th:href="@{/admin/products/create}"><i class="fa fa-plus me-1"></i>Add</a>
+        </form>
+    </div>
+
+    <th:block th:replace="~{layout/admin/main :: flashMessages}"></th:block>
+
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Image</th>
+                <th class="text-end">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p, i : ${products}">
+                <td th:text="${i.index + 1}"></td>
+                <td th:text="${p.name}"></td>
+                <td>
+                    <span th:text="${categoryMap[p.categoryId]}"></span>
+                </td>
+                <td>
+                    <img th:if="${p.image}" th:src="${p.image}" alt="image" style="height:40px">
+                </td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-info me-1" th:href="@{'/admin/products/' + ${p.id} + '/variants'}" title="View Variants">
+                        <i class="fa fa-layer-group"></i>
+                    </a>
+                    <a class="btn btn-sm btn-success me-1" th:href="@{'/admin/products/' + ${p.id} + '/variants/create'}" title="Create Variant">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <a class="btn btn-sm btn-secondary me-1" th:href="@{'/admin/products/edit/' + ${p.id}}" title="Edit Product">
+                        <i class="fa fa-pen"></i>
+                    </a>
+                    <form th:action="@{'/admin/products/delete/' + ${p.id}}" method="post" class="d-inline delete-form">
+                        <button type="button" class="btn btn-sm btn-danger btn-delete" title="Delete Product">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(products)}">
+                <td colspan="5" class="text-center text-muted">No data</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav th:if="${page != null && page.totalPages > 1}" aria-label="Pagination">
+        <ul class="pagination pagination-sm justify-content-end">
+            <li class="page-item" th:classappend="${page.first} ? 'disabled'">
+                <a class="page-link" th:href="@{/admin/products(page=${page.number-1}, size=${page.size}, q=${q})}" aria-label="Previous">&laquo;</a>
+            </li>
+            <li class="page-item" th:each="i : ${#numbers.sequence(0, page.totalPages-1)}" th:classappend="${i==page.number} ? 'active'">
+                <a class="page-link" th:text="${i+1}" th:href="@{/admin/products(page=${i}, size=${page.size}, q=${q})}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${page.last} ? 'disabled'">
+                <a class="page-link" th:href="@{/admin/products(page=${page.number+1}, size=${page.size}, q=${q})}" aria-label="Next">&raquo;</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<th:block layout:fragment="scripts">
+    <script>
+        $(function(){
+            $(document).on('click', '.btn-delete', function(){
+                const form = $(this).closest('form');
+                Swal.fire({
+                    title: 'Delete this product?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete',
+                    cancelButtonText: 'Cancel'
+                }).then((res)=>{ if(res.isConfirmed){ form.submit(); } });
+            });
+        });
+    </script>
+</th:block>
+</body>
+</html>
+
+

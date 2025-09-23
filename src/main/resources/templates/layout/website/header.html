@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="website-header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/{lang}(lang=${#locale.language})}" th:text="#{app.title}">Fiordelisi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarWebsite"
+                    aria-controls="navbarWebsite" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarWebsite">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/{lang}(lang=${#locale.language})}" th:text="#{nav.home}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/{lang}/products(lang=${#locale.language})}" th:text="#{nav.products}">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/{lang}/about(lang=${#locale.language})}" th:text="#{nav.about}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/{lang}/contact(lang=${#locale.language})}" th:text="#{nav.contact}">Contact</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="me-1">🌐</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
+                            <li><a class="dropdown-item lang-switch" href="#" data-lang="en" th:text="#{nav.language.en}">English</a></li>
+                            <li><a class="dropdown-item lang-switch" href="#" data-lang="vi" th:text="#{nav.language.vi}">Vietnamese</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="site-hero">
+        <div class="container py-4">
+            <h1 class="h3 m-0" th:text="${pageTitle} ?: #{app.title}"></h1>
+        </div>
+    </div>
+</header>
+</body>
+</html>
+
+

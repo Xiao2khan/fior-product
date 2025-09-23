@@ -1,0 +1,480 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#sidebarCollapse {
+    background: #343a40;
+    border: none;
+}
+
+#sidebarCollapse:hover {
+    background: #2c3136;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+
+:root {
+    --primary-color: #5d9cec; /* Cerulean - Primary action color */
+    --secondary-color: #4a89dc; /* Lapis Lazuli - Darker blue for elements */
+    --accent-color: #4fc1e9; /* Sky Blue - For highlights/accents */
+    --background-color: #f8fafd; /* Very light blue-grey background */
+    --surface-color: #ffffff; /* White for cards, etc. */
+    --text-color: #333333; /* Dark grey */
+    --text-color-light: #757575; /* Medium grey */
+    --border-color: #e0e0e0; /* Light grey border */
+    --shadow-color: rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    --danger-color: #e9573f; /* Cinnabar - Red for destructive actions */
+    --success-color: #8cc152; /* Apple Green - For success messages */
+    --warning-color: #ffb11b; /* Orpiment - For warnings */
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    width: 60px; /* Initial width for icon-only state */
+    background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    color: white;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    height: calc(100vh - 40px);
+    z-index: 1000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 0;
+}
+
+#sidebar.active { /* Style for when sidebar is expanded by click */
+    width: 260px;
+}
+
+#sidebar:hover {
+    width: 260px;
+}
+
+#sidebar .sidebar-header {
+    padding: 25px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 15px 0 20px 0;
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+}
+
+#sidebar .sidebar-header h3 {
+    color: white;
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#sidebar:hover .sidebar-header h3 {
+    opacity: 1;
+}
+
+#sidebar ul.components {
+    padding: 15px 0; /* Vertical padding only */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0; /* No margin on ul.components */
+}
+
+#sidebar ul li {
+    margin-bottom: 15px; /* Consistent spacing between cards */
+    padding: 0 5px; /* Horizontal padding for each card item */
+}
+
+#sidebar ul li:last-child {
+    margin-bottom: 0;
+}
+
+#sidebar ul li a {
+    padding: 12px 13px; /* Adjusted internal padding for the link/card to center icon */
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    white-space: nowrap;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.4); /* Increased background opacity for prominence */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow for better depth */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#sidebar ul li a i {
+    margin-right: 0; /* No margin by default */
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.1em;
+    color: #9e9e9e;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+#sidebar ul li a span {
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s, width 0.3s; /* Transition opacity and width */
+    font-weight: 500;
+    flex-grow: 0;
+    flex-shrink: 1; /* Allow span to shrink */
+    width: 0; /* Hide text by controlling width */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: clip; /* Hide text overflow */
+}
+
+#sidebar:hover ul li a i,
+#sidebar.active ul li a i {
+    margin-right: 15px; /* Add margin when text is visible */
+}
+
+#sidebar:hover ul li a span,
+#sidebar.active ul li a span { /* Show text on hover or when active */
+    opacity: 1;
+    width: auto; /* Allow text to be visible */
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+#sidebar ul li a:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.5); /* Even more opaque on hover */
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateX(5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+}
+
+#sidebar ul li a:hover i {
+    color: white;
+    transform: scale(1.1);
+}
+
+#sidebar ul li.active > a,
+a[aria-expanded="true"] {
+    color: white;
+    background: var(--secondary-color);
+    border-color: var(--accent-color);
+    font-weight: 600;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Stronger shadow for active state */
+}
+
+#sidebar ul li.active > a i {
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Custom scrollbar for sidebar */
+#sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+#sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+#content {
+    width: calc(100% - (60px + 20px + 20px)); /* Initial width: 100% - (sidebar_width + left_margin + right_margin) */
+    padding: 25px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    margin-left: calc(60px + 20px); /* Initial margin-left: sidebar_width + left_margin */
+    flex-grow: 1;
+}
+
+#sidebar:hover + #content { /* Adjust content when sidebar is hovered */
+    width: calc(100% - (260px + 20px + 20px)); /* 100% - (expanded_sidebar_width + left_margin + right_margin) */
+    margin-left: calc(260px + 20px); /* expanded_sidebar_width + left_margin */
+}
+
+#content.active { /* Adjust content when sidebar is expanded by click */
+    width: calc(100% - (260px + 20px + 20px));
+    margin-left: calc(260px + 20px);
+}
+
+.navbar {
+    padding: 12px 25px;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    align-items: center;
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+    color: var(--text-color-light);
+    font-size: 1.3rem;
+    padding: 5px 10px;
+}
+
+.navbar-btn:hover {
+    color: var(--text-color);
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 30px 0;
+}
+
+.card {
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 10px var(--shadow-color);
+    border-radius: 8px; /* Slight rounding */
+    margin-bottom: 25px;
+    background-color: var(--surface-color);
+}
+
+.card-header {
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 18px 25px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.btn {
+    white-space: nowrap;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+    background-color: var(--text-color-light);
+    border-color: var(--text-color-light);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #6a797d;
+    border-color: #6a797d;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.dropdown-menu {
+    box-shadow: 0 2px 10px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 0;
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    color: var(--text-color);
+    transition: background-color 0.2s ease;
+    /* Added for button-like appearance */
+    display: flex;
+    align-items: center;
+    border-radius: 6px; /* Slight rounding */
+    margin: 4px 8px; /* Add some margin to separate */
+}
+
+.dropdown-item i {
+    margin-right: 10px;
+}
+
+.dropdown-item:hover {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Specific styles for dropdown buttons */
+.dropdown-item.btn-change-password {
+    color: var(--secondary-color); /* Use secondary color for change password */
+}
+
+.dropdown-item.btn-change-password:hover {
+    background-color: var(--border-color);
+}
+
+.dropdown-item.btn-logout {
+    color: var(--danger-color); /* Use danger color for logout */
+}
+
+.dropdown-item.btn-logout:hover {
+    background-color: #ffebee; /* Light red background on hover */
+    border-color: #fecdd3;
+    color: var(--danger-color);
+}
+
+.alert {
+    border-radius: 6px;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+
+/* Using defined color variables for alerts */
+.alert-success {
+    background-color: #dff0d8; /* Brighter green */
+    color: #3c763d; /* Darker green text */
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    background-color: #f2dede; /* Brighter red */
+    color: #a94442; /* Darker red text */
+    border-color: #ebccd1;
+}
+
+.alert-warning {
+    background-color: #fcf8e3; /* Brighter yellow */
+    color: #8a6d3b; /* Darker yellow text */
+    border-color: #faebcc;
+}
+
+
+/* Adjustments for small screens */
+@media (max-width: 768px) {
+    #sidebar {
+        top: 10px;
+        left: 10px;
+        height: calc(100vh - 20px);
+        width: 60px; /* Collapsed width for small screens */
+    }
+
+    #sidebar.active {
+        width: 250px; /* Expanded width for small screens on click */
+    }
+
+    #sidebar:hover {
+        width: 250px; /* Expanded width for small screens on hover */
+    }
+
+    #content {
+        width: calc(100% - (60px + 10px + 10px)); /* initial content width on small screen */
+        margin-left: calc(60px + 10px); /* initial content margin-left on small screen */
+        padding: 15px;
+    }
+
+    #sidebar:hover + #content {
+        width: calc(100% - (250px + 10px + 10px));
+        margin-left: calc(250px + 10px);
+    }
+
+    #content.active {
+        width: calc(100% - (250px + 10px + 10px));
+        margin-left: calc(250px + 10px);
+    }
+}
+
+/* Compact form controls and buttons */
+.form-control-sm {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.btn-sm {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    border-radius: 0.5rem;
+}
+
+.pagination-sm .page-link {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.9rem;
+    line-height: 1.35;
+}
+
+.pagination-sm .page-item:first-child .page-link {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+.pagination-sm .page-item:last-child .page-link {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+/* Global rounded corners for consistency */
+.btn, .form-control, .page-link {
+    border-radius: 0.5rem;
+}
