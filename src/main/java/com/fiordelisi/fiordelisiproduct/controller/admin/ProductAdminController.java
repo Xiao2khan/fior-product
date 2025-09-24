@@ -15,9 +15,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 @Controller
 @RequestMapping("/admin/products")
@@ -54,11 +60,30 @@ public class ProductAdminController extends BaseController {
     public String submit(@PathVariable(required = false) String id,
                          @Valid @ModelAttribute("product") ProductDto dto,
                          BindingResult bindingResult,
+                         @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
                          RedirectAttributes ra,
                          Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("categories", categoryService.findAll());
             return "admin/product/form";
+        }
+        // Handle image upload if provided
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                Path uploadDir = Paths.get("uploads");
+                if (!Files.exists(uploadDir)) {
+                    Files.createDirectories(uploadDir);
+                }
+                String originalFilename = imageFile.getOriginalFilename();
+                String filename = System.currentTimeMillis() + "_" + (originalFilename == null ? "image" : originalFilename.replaceAll("\\s+", "_"));
+                Path target = uploadDir.resolve(filename);
+                Files.copy(imageFile.getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
+                // Save the web-accessible path
+                dto.setImage("/uploads/" + filename);
+            } catch (IOException e) {
+                ra.addFlashAttribute("error", "Failed to upload image: " + e.getMessage());
+                return "redirect:/admin/products";
+            }
         }
         dto.setId(id);
         productService.saveFromDto(dto);

@@ -1,0 +1,29 @@
+#navbarWebsite .navbar-nav {
+    gap: 20px;
+}
+
+#navbarWebsite .navbar-nav .nav-item {
+    padding: 10px;
+}
+
+#navbarWebsite .navbar-nav .nav-item:hover {
+    padding: 10px 28px;
+    opacity: 1;
+    border-radius: 500px;
+    background: #DEF8C0;
+    border: 1px solid #B8E99E;
+}
+
+#navbarWebsite .navbar-nav .nav-item .nav-link {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 32px;
+    text-align: center;
+    vertical-align: middle;
+    color: #020808;
+    padding: unset;
+}
+
+#navbarWebsite .navbar-nav .nav-item .nav-link:hover, :active {
+    color: #2C6E1F;
+}
