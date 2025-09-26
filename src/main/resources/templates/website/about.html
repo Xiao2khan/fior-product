@@ -12,10 +12,8 @@
 <div layout:fragment="website-content" class = "container my-5 d-flex flex-column gap-5 about">
     <section class="row align-items-start gy-4 gx-5">
         <div class="col-md-6 order-md-1 text">
-            <h2>Lịch sử của chúng tôi bắt đầu vào năm 1954</h2>
-            <p>Nếu trái đất có thể nói chuyện, nó sẽ kể câu chuyện về Fiodelisi, một câu chuyện bắt đầu vào năm 1954 ở đồng bằng Apulian màu mỡ, Tavoliere, một nơi được biết đến từ thời cổ đại như một nơi màu mỡ cho nông nghiệp.<br>
-                Nó sẽ kể về niềm đam mê và cam kết của Antonio Fiodelisi, toor tiên của gia đình và người snags lập công ty, người đầu tiên cống hiến hết mình cho trồng trọt và sản xuất rau ở những vùng đất trù phú dưới ánh nắng mặt trời đó.
-            </p>
+            <h2 th:text="#{about.section_1.title}"></h2>
+            <p th:text="#{about.section_1.description}"></p>
         </div>
         <div class="col-md-6 order-md-2 text-center image">
             <img th:src="@{/image/image.png}" alt="Antonio Fiodelisi" class = "img-rounded-shadow">
@@ -24,8 +22,8 @@
 
     <section class="row align-items-start gy-4 gx-5 flex-md-row-reverse">
         <div class="col-md-6 text">
-            <h2>Thay đổi qua nhiều thế hệ</h2>
-            <p>Năm 1978, bốn người con của ông ấy đã cùng tham gia vào dự án, vốn đã bắt đầu định hình. Những đồng minh quý giá khi ấy chính là những ánh mặt trời và khí hậu ôn hòa, khô ráo đặt trưng của vùng, đã tạo điều kiện thuận lợi cho những thử nghiệm đầu tiên trong sản xuất và bảo quản cà chua sấy khô - ngày nay trở thành niềm tự hào và sức mạnh của Fiodelisi</p>
+            <h2 th:text="#{about.section_2.title}"></h2>
+            <p th:text="#{about.section_2.description}"></p>
         </div>
         <div class="col-md-6 text-center image">
             <img th:src="@{/image/image_2.png}" alt="" class ="img-rounded-shadow">
@@ -34,9 +32,7 @@
 
     <section class="row align-items-start gy-4 gx-5">
         <div class="col-md-6 text">
-            <p>Khí hậu cùng với đặc tính tự nhiên của đất đai thích hợp cho việc trồng rau và góp phần đền đáp cho sự tận tâm và đam mê của bốn anh em.<br>
-                Đến năm 1995, sau quá trình nghiên cứu sâu rộng và tỉ mỉ nhằm đảm bảo nguồn nguyên liệu thô và chất lượng cao nhất, hoàn toàn tôn trọng thiên nhiên và sự nguyên bản, lô cà chua sấy đầu tiên được ra mắt.
-            </p>
+            <p th:text="#{about.section_3.description}"></p>
         </div>
         <div class="col-md-6 text-center image">
             <img th:src="@{/image/image_3.png}" alt="" class = "img-rounded-shadow">
@@ -45,21 +41,19 @@
 
     <section class="row align-items-start gy-4 gx-5 flex-md-row-reverse">
         <div class="col-md-6 text">
-            <h2>Truyền thống đi cùng đổi mới</h2>
-            <p>Fiordelisi là đơn vị dẫn đầu thị trường châu Âu trong lĩnh vực sản xuất rau củ sấy khô, đặc biệt là vị thế số một không thể tranh cãi về cà chua sấy khô và bán sấy.<br>
-                Ngoài ra, công ty còn cung cấp đa dạng các loại rau củ khác như cà tím, bí ngòi, atisô, ớt chuông và ớt cay, dưới nhiều hình thức như sấy khô hoặc nướng. Danh mục sản phẩm còn bao gồm các sản phẩm bán thành phẩm và thành phẩm như ớt tròn nhồi cá ngừ hoặc phô mai dê, các loại sốt phết và pa-tê hấp dẫn, cũng như ô-liu và những hỗn hợp rau củ sấy khô đậm đà hương vị
-            </p>
+            <h2 th:text="#{about.section_4.title}"></h2>
+            <p th:text="#{about.section_4.description}"></p>
         </div>
         <div class="col-md-6 text-center image">
-            <img th:src="@{/image/image_4.png}" alt="">
+            <img th:src="@{/image/image_4.png}" alt="" class = "img-rounded-shadow">
         </div>
     </section>
 
     <section class="row align-items-stretch gy-4 gx-5">
         <div class="col-md-6 d-flex flex-column justify-content-between">
             <div>
-                <h2>Trách nhiệm xã hội</h2>
-                <p>Trách nhiệm xã hội doanh nghiệp là cam kết của công ty chúng tôi đối với cộng đồng và môi trường nơi mình hoạt động. Fiordelisi luôn nỗ lực không ngừng để cải thiện điều kiện sống của người lao động và sẵn sàng nhận trách nhiệm trong việc giải quyết những vấn đề nhạy cảm, lựa chọn dành một phần nguồn lực của mình để mang lại lợi ích cho cộng đồng.</p>
+                <h2 th:text="#{about.section_5.title}"></h2>
+                <p th:text="#{about.section_5.description}"></p>
             </div>
             <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap mt-3">
                 <img th:src="@{/image/logo_1.png}" alt="" class="img-fluid w-48">
@@ -70,6 +64,7 @@
             <img th:src="@{/image/image_5.png}" alt="" class = "img-rounded-shadow">
         </div>
     </section>
+
 </div>
 </body>
 </html>
