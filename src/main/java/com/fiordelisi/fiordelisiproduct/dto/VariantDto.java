@@ -19,7 +19,7 @@ public class VariantDto {
 
     @NotNull(message = "Please enter price (VND)")
     @Min(value = 0, message = "Price must not be negative")
-    private Integer priceCents;
+    private Integer price;
 
     @NotNull(message = "Please enter quantity")
     @Min(value = 0, message = "Quantity must not be negative")

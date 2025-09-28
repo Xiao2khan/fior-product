@@ -22,7 +22,7 @@ public class UserDto {
     private String email;
 
     @Size(min = 6, message = "Password must be at least 6 characters")
-    private String password; // only required on create
+    private String password;
 }
 
 
