@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<footer th:fragment="website-footer" class="d-flex flex-column footer" style = "gap:100px">
+<footer th:fragment="website-footer" class="footer d-flex flex-column">
 
-    <section class="text-center w-100 ps-5 pe-5 bg-transparent contact" style = "padding: 60px 20px;">
-        <h1 class = "mb-3" th:text="#{contact.title}"></h1>
-        <p th:text="#{contact.description}"></p>
-        <div class="d-flex flex-wrap gap-3 align-items-center justify-content-center form-group">
+    <section class="contact text-center w-100 ps-5 pe-5 bg-transparent" style="padding: 60px 20px;">
+        <h1 th:utext="#{contact.title}" class="mb-3"></h1>
+        <p th:utext="#{contact.description}"></p>
+        <div class="form-group d-flex flex-wrap gap-3 align-items-center justify-content-center">
             <input type="email" th:placeholder="#{contact.placeholder}">
-            <button type = "button" class = "btn btn-outline-success" th:text="#{contact.button}">Gửi</button>
+            <button type="button" class="btn btn-outline-success" th:utext="#{contact.button}">Gửi</button>
         </div>
     </section>
-
 
     <section class="info">
         <div class="container">
             <div class="row align-items-start">
                 <div class="col">
-                    <img th:src="@{/image/image_155.png}" alt="">
-                    <h5 class="mb-3">Fiordelisi</h5>
-                    <p class="mb-0 small">
-                        © <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span> Fiordelisi. All rights reserved.
-                    </p>
-                    <p class="small">Giấy phép KD: 123456789 - Cấp bởi Bộ Công Thương</p>
-                    <img src="/image/logo-bct.png" alt="Logo Bộ Công Thương" style="height:40px; margin-top:10px;">
+                    <img th:src="@{/image/156.png}" alt="" style = "width:165px">
+                    <p th:utext="#{footer.info}"></p>
                 </div>
-                <div class ="col">
-                    <a th:href="@{/privacy}" th:text="#{footer.privacy}"></a>
-                    <a th:href="@{/terms}" th:text="#{footer.terms}"></a>
-                    <a th:href="@{/privacy}" th:text="#{footer.returns}"></a>
-                </div>
-                <div class="col">
-
+                <div class = "col d-flex">
+                    <div class="d-flex flex-column col">
+                        <a th:href="@{/privacy}" th:utext="#{footer.privacy}"></a>
+                        <a th:href="@{/terms}" th:utext="#{footer.terms}"></a>
+                        <a th:href="@{/privacy}" th:utext="#{footer.returns}"></a>
+                    </div>
+                    <div class="d-flex flex-column col">
+                        <p th:utext="#{footer.certificate}"></p>
+                        <img th:src="@{/image/157.png}" alt="" style = "width:165px">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="copyright text-center" style="
+    background-color: #2C6E1F;
+    border-top: 1px solid #fff;
+    padding-top: 15px;
+    color:#fff;
+    ">
+        <p th:text="#{footer.copyright}"></p>
+    </div>
+
+</footer>
+
+
 </footer>
 </body>
 </html>
