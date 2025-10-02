@@ -5,6 +5,7 @@ body {
   font-size: 20px;
 }
 
+
 .site-hero {
   background: #f8f9fa;
   border-bottom: 1px solid #e9ecef;
@@ -18,7 +19,85 @@ footer a:hover {
   text-decoration: underline;
 }
 
-img {
+.hero-section {
   width: 100%;
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100vh;
   object-fit: cover;
+}
+
+.hero-content {
+  gap: 32px;
+  top: 10%;
+  left: 5%;
+  max-width: 90%;
+}
+
+.hero-title {
+  width: 100%;
+  max-width: 319px;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 80px;
+  color: #2C6E1F;
+}
+
+.hero-description {
+  max-width: 624px;
+  font-weight: 600;
+  line-height: 32px;
+  font-size: 18px;
+  color: #222;
+}
+
+.hero-button {
+  display: inline-block;
+  border-radius: 15px;
+  padding: 16px 40px;
+  background: #2C6E1F;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* 🔹 Responsive */
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 48px;
+    line-height: 60px;
+    max-width: 100%;
+  }
+
+  .hero-description {
+    font-size: 16px;
+    line-height: 28px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .hero-content {
+    gap: 16px;
+  }
+  .hero-title {
+    font-size: 32px;
+    line-height: 42px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .hero-button {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
 }
