@@ -45,6 +45,44 @@
             });
         });
     });
+    document.addEventListener("DOMContentLoaded", function() {
+      const desc = document.getElementById("heroDesc");
+      const btn = document.getElementById("toggleDesc");
+
+      function checkScreenSize() {
+        if (window.innerWidth <= 1024) {
+          btn.style.display = "inline-block";
+        } else {
+          btn.style.display = "none";
+          desc.classList.remove("expanded");
+        }
+      }
+
+      btn.addEventListener("click", function() {
+        desc.classList.toggle("expanded");
+        btn.textContent = desc.classList.contains("expanded") ? "Read less" : "Read more";
+      });
+
+      checkScreenSize();
+      window.addEventListener("resize", checkScreenSize);
+    });
+    function toggleDescription(btn) {
+    const card = btn.closest(".product-card");
+    const img = card.querySelector(".product-image");
+    const desc = card.querySelector(".product-description");
+
+    if (desc.classList.contains("active")) {
+
+        desc.classList.remove("active");
+        img.classList.remove("hidden");
+        btn.textContent = "+";
+    } else {
+
+        desc.classList.add("active");
+        img.classList.add("hidden");
+        btn.textContent = "-";
+    }
+}
 </script>
 
 <th:block layout:fragment="scripts"></th:block>

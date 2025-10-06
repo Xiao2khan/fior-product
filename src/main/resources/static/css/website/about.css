@@ -11,6 +11,10 @@
     margin-bottom: 20px;
 }
 
+.about .image img {
+    width: 100%;
+}
+
 .text p {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
@@ -26,8 +30,8 @@
 }
 
 /* Logos custom */
-.w-48 {
-    max-width: 48%;
+.w-45 {
+    max-width: 45%;
     height: auto;
 }
 

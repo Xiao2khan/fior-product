@@ -7,13 +7,14 @@
     <link rel="stylesheet" th:href="@{/css/website/about.css}">
     <!-- Bootstrap CSS -->
     <title>Giới Thiệu</title>
+
 </head>
 <body>
 <div layout:fragment="website-content" class = "container my-5 d-flex flex-column gap-5 about">
     <section class="row align-items-start gy-4 gx-5">
         <div class="col-md-6 order-md-1 text">
             <h2 th:text="#{about.section_1.title}"></h2>
-            <p th:text="#{about.section_1.description}"></p>
+            <p th:utext="#{about.section_1.description}"></p>
         </div>
         <div class="col-md-6 order-md-2 text-center image">
             <img th:src="@{/image/image.png}" alt="Antonio Fiodelisi" class = "img-rounded-shadow">
@@ -23,7 +24,7 @@
     <section class="row align-items-start gy-4 gx-5 flex-md-row-reverse">
         <div class="col-md-6 text">
             <h2 th:text="#{about.section_2.title}"></h2>
-            <p th:text="#{about.section_2.description}"></p>
+            <p th:utext="#{about.section_2.description}"></p>
         </div>
         <div class="col-md-6 text-center image">
             <img th:src="@{/image/image_2.png}" alt="" class ="img-rounded-shadow">
@@ -32,7 +33,7 @@
 
     <section class="row align-items-start gy-4 gx-5">
         <div class="col-md-6 text">
-            <p th:text="#{about.section_3.description}"></p>
+            <p th:utext="#{about.section_3.description}"></p>
         </div>
         <div class="col-md-6 text-center image">
             <img th:src="@{/image/image_3.png}" alt="" class = "img-rounded-shadow">
@@ -42,7 +43,7 @@
     <section class="row align-items-start gy-4 gx-5 flex-md-row-reverse">
         <div class="col-md-6 text">
             <h2 th:text="#{about.section_4.title}"></h2>
-            <p th:text="#{about.section_4.description}"></p>
+            <p th:utext="#{about.section_4.description}"></p>
         </div>
         <div class="col-md-6 text-center image">
             <img th:src="@{/image/image_4.png}" alt="" class = "img-rounded-shadow">
@@ -53,11 +54,11 @@
         <div class="col-md-6 d-flex flex-column justify-content-between">
             <div>
                 <h2 th:text="#{about.section_5.title}"></h2>
-                <p th:text="#{about.section_5.description}"></p>
+                <p th:utext="#{about.section_5.description}"></p>
             </div>
-            <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap mt-3">
-                <img th:src="@{/image/logo_1.png}" alt="" class="img-fluid w-48">
-                <img th:src="@{/image/logo_2.png}" alt="" class="img-fluid w-48">
+            <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap" style="width:60%">
+                <img th:src="@{/image/logo_1.png}" alt="" class="img-fluid w-45">
+                <img th:src="@{/image/logo_2.png}" alt="" class="img-fluid w-45">
             </div>
         </div>
         <div class="col-md-6 text-center image">

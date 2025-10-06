@@ -6,21 +6,48 @@
     <section class="hero-section">
         <div class="hero-wrapper position-relative">
             <div class="hero-image">
-                <img th:src="@{/image/image_154.png}" alt="Cà Chua Phơi Nắng">
+                <img th:src="@{/image/image_154.png}" alt="Tomatoes Dried in the Sun">
             </div>
-
             <div class="hero-content position-absolute d-flex flex-column">
-                <h1 class="hero-title">Cà Chua Phơi Nắng</h1>
-
-                <p class="hero-description">
-                    Là sản phẩm 100% của Ý, nó được đặc trưng bởi màu đỏ tươi và tươi và hình dáng thuôn dài. <br>
-                    Nó có kết cấu mềm mại và dễ chịu, nói lên tất cả hương vị của trái đất. Không sử dụng phụ gia hóa học để sấy khô,
-                    chỉ sử dụng ánh nắng mặt trời và muối. Chính xác muối hoạt động như một chất bảo quản tự nhiên, mà không ảnh hưởng
-                    đến sản phẩm, vốn vẫn còn ít nước muối, nhờ một phương pháp ướp muối sáng tạo.
+                <h1 class="hero-title" th:text= "#{home.title}"></h1>
+                <p class="hero-description" id="heroDesc" th:utext="#{home.description}">
                 </p>
-
+                <a href="javascript:void(0)" id="toggleDesc" class="read-more-btn">Read more</a>
                 <div class="hero-button-wrapper d-flex">
-                    <a href="#" class="hero-button">Tìm hiểu thêm</a>
+                    <a href="#" class="hero-button" th:text="#{home.button}">Tìm hiểu thêm</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="hot-products container my-5">
+        <h1 class="hot-products-title text-center mb-4">Sản phẩm hot</h1>
+        <div class="row justify-content-center g-4 hot-products-list">
+            <div class="col-auto" th:each="product : ${hotProducts}">
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <div class="button">
+                            <button class="toggle-btn" onclick="toggleDescription(this)">+</button>
+                        </div>
+                        <div class="toggle-content">
+                            <div class="product-image">
+                                <img th:src="@{${product.image}}" th:alt="${product.name}">
+                            </div>
+                            <div class="product-description" th:text="${product.description}"></div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="product-footer">
+                        <div class="product-text">
+                            <h2 class="product-name" th:text="${product.name}"></h2>
+                            <p class="product-price"
+                               th:text="${product.variants != null and product.variants.size() > 0
+                        ? #numbers.formatDecimal(product.variants[0].priceCents, 0, 'POINT', 0, 'NONE') + ' VNĐ'
+                        : '0 VND'}">
+                            </p>
+                        </div>
+                        <button class="buy-btn">Mua</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,4 +55,3 @@
 </div>
 </body>
 </html>
-
