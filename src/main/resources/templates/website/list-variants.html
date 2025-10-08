@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/website/main}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/website/product-page.css}">
+</head>
+<body>
+<div layout:fragment="website-content">
+    <section class="">
+        <div>
+            <img th:src="@{/image/Frame_1000004965.png}" alt="">
+        </div>
+    </section>
+    <section>
+        <div class="d-flex justify-content-center" style="margin: 40px 0 60px 0">
+            <form method="get" th:action="|/${lang}/products|" class="search-form w-50 position-relative">
+                <input type="hidden" name="categoryId" th:value="${selectedCategoryId}"
+                       th:if="${selectedCategoryId != null}">
+                <input type="hidden" name="sort" th:value="${selectedSort}" th:if="${selectedSort != null}">
+                <input type="hidden" name="page" value="0">
+                <input type="hidden" name="size" th:value="${pageSize}">
+
+                <input type="text" name="search"
+                       th:value="${search}"
+                       class="search-input w-100"
+                       id="searchInput"
+                       style="border:unset; border-radius: 24px;padding: 10px 50px 10px 15px;gap: 8px;opacity: 1;background: rgba(255, 255, 255, 1); box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.08);"
+                       onkeypress="if(event.key==='Enter'){event.preventDefault();this.closest('form').submit();}">
+            </form>
+        </div>
+    </section>
+    <section class="category-section">
+        <div class="category-container container">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="category-list d-flex gap-3">
+                    <div class="category-item">
+                        <a th:href="|/${lang}/products?page=0&size=${pageSize}| + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|"
+                           th:classappend="${selectedCategoryId == null || selectedCategoryId == ''} ? 'active'"
+                           class="category-link">
+                            Tất cả
+                        </a>
+                    </div>
+                    <div class="category-item" th:each="categorie : ${categories}">
+                        <a th:href="|/${lang}/products?page=0&size=${pageSize}&categoryId=${categorie.id}| + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|"
+                           th:text="${categorie.name}"
+                           th:classappend="${selectedCategoryId == categorie.id} ? 'active'"
+                           class="category-link">
+                        </a>
+                    </div>
+                </div>
+                <div class="sort-dropdown">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center justify-content-between"
+                                type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div th:text="${selectedSort == null ? 'Mặc định' : (selectedSort == 'price_asc' ? 'Giá tăng dần' : (selectedSort == 'price_desc' ? 'Giá giảm dần' : (selectedSort == 'name_asc' ? 'Từ A - Z' : (selectedSort == 'name_desc' ? 'Từ Z - A' : 'Mặc định'))))}"></div>
+                            <div><img th:src="@{/image/arrow-down.png}" alt=""></div>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                            <li class="d-flex align-items-center"><a class="dropdown-item"
+                                                                     th:href="|/${lang}/products?page=0&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '')|"
+                                                                     th:classappend="${selectedSort == null} ? 'active'">Mặc
+                                định</a>
+                                <div><img style="transform: rotate(180deg);" th:src="@{/image/arrow-down.png}" alt="">
+                                </div>
+                            </li>
+                            <li><a class="dropdown-item"
+                                   th:href="|/${lang}/products?page=0&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + '&sort=price_asc'|"
+                                   th:classappend="${selectedSort == 'price_asc'} ? 'active'">Giá tăng dần</a></li>
+                            <li><a class="dropdown-item"
+                                   th:href="|/${lang}/products?page=0&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + '&sort=price_desc'|"
+                                   th:classappend="${selectedSort == 'price_desc'} ? 'active'">Giá giảm dần</a></li>
+                            <li><a class="dropdown-item"
+                                   th:href="|/${lang}/products?page=0&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + '&sort=name_asc'|"
+                                   th:classappend="${selectedSort == 'name_asc'} ? 'active'">Từ A - Z</a></li>
+                            <li><a class="dropdown-item"
+                                   th:href="|/${lang}/products?page=0&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + '&sort=name_desc'|"
+                                   th:classappend="${selectedSort == 'name_desc'} ? 'active'">Từ Z - A</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="product-section">
+        <div class="product-container container">
+            <div class="product-content-row row align-items-center justify-content-center">
+                <div class="product-content-col col-xs-12 col-md-6 col-lg-4 col-xl-3"
+                     th:each="variant: ${variants}">
+                    <div></div>
+                    <div class="product-content-detail">
+                        <div class="image-content">
+                            <div class="image-detail d-flex flex-column">
+                                <div class="icon d-flex justify-content-end">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                                <div class="image d-flex align-items-center justify-content-center">
+                                    <div>
+                                        <img th:src="${variant.productImage}" alt="" class="h-100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-content">
+                            <div class="text-detail d-flex flex-column fw-bolder">
+                                <div class="text-title" th:text="${variant.productName}"></div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="text-price" th:text="${variant.variant.price}"></div>
+                                    <div class="buy-btn">Mua</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav aria-label="Page navigation" class="mt-4" th:if="${totalPages > 1}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="|/${lang}/products?page=${currentPage - 1}&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|">
+                            Previous
+                        </a>
+                    </li>
+                    <li class="page-item"
+                        th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:classappend="${i == currentPage} ? 'active'">
+                        <a class="page-link"
+                           th:text="${i + 1}"
+                           th:href="|/${lang}/products?page=${i}&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|">
+                        </a>
+                    </li>
+
+                    <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="|/${lang}/products?page=${currentPage + 1}&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|">
+                            Next
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('focus', function () {
+                if (this.value === this.getAttribute('th:value') || this.value === '') {
+                    this.select();
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

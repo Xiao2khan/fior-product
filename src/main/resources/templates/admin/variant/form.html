@@ -18,9 +18,9 @@
                 <div class="text-danger" th:if="${#fields.hasErrors('sizeGram')}" th:errors="*{sizeGram}"></div>
             </div>
             <div class="col-md-4">
-                <label class="form-label">Price (cents)</label>
-                <input type="number" min="0" class="form-control" th:field="*{priceCents}" required>
-                <div class="text-danger" th:if="${#fields.hasErrors('priceCents')}" th:errors="*{priceCents}"></div>
+                <label class="form-label">Price</label>
+                <input type="number" min="0" class="form-control" th:field="*{price}" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
             </div>
             <div class="col-md-4">
                 <label class="form-label">Quantity</label>

@@ -1,0 +1,173 @@
+.category-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.category-item .category-link {
+    color: rgba(2, 8, 8, 1);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.category-item .category-link:hover {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-underline-offset: 4px;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 10%;
+    color: rgba(44, 110, 31, 1);
+}
+
+.category-item .category-link.active {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    text-underline-offset: 4px;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 10%;
+    color: rgba(44, 110, 31, 1);
+}
+
+/* Sort Dropdown Styles */
+.sort-dropdown {
+    position: relative;
+}
+
+#sortDropdown {
+    border: 1px solid #495057;
+    gap: 10px;
+    opacity: 1;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 1) !important;
+    padding: 10px 22px;
+    width: 290px;
+}
+
+#sortDropdown div {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(2, 8, 8, 1);
+}
+
+.sort-dropdown .dropdown-menu {
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 290px;
+}
+
+.dropdown-menu li {
+    margin: 10px 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(153, 153, 153, 1);
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: unset;
+    padding-bottom: unset;
+}
+
+.sort-dropdown .dropdown-item {
+    color: rgba(102, 102, 102, 1);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.dropdown-toggle::after {
+    content: none !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: unset;
+}
+
+.dropdown-item {
+    padding: unset;
+}
+
+
+.product-section {
+    margin-top: 40px;
+}
+
+.product-section .product-container .product-title .text-title {
+    font-size: 32px;
+    line-height: 64px
+}
+
+.product-section .product-container .product-title .icon {
+    right: 0;
+    top: 0;
+    z-index: 1
+}
+
+.product-section .product-container .product-title .icon .fa-solid {
+    padding: 12px 13.25px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.08);
+}
+
+.product-section .product-container .product-content-row .product-content-col {
+    padding: 12px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail {
+    box-shadow: 0px 4px 24px 0px #0000001F;
+    border-radius: 24px;
+    padding: 20px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .image-content {
+    padding-bottom: 32px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .image-content .image-detail {
+    gap: 10px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .image-content .image-detail .icon .fa-solid {
+    padding: 6px 7.25px;
+    border-radius: 50%;
+    background: #F6F6F6;
+    color: #6B6B6B;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .image-content .image-detail .image div {
+    width: 180px;
+    height: 137px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .text-content {
+    padding-top: 20px;
+    border-top: 10px;
+    border-top: 1px solid #8DB34A;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .text-content .text-detail {
+    gap: 12px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .text-content .text-detail .text-title {
+    font-size: 16px;
+}
+
+
+.text-price {
+    font-size: 22px;
+}
+
+.buy-btn {
+    font-size: 16px;
+    border-radius: 12px;
+    padding: 10px 32px;
+    background: #DEF8C0;
+}

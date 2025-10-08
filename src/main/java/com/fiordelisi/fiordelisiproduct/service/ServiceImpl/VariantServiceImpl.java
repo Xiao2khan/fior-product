@@ -104,7 +104,7 @@ public class VariantServiceImpl implements VariantService {
                 return VariantDto.builder()
                         .id(v.getId())
                         .sizeGram(v.getSizeGram())
-                        .priceCents(v.getPriceCents())
+                        .price(v.getPrice())
                         .quantity(v.getQuantity())
                         .build();
             }
@@ -118,7 +118,7 @@ public class VariantServiceImpl implements VariantService {
                 .id(variantId)
                 .productId(productId)
                 .sizeGram(dto.getSizeGram())
-                .priceCents(dto.getPriceCents())
+                .price(dto.getPrice())
                 .quantity(dto.getQuantity())
                 .build();
         return upsertVariant(productId, variant);

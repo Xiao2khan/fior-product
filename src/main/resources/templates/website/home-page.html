@@ -1,26 +1,248 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/website/main}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/website/home-page.css}">
+</head>
 <body>
 <div layout:fragment="website-content">
-    <section>
-        <div class="position-relative">
-            <div><img style="height: 100vh" th:src="@{/image/image_154.png}" alt=""></div>
-            <div class="position-absolute d-flex flex-column" style="gap: 32px; top: 10%; left: 5%;">
-                <div style="width: 319px; font-weight: 700; font-size: 64px; line-height: 80px; color: #2C6E1F;">Cà Chua
-                    Phơi Nắng
-                </div>
-                <div style="width: 624px; font-weight: 600;line-height: 32px;">Là sản phẩm 100% của Ý, nó được đặc trưng
-                    bởi màu đỏ tươi và tươi và hình dáng thuôn dài. <br> Nó có kết cấu mềm mại và dễ chịu, nói lên tất
-                    cả
-                    hương vị của trái đất. Không sử dụng phụ gia hóa học để sấy khô, chỉ sử dụng ánh nắng mặt trời và
-                    muối. Chính xác muối hoạt động như một chất bảo quản tự nhiên, mà không ảnh hưởng đến sản phẩm, vốn
-                    vẫn còn ít nước muối, nhờ một phương pháp ướp muối sáng tạo.
+    <section class="main-section">
+        <div class="main-container position-relative d-flex align-items-center w-100">
+            <div class="image-content w-100"><img th:src="@{/image/image_154.png}" alt=""></div>
+            <div class="text-content position-absolute d-flex flex-column">
+                <div class="text-title fw-bolder">Cà Chua Phơi Nắng</div>
+                <div class="text-detail fw-bold">Là sản phẩm 100% của Ý, nó được đặc trưng bởi màu đỏ tươi và tươi và
+                    hình dáng thuôn dài. <br> Nó có kết cấu mềm mại và dễ chịu, nói lên tất cả hương vị của trái đất.
+                    Không sử dụng phụ gia hóa học để sấy khô, chỉ sử dụng ánh nắng mặt trời và muối. Chính xác muối hoạt
+                    động như một chất bảo quản tự nhiên, mà không ảnh hưởng đến sản phẩm, vốn vẫn còn ít nước muối, nhờ
+                    một phương pháp ướp muối sáng tạo.
                 </div>
                 <div class="d-flex">
-                    <div class="d-flex"
-                         style="border-radius: 15px; padding: 16px 40px; background: #2C6E1F;font-weight: 600;font-size: 16px;line-height: 24px;color: #FFFFFF">
+                    <div class="learn-more-btn fw-bold d-flex">
                         Tìm hiểu thêm
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="product-section">
+        <div class="product-container container">
+            <div class="product-title position-relative">
+                <div class="text-title text-center fw-bold">Sản phẩm hot</div>
+                <div class="icon position-absolute d-flex align-items-center justify-content-center">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+            <div class="product-content-row row align-items-center justify-content-center">
+                    <div class="product-content-col col-xs-12 col-md-6 col-lg-4 col-xl-3"
+                         th:each="variant: ${variants}">
+                        <div></div>
+                        <div class="product-content-detail">
+                            <div class="image-content">
+                                <div class="image-detail d-flex flex-column">
+                                    <div class="icon d-flex justify-content-end">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </div>
+                                    <div class="image d-flex align-items-center justify-content-center">
+                                        <div>
+                                            <img th:src="${variant.productImage}" alt="" class="h-100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-content">
+                                <div class="text-detail d-flex flex-column fw-bolder">
+                                    <div class="text-title" th:text="${variant.productName}"></div>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="text-price" th:text="${variant.variant.price}"></div>
+                                        <div class="buy-btn">Mua</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+    <section class="production-process-section">
+        <div class="production-process-container container">
+            <div class="production-process-content d-flex flex-column align-items-center">
+                <div class="production-process-title d-flex flex-column align-items-center text-center fw-bolder">
+                    <div>Quy trình sản xuất <br>sản phẩm cà chua cô đặc</div>
+                    <div class="line"></div>
+                </div>
+                <div class="production-process-detail position-relative d-flex align-items-center w-100">
+                    <div class="image-content w-100">
+                        <img th:src="@{/image/6f4d1574c1b8da33ab0c9054f07e42fafd367a56.png}" alt="">
+                    </div>
+                    <div class="section-text position-absolute">
+                        <div class="text-content d-flex align-items-center">
+                            <div class="title-number fw-bolder">01</div>
+                            <div class="detail-content d-flex flex-column">
+                                <div class="fw-bolder">Tiếp nhận và phân loại</div>
+                                <div class="fw-normal">Cà chua tươi được vận chuyển đến nhà máy, đưa vào hệ thống phân
+                                    loại ban đầu: loại bỏ quả hư, đất đá, tạp chất thông qua cổng kiểm tra, máy quét
+                                    quang học, băng chuyền và kiểm tra thủ công
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="production-process-detail position-relative d-flex align-items-center w-100">
+                    <div class="image-content w-100">
+                        <img th:src="@{/image/3a2cdd2d7576198b2e7617c83f84a97ae6ccac9a.png}" alt=""></div>
+                    <div class="section-text position-absolute">
+                        <div class="text-content d-flex align-items-center">
+                            <div class="title-number fw-bolder">02</div>
+                            <div class="detail-content d-flex flex-column">
+                                <div class="fw-bolder">Rửa sạch</div>
+                                <div class="fw-normal">Sau khi phân loại, cà chua được rửa với nước sạch để loại bỏ bụi
+                                    bẩn còn sót .
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="production-process-detail position-relative d-flex align-items-center w-100">
+                    <div class="image-content w-100">
+                        <img th:src="@{/image/1ee44764fd19e3eddfa06d167a7bab0fd10f969f.png}" alt="">
+                    </div>
+                    <div class="section-text position-absolute">
+                        <div class="text-content d-flex align-items-center">
+                            <div class="title-number fw-bolder">03</div>
+                            <div class="detail-content d-flex flex-column">
+                                <div class="fw-bolder">Tiền xử lý nhiệt và cắt nghiền</div>
+                                <div class="fw-normal">Hot Break: nghiền ở 85–100°C cho sản phẩm sánh mịn, dùng cho
+                                    ketchup hoặc các sản phẩm cô đặc nhẹ (28–30° Brix).
+                                    <br>
+                                    Cold Break: nghiền ở 65–75°C để bảo toàn hương vị và chất dinh dưỡng, dùng cho cô
+                                    đặc cao (36–38° Brix)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="production-process-detail position-relative d-flex align-items-center w-100">
+                    <div class="image-content w-100">
+                        <img th:src="@{/image/f87d90ad85799eac87e2798c1d3a696b1b023da2.png}" alt="">
+                    </div>
+                    <div class="section-text position-absolute">
+                        <div class="text-content d-flex align-items-center">
+                            <div class="title-number fw-bolder">04</div>
+                            <div class="detail-content d-flex flex-column">
+                                <div class="fw-bolder">Chiết xuất và lọc bỏ bã</div>
+                                <div class="fw-normal">Cà chua sau nghiền được đưa vào máy “passatrice” và
+                                    “raffinatrice” để tách nước, loại bỏ phần vỏ, hạt, rồi thu lấy phần nước/nước xay ép
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="production-process-detail position-relative d-flex align-items-center w-100">
+                    <div class="image-content w-100">
+                        <img th:src="@{/image/ff38eb69534a8911fe63bfe9e2f0b2c695632f5e.png}" alt="">
+                    </div>
+                    <div class="section-text position-absolute">
+                        <div class="text-content d-flex align-items-center">
+                            <div class="title-number fw-bolder">05</div>
+                            <div class="detail-content d-flex flex-column">
+                                <div class="fw-bolder">Cô đặc</div>
+                                <div class="fw-normal">Nước ép được bơm vào thiết bị đa tầng bay hơi (evaporator) theo
+                                    áp suất giảm để giữ hương vị và dưỡng chất. Quá trình diễn ra từng giai đoạn để đạt
+                                    độ cô đặc mong muốn (chẳng hạn 36% Brix cho cô đặc ba lần)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="production-process-detail position-relative d-flex align-items-center w-100">
+                    <div class="image-content w-100">
+                        <img th:src="@{/image/9b2744d87da0b3e1afce7464bbc252624fcde9c4.png}" alt="">
+                    </div>
+                    <div class="section-text position-absolute">
+                        <div class="text-content d-flex align-items-center">
+                            <div class="title-number fw-bolder">06</div>
+                            <div class="detail-content d-flex flex-column">
+                                <div class="fw-bolder">Tiệt trùng và Đóng gói
+                                </div>
+                                <div class="fw-normal">Sản phẩm cô đặc được tiệt trùng (pasteur hoặc asettico) tùy yêu
+                                    cầu, rồi đóng gói vào ống thiếc, lon, túi vô trùng hoặc thùng lớn, đảm bảo vệ sinh
+                                    an toàn thực phẩm .
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="our-products-section" style="margin-top: 100px">
+        <div class="our-product-container container">
+            <div class="text-center fw-bold"
+                 style="margin-bottom: 48px;font-weight: 600;font-size: 32px;line-height: 48px;">
+                Sản phẩm của chúng tôi
+            </div>
+            <div class="d-flex justify-content-center flex-wrap" style="gap: 28px">
+                <div class="d-flex flex-column" style="gap: 28px; width: 180px">
+                    <div class="d-flex flex-column align-items-center" style="gap: 16px">
+                        <div style="width: 100px">
+                            <img th:src="@{/image/image_164.png}" alt="">
+                        </div>
+                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;">
+                            Bảo vệ sức khỏe của bạn
+                        </div>
+                    </div>
+                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;">
+                        Các phương pháp canh tác được thực hiện trong các trang trại Fiordelisi là hiện đại, nhưng luôn
+                        tôn trọng đất đai.
+                    </div>
+                </div>
+                <div class="straight-line d-none d-sm-block"
+                     style="border-left: 1.5px solid rgba(44, 110, 31, 1)"></div>
+                <div class="d-flex flex-column" style="gap: 28px; width: 180px">
+                    <div class="d-flex flex-column align-items-center" style="gap: 16px">
+                        <div style="width: 100px">
+                            <img th:src="@{/image/image_165.png}" alt="">
+                        </div>
+                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;">
+                            Chỉ có muối và mặt trời của Puglia
+                        </div>
+                    </div>
+                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;">
+                        Mỗi loại rau được chế biến, tùy thuộc vào bản chất của nó, với các quy trình và phương pháp bảo
+                        quản cụ thể.
+                    </div>
+                </div>
+                <div class="straight-line d-none d-md-block"
+                     style="border-left: 1.5px solid rgba(44, 110, 31, 1)"></div>
+                <div class="d-flex flex-column" style="gap: 28px; width: 180px">
+                    <div class="d-flex flex-column align-items-center" style="gap: 16px">
+                        <div style="width: 100px">
+                            <img th:src="@{/image/image_166.png}" alt="">
+                        </div>
+                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;">
+                            Truyền thống và Đổi mới
+                        </div>
+                    </div>
+                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;">
+                        Chất lượng, chân thực, tôn trọng, nhưng cũng sáng tạo, thông qua việc phát triển các sản phẩm
+                        sản phẩm mới.
+                    </div>
+                </div>
+                <div class="straight-line d-none d-sm-block d-md-none d-lg-block"
+                     style="border-left: 1.5px solid rgba(44, 110, 31, 1)"></div>
+                <div class="d-flex flex-column" style="gap: 28px; width: 180px">
+                    <div class="d-flex flex-column align-items-center" style="gap: 16px">
+                        <div style="width: 100px">
+                            <img th:src="@{/image/image_167.png}" alt="">
+                        </div>
+                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;">
+                            Từ cánh đồng đến bàn ăn
+                        </div>
+                    </div>
+                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;">
+                        Fiordelisi trực tiếp theo dõi việc trồng cà chua và rau củ với quyền kiểm soát toàn bộ chuỗi
+                        cung ứng, từ việc lựa chọn hạt giống đến thành phẩm
                     </div>
                 </div>
             </div>

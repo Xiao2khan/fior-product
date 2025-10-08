@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<header th:fragment="website-header">
+<header th:fragment="website-header" class="position-sticky">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: unset">
         <div class="container" style="padding: unset">
             <a class="navbar-brand" style="padding: unset" th:href="@{/{lang}(lang=${#locale.language})}">
