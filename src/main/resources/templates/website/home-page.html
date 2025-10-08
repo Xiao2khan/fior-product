@@ -22,39 +22,6 @@
             </div>
         </div>
     </section>
-    <section class="hot-products container my-5">
-        <h1 class="hot-products-title text-center mb-4">Sản phẩm hot</h1>
-        <div class="row justify-content-center g-4 hot-products-list">
-            <div class="col-auto" th:each="product : ${hotProducts}">
-                <div class="product-card">
-                    <div class="product-image-wrapper">
-                        <div class="button">
-                            <button class="toggle-btn" onclick="toggleDescription(this)">+</button>
-                        </div>
-                        <div class="toggle-content">
-                            <div class="product-image">
-                                <img th:src="@{${product.image}}" th:alt="${product.name}">
-                            </div>
-                            <div class="product-description" th:text="${product.description}"></div>
-                        </div>
-                    </div>
-
-                    <!-- Footer -->
-                    <div class="product-footer">
-                        <div class="product-text">
-                            <h2 class="product-name" th:text="${product.name}"></h2>
-                            <p class="product-price"
-                               th:text="${product.variants != null and product.variants.size() > 0
-                        ? #numbers.formatDecimal(product.variants[0].priceCents, 0, 'POINT', 0, 'NONE') + ' VNĐ'
-                        : '0 VND'}">
-                            </p>
-                        </div>
-                        <button class="buy-btn">Mua</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <section class="product-section">
         <div class="product-container container">
             <div class="product-title position-relative">
@@ -84,7 +51,7 @@
                                 <div class="text-detail d-flex flex-column fw-bolder">
                                     <div class="text-title" th:text="${variant.productName}"></div>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <div class="text-price" th:text="${variant.variant.price}"></div>
+                                        <div class="text-price" th:text="${variant.variant.price} + ' VNĐ'"></div>
                                         <div class="buy-btn">Mua</div>
                                     </div>
                                 </div>

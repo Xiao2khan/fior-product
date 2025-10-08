@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+.wc-container {
+  font-family: 'Inter', system-ui, Arial, sans-serif;
+  color: #111;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* 1 - Breadcrumb */
+.breadcrumb {
+  font-size: 14px;
+  color: #666;
+  margin:0;
+}
+
+.gap-60 {
+  gap:60px
+}
+
+.breadcrumb span + span::before {
+  content: " > ";
+  color: #999;
+  margin: 0 6px;
+}
+
+
+.banner-wrap {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+.banner-wrap img.banner {
+  display: block;
+  height: 462px;
+  opacity: 1;
+}
+
+.support-section {
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  color: #111;
+}
+
+.support-title {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 64px;
+  text-transform: uppercase;
+}
+
+/* Search overlay */
+.search-overlay {
+  height: 68px;
+  padding: 18px 24px;
+  border-radius: 24px;
+  background: #fff;
+  box-sizing: border-box;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 18px;
+}
+
+.search-icon {
+  font-size: 22px;
+  color: #555;
+  cursor: pointer;
+}
+
+/* Support cards */
+.support-cards {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.support-card {
+  width: 303px;
+  height: 213px;
+  box-sizing: border-box;
+  padding: 38px 24px;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* 4 - FAQ */
+.faq-title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 100%;
+}
+
+.faq-box {
+  width: 1272px;
+  max-width: 100%;
+  height: 56px;
+  box-sizing: border-box;
+  padding: 16px 22px;
+  border-radius: 12px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.faq-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.see-more-btn {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: var(--Green-Primary, #2C6E1F);
+  color: white;
+}

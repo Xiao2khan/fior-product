@@ -2,11 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/website/main}">
 <head>
-    <link rel="stylesheet" th:href="@{/css/website/product-page.css}">
+    <link rel="stylesheet" th:href="@{/css/website/support-page.css}">
 </head>
 <body>
 <div layout:fragment="website-content">
+    <div class="wc-container position-relative">
+        <!-- 1 - Breadcrumb -->
+        <div class="breadcrumb">
+            <span>Trang chủ</span>
+            <span>Hỗ trợ</span>
+        </div>
+    </div>
 
+    <!-- 2 - Banner -->
+    <div class="banner-wrap position-relative">
+        <img class="banner" th:src="@{/image/banner-support.png}" alt="Banner hỗ trợ">
+
+        <!-- Support section đè lên banner -->
+        <section class="support-section d-flex flex-column gap-60 align-items-center position-absolute">
+            <h2 class="support-title">Fiordelisi giúp được gì cho bạn?</h2>
+            <div class="search-overlay d-flex w-100 align-items-center justify-content-between">
+                <input class="search-input" type="search" placeholder="Tìm kiếm câu hỏi, sản phẩm, chính sách..." />
+                <i class="fa fa-search search-icon"></i>
+            </div>
+            <div class="support-cards">
+                <div class="support-card">Hỗ trợ mua hàng</div>
+                <div class="support-card">Hỗ trợ thanh toán</div>
+                <div class="support-card">Hỗ trợ đổi trả</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 4 - FAQ -->
+    <div class="wc-container position-relative">
+        <section class="faq-section">
+            <h3 class="faq-title">Một số câu hỏi thường gặp</h3>
+            <div class="faq-list">
+                <div class="faq-box"><div>Câu hỏi 1</div><div>›</div></div>
+                <div class="faq-box"><div>Câu hỏi 2</div><div>›</div></div>
+                <div class="faq-box"><div>Câu hỏi 3</div><div>›</div></div>
+                <div class="faq-box"><div>Câu hỏi 4</div><div>›</div></div>
+                <div class="faq-box"><div>Câu hỏi 5</div><div>›</div></div>
+            </div>
+            <div class="faq-actions">
+                <button class="see-more-btn">Xem thêm ngay</button>
+            </div>
+        </section>
+    </div>
 </div>
 </body>
 </html>
