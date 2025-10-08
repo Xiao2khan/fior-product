@@ -1,0 +1,161 @@
+.main-section .main-container .image-content img {
+    height: 100vh;
+}
+
+.main-section .main-container .text-content {
+    gap: 32px;
+    padding: 0 0 0 10%;
+}
+
+.main-section .main-container .text-content .text-title {
+    width: 319px;
+    font-size: 64px;
+    line-height: 80px;
+    color: #2C6E1F;
+}
+
+.main-section .main-container .text-content .text-detail {
+    width: 624px;
+    line-height: 32px;
+}
+
+.learn-more-btn {
+    border-radius: 15px;
+    padding: 16px 40px;
+    background: #2C6E1F;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.product-section {
+    margin-top: 100px;
+}
+
+.product-section .product-container .product-title .text-title {
+    font-size: 32px;
+    line-height: 64px
+}
+
+.product-section .product-container .product-title .icon {
+    right: 0;
+    top: 0;
+    z-index: 1
+}
+
+.product-section .product-container .product-title .icon .fa-solid {
+    padding: 12px 13.25px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.08);
+}
+
+.product-section .product-container .product-content-row .product-content-col {
+    padding: 12px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail {
+    box-shadow: 0px 4px 24px 0px #0000001F;
+    border-radius: 24px;
+    padding: 20px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .image-content {
+    padding-bottom: 32px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .image-content .image-detail {
+    gap: 10px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .image-content .image-detail .icon .fa-solid {
+    padding: 6px 7.25px;
+    border-radius: 50%;
+    background: #F6F6F6;
+    color: #6B6B6B;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .image-content .image-detail .image div {
+    width: 180px;
+    height: 137px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .text-content {
+    padding-top: 20px;
+    border-top: 10px;
+    border-top: 1px solid #8DB34A;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .text-content .text-detail {
+    gap: 12px;
+}
+
+.product-section .product-container .product-content-row .product-content-col .product-content-detail .text-content .text-detail .text-title {
+    font-size: 16px;
+}
+
+.text-price {
+    font-size: 22px;
+}
+
+.buy-btn {
+    font-size: 16px;
+    border-radius: 12px;
+    padding: 10px 32px;
+    background: #DEF8C0;
+}
+
+.production-process-section {
+    margin-top: 100px;
+}
+
+.production-process-section .production-process-container .production-process-content {
+    gap: 40px;
+}
+
+.production-process-section .production-process-container .production-process-content .production-process-title {
+    font-size: 32px;
+    line-height: 40px;
+    gap: 16px;
+}
+
+.production-process-section .production-process-container .production-process-content .line {
+    width: 293px;
+    border: 6px solid #2C6E1F;
+}
+
+.production-process-section .production-process-container .production-process-content .production-process-detail .image-content img {
+    height: 412px;
+    border-radius: 36px;
+    box-shadow: 0px 8px 24px 0px #00000040;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.39) 46.94%, rgba(0, 0, 0, 0.39) 63%, rgba(0, 0, 0, 0) 100%);
+    filter: brightness(85%);
+}
+
+.production-process-section .production-process-container .production-process-content .production-process-detail .section-text {
+    padding: 0 10%;
+}
+
+.production-process-section .production-process-container .production-process-content .production-process-detail .section-text .text-content {
+    gap: 60px;
+    color: #FFFFFF;
+}
+
+.production-process-section .production-process-container .production-process-content .production-process-detail .section-text .text-content .title-number {
+    font-size: 96px;
+    line-height: 100px;
+}
+
+.production-process-section .production-process-container .production-process-content .production-process-detail .section-text .text-content .detail-content {
+    gap: 16px;
+}
+
+.production-process-section .production-process-container .production-process-content .production-process-detail .section-text .text-content .detail-content div:first-child {
+    font-size: 36px;
+    line-height: 48px;
+}
+
+.production-process-section .production-process-container .production-process-content .production-process-detail .section-text .text-content .detail-content div:last-child {
+    font-size: 18px;
+    line-height: 24px;
+}

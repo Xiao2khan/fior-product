@@ -9,6 +9,6 @@ public class Variant {
     private String id;
     private String productId;
     private Integer sizeGram;
-    private Integer priceCents;
+    private Integer price;
     private Integer quantity;
 }

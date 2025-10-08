@@ -36,7 +36,7 @@
                     <span th:each="p : ${products}" th:if="${p.id == v.productId}" th:text="${p.name}"></span>
                 </td>
                 <td th:text="${v.sizeGram}"></td>
-                <td th:text="${v.priceCents}"></td>
+                <td th:text="${v.price}"></td>
                 <td th:text="${v.quantity}"></td>
                 <td class="text-end">
                     <a class="btn btn-sm btn-secondary me-1" th:href="@{'/admin/products/' + ${v.productId} + '/variants/edit/' + ${v.id}}">
