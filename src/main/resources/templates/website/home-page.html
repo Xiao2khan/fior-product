@@ -6,69 +6,94 @@
 </head>
 <body>
 <div layout:fragment="website-content">
-    <section class="main-section">
-        <div class="main-container position-relative d-flex align-items-center w-100">
-            <div class="image-content w-100"><img th:src="@{/image/image_154.png}" alt=""></div>
-            <div class="text-content position-absolute d-flex flex-column">
-                <div class="text-title fw-bolder">Cà Chua Phơi Nắng</div>
-                <div class="text-detail fw-bold">Là sản phẩm 100% của Ý, nó được đặc trưng bởi màu đỏ tươi và tươi và
-                    hình dáng thuôn dài. <br> Nó có kết cấu mềm mại và dễ chịu, nói lên tất cả hương vị của trái đất.
-                    Không sử dụng phụ gia hóa học để sấy khô, chỉ sử dụng ánh nắng mặt trời và muối. Chính xác muối hoạt
-                    động như một chất bảo quản tự nhiên, mà không ảnh hưởng đến sản phẩm, vốn vẫn còn ít nước muối, nhờ
-                    một phương pháp ướp muối sáng tạo.
+    <section class="hero-section">
+        <!-- Phần chứa các banner -->
+        <div class="hero-track">
+
+            <!-- Banner 1 -->
+            <div class="hero-wrapper position-relative">
+                <div class="hero-image">
+                    <img th:src="@{/image/image_154.png}" alt="Cà Chua Phơi Nắng">
                 </div>
-                <div class="d-flex">
-                    <div class="learn-more-btn fw-bold d-flex">
-                        Tìm hiểu thêm
+                <div class="hero-content position-absolute d-flex flex-column">
+                    <h1 class="hero-title" th:text="#{home.title}"></h1>
+                    <p class="hero-description" th:utext="#{home.description}"></p>
+                    <a href="javascript:void(0)" class="read-more-btn toggle-desc">Read more</a>
+                    <div class="hero-button-wrapper d-flex">
+                        <a href="#" class="hero-button" th:text="#{home.button}">Tìm hiểu thêm</a>
                     </div>
                 </div>
             </div>
+
+            <!-- Banner 2 -->
+            <div class="hero-wrapper position-relative">
+                <div class="hero-image">
+                    <img th:src="@{/image/311ac65e92c70f8914e6d739a0bc9a972aa3da32.jpg}">
+                </div>
+                <div class="hero-content position-absolute d-flex flex-column">
+                    <h1 class="hero-title" th:text="#{home.title_2}"></h1>
+                    <p class="hero-description" th:utext="#{home.description_2}"></p>
+                    <a href="javascript:void(0)" class="read-more-btn toggle-desc">Read more</a>
+                    <div class="hero-button-wrapper d-flex">
+                        <a href="#" class="hero-button" th:text="#{home.button}">Tìm hiểu thêm</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner 3 -->
+            <div class="hero-wrapper position-relative">
+                <div class="hero-image">
+                    <img th:src="@{/image/banner_3.jpg}">
+                </div>
+                <div class="hero-content position-absolute d-flex flex-column">
+                    <h1 class="hero-title" th:utext="#{home.title_3}"></h1>
+                    <p class="hero-description" th:utext="#{home.description_3}"></p>
+                    <a href="javascript:void(0)" class="read-more-btn toggle-desc">Read more</a>
+                    <div class="hero-button-wrapper d-flex">
+                        <a href="#" class="hero-button" th:text="#{home.button}">Tìm hiểu thêm</a>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- Kết thúc .hero-track -->
+
+        <!-- Các chấm tròn điều hướng -->
+        <div class="hero-indicators d-flex justify-content-center">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
         </div>
     </section>
+
     <section class="product-section">
-        <div class="product-container container">
-            <div class="product-title position-relative">
-                <div class="text-title text-center fw-bold">Sản phẩm hot</div>
-                <div class="icon position-absolute d-flex align-items-center justify-content-center">
+        <div class="product-container container d-flex flex-column" style="gap:32px">
+            <div class="product-title position-relative" th:attr="data-lang=${lang}">
+                <div class="text-title text-center fw-bold" th:text="#{productTitle.title}"></div>
+
+                <div id="prev-btn" class="icon position-absolute start-0 d-flex align-items-center justify-content-center" style="cursor:pointer;">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </div>
+
+                <div id="next-btn" class="icon position-absolute end-0 d-flex align-items-center justify-content-center" style="cursor:pointer;">
                     <i class="fa-solid fa-arrow-right"></i>
                 </div>
             </div>
-            <div class="product-content-row row align-items-center justify-content-center">
-                    <div class="product-content-col col-xs-12 col-md-6 col-lg-4 col-xl-3"
-                         th:each="variant: ${variants}">
-                        <div></div>
-                        <div class="product-content-detail">
-                            <div class="image-content">
-                                <div class="image-detail d-flex flex-column">
-                                    <div class="icon d-flex justify-content-end">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </div>
-                                    <div class="image d-flex align-items-center justify-content-center">
-                                        <div>
-                                            <img th:src="${variant.productImage}" alt="" class="h-100">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-content">
-                                <div class="text-detail d-flex flex-column fw-bolder">
-                                    <div class="text-title" th:text="${variant.productName}"></div>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="text-price" th:text="${variant.variant.price}"></div>
-                                        <div class="buy-btn">Mua</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+            <!-- Product list từ nhánh mới (Stashed changes) -->
+            <div class="product-content-row row align-items-center justify-content-center" id="product-list"
+                 th:data-products="${products}">
+            </div>
+
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center" id="pagination" style="gap: 8px;"></ul>
+            </nav>
         </div>
     </section>
     <section class="production-process-section">
         <div class="production-process-container container">
             <div class="production-process-content d-flex flex-column align-items-center">
                 <div class="production-process-title d-flex flex-column align-items-center text-center fw-bolder">
-                    <div>Quy trình sản xuất <br>sản phẩm cà chua cô đặc</div>
+                    <div th:utext="#{productionProcess.title}"></div>
                     <div class="line"></div>
                 </div>
                 <div class="production-process-detail position-relative d-flex align-items-center w-100">
@@ -79,11 +104,8 @@
                         <div class="text-content d-flex align-items-center">
                             <div class="title-number fw-bolder">01</div>
                             <div class="detail-content d-flex flex-column">
-                                <div class="fw-bolder">Tiếp nhận và phân loại</div>
-                                <div class="fw-normal">Cà chua tươi được vận chuyển đến nhà máy, đưa vào hệ thống phân
-                                    loại ban đầu: loại bỏ quả hư, đất đá, tạp chất thông qua cổng kiểm tra, máy quét
-                                    quang học, băng chuyền và kiểm tra thủ công
-                                </div>
+                                <div class="fw-bolder" th:text="#{sectionText1.h}"></div>
+                                <div class="fw-normal" th:utext="#{sectionText1.description}"></div>
                             </div>
                         </div>
                     </div>
@@ -95,9 +117,8 @@
                         <div class="text-content d-flex align-items-center">
                             <div class="title-number fw-bolder">02</div>
                             <div class="detail-content d-flex flex-column">
-                                <div class="fw-bolder">Rửa sạch</div>
-                                <div class="fw-normal">Sau khi phân loại, cà chua được rửa với nước sạch để loại bỏ bụi
-                                    bẩn còn sót .
+                                <div class="fw-bolder" th:text="#{sectionText2.h}"></div>
+                                <div class="fw-normal" th:text="#{sectionText2.description}">
                                 </div>
                             </div>
                         </div>
@@ -111,12 +132,8 @@
                         <div class="text-content d-flex align-items-center">
                             <div class="title-number fw-bolder">03</div>
                             <div class="detail-content d-flex flex-column">
-                                <div class="fw-bolder">Tiền xử lý nhiệt và cắt nghiền</div>
-                                <div class="fw-normal">Hot Break: nghiền ở 85–100°C cho sản phẩm sánh mịn, dùng cho
-                                    ketchup hoặc các sản phẩm cô đặc nhẹ (28–30° Brix).
-                                    <br>
-                                    Cold Break: nghiền ở 65–75°C để bảo toàn hương vị và chất dinh dưỡng, dùng cho cô
-                                    đặc cao (36–38° Brix)
+                                <div class="fw-bolder"th:utext = "#{sectionText3.h}"></div>
+                                <div class="fw-normal" th:utext = "#{sectionText3.description}">
                                 </div>
                             </div>
                         </div>
@@ -130,10 +147,8 @@
                         <div class="text-content d-flex align-items-center">
                             <div class="title-number fw-bolder">04</div>
                             <div class="detail-content d-flex flex-column">
-                                <div class="fw-bolder">Chiết xuất và lọc bỏ bã</div>
-                                <div class="fw-normal">Cà chua sau nghiền được đưa vào máy “passatrice” và
-                                    “raffinatrice” để tách nước, loại bỏ phần vỏ, hạt, rồi thu lấy phần nước/nước xay ép
-                                </div>
+                                <div class="fw-bolder" th:text="#{sectionText4.h}"></div>
+                                <div class="fw-normal" th:text="#{sectionText4.description}"></div>
                             </div>
                         </div>
                     </div>
@@ -146,10 +161,8 @@
                         <div class="text-content d-flex align-items-center">
                             <div class="title-number fw-bolder">05</div>
                             <div class="detail-content d-flex flex-column">
-                                <div class="fw-bolder">Cô đặc</div>
-                                <div class="fw-normal">Nước ép được bơm vào thiết bị đa tầng bay hơi (evaporator) theo
-                                    áp suất giảm để giữ hương vị và dưỡng chất. Quá trình diễn ra từng giai đoạn để đạt
-                                    độ cô đặc mong muốn (chẳng hạn 36% Brix cho cô đặc ba lần)
+                                <div class="fw-bolder" th:text="#{sectionText5.h}"></div>
+                                <div class="fw-normal" th:utext="#{sectionText5.description}">
                                 </div>
                             </div>
                         </div>
@@ -163,11 +176,9 @@
                         <div class="text-content d-flex align-items-center">
                             <div class="title-number fw-bolder">06</div>
                             <div class="detail-content d-flex flex-column">
-                                <div class="fw-bolder">Tiệt trùng và Đóng gói
+                                <div class="fw-bolder" th:utext="#{sectionText6.h}">
                                 </div>
-                                <div class="fw-normal">Sản phẩm cô đặc được tiệt trùng (pasteur hoặc asettico) tùy yêu
-                                    cầu, rồi đóng gói vào ống thiếc, lon, túi vô trùng hoặc thùng lớn, đảm bảo vệ sinh
-                                    an toàn thực phẩm .
+                                <div class="fw-normal" th:utext="#{sectionText6.description}">
                                 </div>
                             </div>
                         </div>
@@ -178,9 +189,8 @@
     </section>
     <section class="our-products-section" style="margin-top: 100px">
         <div class="our-product-container container">
-            <div class="text-center fw-bold"
+            <div class="text-center fw-bold" th:text="#{ourProductContainer.title}"
                  style="margin-bottom: 48px;font-weight: 600;font-size: 32px;line-height: 48px;">
-                Sản phẩm của chúng tôi
             </div>
             <div class="d-flex justify-content-center flex-wrap" style="gap: 28px">
                 <div class="d-flex flex-column" style="gap: 28px; width: 180px">
@@ -188,13 +198,12 @@
                         <div style="width: 100px">
                             <img th:src="@{/image/image_164.png}" alt="">
                         </div>
-                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;">
-                            Bảo vệ sức khỏe của bạn
+                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;" th:text="#{ourProduct1.title}">
+
                         </div>
                     </div>
-                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;">
-                        Các phương pháp canh tác được thực hiện trong các trang trại Fiordelisi là hiện đại, nhưng luôn
-                        tôn trọng đất đai.
+                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;" th:utext="#{ourProduct1.desc}">
+
                     </div>
                 </div>
                 <div class="straight-line d-none d-sm-block"
@@ -204,13 +213,12 @@
                         <div style="width: 100px">
                             <img th:src="@{/image/image_165.png}" alt="">
                         </div>
-                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;">
-                            Chỉ có muối và mặt trời của Puglia
+                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;" th:text="#{ourProduct2.title}">
+
                         </div>
                     </div>
-                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;">
-                        Mỗi loại rau được chế biến, tùy thuộc vào bản chất của nó, với các quy trình và phương pháp bảo
-                        quản cụ thể.
+                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;" th:utext="#{ourProduct2.desc}">
+
                     </div>
                 </div>
                 <div class="straight-line d-none d-md-block"
@@ -220,13 +228,12 @@
                         <div style="width: 100px">
                             <img th:src="@{/image/image_166.png}" alt="">
                         </div>
-                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;">
-                            Truyền thống và Đổi mới
+                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;" th:text="#{ourProduct3.title}">
+
                         </div>
                     </div>
-                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;">
-                        Chất lượng, chân thực, tôn trọng, nhưng cũng sáng tạo, thông qua việc phát triển các sản phẩm
-                        sản phẩm mới.
+                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;" th:utext="#{ourProduct3.desc}">
+
                     </div>
                 </div>
                 <div class="straight-line d-none d-sm-block d-md-none d-lg-block"
@@ -236,19 +243,295 @@
                         <div style="width: 100px">
                             <img th:src="@{/image/image_167.png}" alt="">
                         </div>
-                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;">
-                            Từ cánh đồng đến bàn ăn
+                        <div class="text-center fw-bold" style="font-size: 20px;line-height: 24px;" th:text="#{ourProduct4.title}">
+
                         </div>
                     </div>
-                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;">
-                        Fiordelisi trực tiếp theo dõi việc trồng cà chua và rau củ với quyền kiểm soát toàn bộ chuỗi
-                        cung ứng, từ việc lựa chọn hạt giống đến thành phẩm
+                    <div class="text-center" style="font-weight: 400;font-size: 14px;line-height: 24px;" th:utext="#{ourProduct4.desc}">
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
+
+<th:block layout:fragment="scripts">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var products = /*[[${productsJson}]]*/ "[]";
+
+        if (typeof products === "string") {
+            try {
+                products = JSON.parse(products);
+            } catch (e) {
+                console.error("Không thể parse JSON:", e, products);
+                products = [];
+            }
+        }
+        /*]]>*/
+    </script>
+
+    <!-- ========== SCRIPT pagination client-side ========== -->
+    <script>
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const productContainer = document.getElementById("product-list");
+            const paginationContainer = document.getElementById("pagination");
+            const prevBtn = document.getElementById("prev-btn");
+            const nextBtn = document.getElementById("next-btn");
+            const path = window.location.pathname;
+            const lang = path.split("/")[1];
+            const validLangs = ["vi", "en"];
+            if (!validLangs.includes(lang)) {
+                const newUrl = `${window.location.origin}/vi`;
+                window.location.replace(newUrl);
+            } else {
+                console.log("🌐 Current language:", lang);
+            }
+
+            if (!Array.isArray(products)) {
+                console.error("Products is not an array:", products);
+                products = [];
+            }
+
+            let currentPage = 0;
+            let itemsPerPage = getItemsPerPage();
+
+            function getItemsPerPage() {
+                if (window.innerWidth >= 992) return 12; // Desktop
+                if (window.innerWidth >= 768) return 8;  // Tablet
+                return 4;                               // Mobile
+            }
+            function getFirstImage(product) {
+                try {
+                    if (product.images && product.images.length > 0) return product.images[0];
+                } catch (e) { }
+                return '/image/No_image_available.svg.webp';
+            }
+
+            function getbtn(lang) {
+                if (lang === "en" || lang === "EN") {
+                    return "Buy"
+                }
+                return "Mua"
+
+            }
+
+            function getPrice(product) {
+                try {
+                    if (product.variants && product.variants.length > 0)
+                        return formatPrice(product.variants[0].price);
+                } catch (e) {}
+                return product.defaultPrice ? formatPrice(product.defaultPrice) : "Liên hệ";
+            }
+
+            function formatPrice(price) {
+                if (typeof price !== 'number') {
+                    price = parseFloat(price);
+                    if (isNaN(price)) return "Liên hệ";
+                }
+
+                const formatted = price.toLocaleString('vi-VN');
+                return `${formatted} VNĐ`;
+            }
+
+            function escapeHtml(str) {
+                if (typeof str !== 'string') return str == null ? '' : str;
+                return str
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            let lastDirection = 'next';
+
+            function renderProducts() {
+                const start = currentPage * itemsPerPage;
+                const end = start + itemsPerPage;
+                const currentProducts = products.slice(start, end);
+                const direction = lastDirection === 'next' ? -1 : 1;
+
+                const container = document.getElementById('product-list');
+                if (!container) return;
+
+                // Đảm bảo container có position để tránh layout shift
+                container.style.position = 'relative';
+                container.style.overflow = 'hidden';
+
+                // Thêm lớp animation
+                container.classList.add('slide-out');
+                container.style.transform = `translateX(${direction * 20}px)`; // trượt nhẹ
+                container.style.opacity = '0';
+
+                // Sau khi fade-out xong, thay nội dung
+                setTimeout(() => {
+                    // Cập nhật nội dung (không thêm container mới)
+                    container.innerHTML = currentProducts.map(product => `
+                    <div class="product-content-col col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <a href="${lang}/product/${product.id}" class="product-link text-decoration-none text-dark">
+                            <div class="product-content-detail">
+                                <div class="image-content">
+                                    <div class="image-detail d-flex flex-column">
+                                        <div class="icon d-flex justify-content-end">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </div>
+                                        <div class="image d-flex align-items-center justify-content-center">
+                                            <div>
+                                                <img src="${escapeHtml(getFirstImage(product))}"
+                                                     alt="${escapeHtml(product.name || '')}" class="h-100">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-content">
+                                    <div class="text-detail d-flex flex-column fw-bolder">
+                                        <div class="text-title">${escapeHtml(product.name || '')}</div>
+                                        <div class="detail d-flex align-items-center justify-content-between">
+                                            <div class="text-price">
+                                                <span class="price-value">${escapeHtml(getPrice(product))}</span>
+                                            </div>
+                                            <div class="buy-btn">${getbtn(lang)}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+        `).join('');
+
+                    // Reset animation rồi fade-in mượt
+                    container.style.transition = 'none';
+                    container.style.transform = `translateX(${direction * -20}px)`;
+                    container.offsetHeight; // force reflow
+                    container.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+                    container.style.transform = 'translateX(0)';
+                    container.style.opacity = '1';
+                }, 200);
+            }
+
+
+            function renderPagination() {
+                paginationContainer.innerHTML = '';
+                const totalPages = Math.max(1, Math.ceil(products.length / itemsPerPage));
+
+                const maxVisible = 7;
+                let startPage = 0;
+                let endPage = totalPages - 1;
+
+                if (totalPages > maxVisible) {
+                    const around = 2;
+                    startPage = Math.max(0, currentPage - around);
+                    endPage = Math.min(totalPages - 1, currentPage + around);
+
+                    if (startPage === 0) endPage = maxVisible - 1;
+                    if (endPage === totalPages - 1) startPage = totalPages - maxVisible;
+                }
+
+                if (startPage > 0) {
+                    paginationContainer.appendChild(makePageItem(0));
+                    if (startPage > 1) paginationContainer.appendChild(makeEllipsis());
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    paginationContainer.appendChild(makePageItem(i));
+                }
+
+                if (endPage < totalPages - 1) {
+                    if (endPage < totalPages - 2) paginationContainer.appendChild(makeEllipsis());
+                    paginationContainer.appendChild(makePageItem(totalPages - 1));
+                }
+
+                updateArrowButtons(totalPages);
+            }
+
+            function makePageItem(i) {
+                const li = document.createElement('li');
+                li.classList.add('page-item');
+                if (i === currentPage) li.classList.add('active');
+
+                const a = document.createElement('a');
+                a.classList.add('page-link');
+                a.href = '#';
+                a.textContent = (i + 1);
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (i === currentPage) return;
+                    currentPage = i;
+                    renderProducts();
+                    renderPagination();
+                    scrollStay();
+                });
+
+                li.appendChild(a);
+                return li;
+            }
+
+            function makeEllipsis() {
+                const li = document.createElement('li');
+                li.classList.add('page-item', 'disabled');
+                const span = document.createElement('span');
+                span.classList.add('page-link');
+                span.style.padding = "4px 8px";
+                span.textContent = '...';
+                li.appendChild(span);
+                return li;
+            }
+
+            function updateArrowButtons(totalPages) {
+                prevBtn.style.visibility = currentPage === 0 ? 'hidden' : 'visible';
+                nextBtn.style.visibility = currentPage >= totalPages - 1 ? 'hidden' : 'visible';
+            }
+
+            function scrollStay() {
+                const sectionTop = document.querySelector('.product-section').offsetTop;
+                window.scrollTo({ top: sectionTop, behavior: 'instant' });
+            }
+
+            // Gán sự kiện cho nút trái/phải
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 0) {
+                    lastDirection = 'prev';
+                    currentPage--;
+                    renderProducts();
+                    renderPagination();
+                    scrollStay();
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(products.length / itemsPerPage);
+                if (currentPage < totalPages - 1) {
+                    lastDirection = 'next';
+                    currentPage++;
+                    renderProducts();
+                    renderPagination();
+                    scrollStay();
+                }
+            });
+
+            let resizeTimer = null;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    const newSize = getItemsPerPage();
+                    if (newSize !== itemsPerPage) {
+                        itemsPerPage = newSize;
+                        currentPage = 0;
+                        renderProducts();
+                        renderPagination();
+                    }
+                }, 150);
+            });
+
+            renderProducts();
+            renderPagination();
+        });
+    </script>
+</th:block>
 </body>
 </html>
 

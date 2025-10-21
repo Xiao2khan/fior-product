@@ -32,7 +32,7 @@
             <tbody>
             <tr th:each="v, i : ${variants}">
                 <td th:text="${i.index + 1}"></td>
-                <td th:text="${v.sizeGram}"></td>
+                <td th:text="${v.size}"></td>
                 <td th:text="${v.price}"></td>
                 <td th:text="${v.quantity}"></td>
                 <td class="text-end">

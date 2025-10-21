@@ -32,7 +32,7 @@ public class VariantAdminController extends BaseController {
                            @RequestParam(value = "size", defaultValue = "10") int size,
                            Model model) {
         Product product = productService.findById(productId).orElseThrow();
-        Pageable pageable = PageRequest.of(Math.max(page, 0), Math.max(size, 1), Sort.by(Sort.Order.asc("sizeGram")));
+        Pageable pageable = PageRequest.of(Math.max(page, 0), Math.max(size, 1), Sort.by(Sort.Order.asc("size")));
         Page<com.fiordelisi.fiordelisiproduct.entity.Variant> result = variantService.searchVariantsByProduct(productId, q, pageable);
         model.addAttribute("product", product);
         model.addAttribute("page", result);
@@ -84,7 +84,7 @@ public class VariantAdminController extends BaseController {
                               @RequestParam(value = "page", defaultValue = "0") int page,
                               @RequestParam(value = "size", defaultValue = "10") int size,
                               Model model) {
-        Pageable pageable = PageRequest.of(Math.max(page, 0), Math.max(size, 1), Sort.by(Sort.Order.asc("sizeGram")));
+        Pageable pageable = PageRequest.of(Math.max(page, 0), Math.max(size, 1), Sort.by(Sort.Order.asc("size")));
         Page<com.fiordelisi.fiordelisiproduct.entity.Variant> result = variantService.searchAllVariants(q, pageable);
         model.addAttribute("page", result);
         model.addAttribute("variants", result.getContent());

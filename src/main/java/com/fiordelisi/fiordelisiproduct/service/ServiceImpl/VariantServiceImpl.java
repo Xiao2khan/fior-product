@@ -54,13 +54,13 @@ public class VariantServiceImpl implements VariantService {
         List<Variant> variants = listVariants(productId);
         String q = query == null ? "" : query.trim().toLowerCase();
         variants.sort((a, b) -> {
-            String sa = String.valueOf(a.getSizeGram());
-            String sb = String.valueOf(b.getSizeGram());
+            String sa = String.valueOf(a.getSize());
+            String sb = String.valueOf(b.getSize());
             return sa.compareToIgnoreCase(sb);
         });
         List<Variant> filtered = new ArrayList<>();
         for (Variant v : variants) {
-            if (q.isEmpty() || String.valueOf(v.getSizeGram()).toLowerCase().contains(q)) {
+            if (q.isEmpty() || String.valueOf(v.getSize()).toLowerCase().contains(q)) {
                 filtered.add(v);
             }
         }
@@ -75,13 +75,13 @@ public class VariantServiceImpl implements VariantService {
         List<Variant> all = getAllVariants();
         String q = query == null ? "" : query.trim().toLowerCase();
         all.sort((a, b) -> {
-            String sa = String.valueOf(a.getSizeGram());
-            String sb = String.valueOf(b.getSizeGram());
+            String sa = String.valueOf(a.getSize());
+            String sb = String.valueOf(b.getSize());
             return sa.compareToIgnoreCase(sb);
         });
         List<Variant> filtered = new ArrayList<>();
         for (Variant v : all) {
-            if (q.isEmpty() || String.valueOf(v.getSizeGram()).toLowerCase().contains(q)) {
+            if (q.isEmpty() || String.valueOf(v.getSize()).toLowerCase().contains(q)) {
                 filtered.add(v);
             }
         }
@@ -103,9 +103,8 @@ public class VariantServiceImpl implements VariantService {
             if (v.getId().equals(variantId)) {
                 return VariantDto.builder()
                         .id(v.getId())
-                        .sizeGram(v.getSizeGram())
+                        .size(v.getSize())
                         .price(v.getPrice())
-                        .quantity(v.getQuantity())
                         .build();
             }
         }
@@ -117,9 +116,8 @@ public class VariantServiceImpl implements VariantService {
         Variant variant = Variant.builder()
                 .id(variantId)
                 .productId(productId)
-                .sizeGram(dto.getSizeGram())
+                .size(dto.getSize())
                 .price(dto.getPrice())
-                .quantity(dto.getQuantity())
                 .build();
         return upsertVariant(productId, variant);
     }

@@ -1,0 +1,140 @@
+.card-box .table tr th {
+    white-space: nowrap;
+    font-size: 16px;
+    color: #2C6E1F;
+}
+
+.card-box .table tr{
+    opacity: 1;
+    gap: 48px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom-width: 0.5px;
+}
+
+.card-box .quantity,
+h4,h5,
+.price,#price_total {
+    color: #2C6E1F !important;
+}
+
+.card-box td {
+    font-size: 16px;
+}
+
+.card-box .btn {
+    border: none;
+}
+
+.card-box {
+    font-weight: 600;
+}
+
+/* Tổng cộng */
+.total span {
+    font-size: 16px;
+}
+
+#price_total {
+    font-size: 22px;
+}
+
+/* 🔹 Thẻ chứa bảng sản phẩm */
+.card-box {
+    box-shadow: 0px 4px 24px 0px #0000001F;
+    border-radius: 24px;
+    padding: 24px 32px;
+    background: #fff;
+    width: 100%;
+    max-width: 840px;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+
+.card {
+    box-shadow: 0px 4px 24px 0px #0000001F;
+    border-radius: 24px;
+    padding: 24px 32px;
+    background: #fff;
+    height: 100%;
+    max-width: 408px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.card .btn {
+    height: 57px;
+    border-radius: 13px;
+    font-weight: 600;
+    font-size: 22px;
+}
+
+
+.card-box table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.card-box th,
+.card-box td {
+    vertical-align: middle;
+}
+
+/* 🔹 Responsive cho màn hình nhỏ */
+@media (max-width: 992px) {
+    .card-box {
+        padding: 16px 20px;
+        max-width: 100%;
+        border-radius: 16px;
+    }
+
+    .card-box table {
+        min-width: 500px;
+    }
+
+    .card-box th,
+    .card-box td {
+        font-size: 14px;
+    }
+
+    .card {
+        max-width: 100%;
+        padding: 16px 20px;
+        border-radius: 16px;
+    }
+
+    .card .btn {
+        font-size: 18px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-box {
+        padding: 12px 16px;
+        border-radius: 12px;
+    }
+
+    .card-box table {
+        min-width: 480px;
+    }
+
+    .card-box th,
+    .card-box td {
+        font-size: 13px;
+    }
+
+    .card .btn {
+        font-size: 16px;
+        height: 46px;
+    }
+    .card-box .rounded{
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .card-box .name {
+        gap:40px!important;
+    }
+}

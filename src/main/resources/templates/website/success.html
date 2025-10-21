@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/website/main}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/website/success.css}">
+
+</head>
+<body>
+<div layout:fragment="website-content">
+    <div class="container breadcrumb" style="margin-top:1rem">Trang chủ > Giỏ hàng > Đặt hàng > Hoàn tất</div>
+    <div class="order-success container">
+        <div class="order-success-container d-flex flex-column" style="gap:24px;width: 60%">
+            <div class="d-flex justify-content-center">
+                <p class="checkmark m-0">✔</p>
+            </div>
+            <div class="title"><h3>Đặt hàng thành công</h3></div>
+            <div class="message d-flex flex-column"  style="gap:24px">
+                Đơn hàng của quý khách đã được đặt thành công, chúng tôi sẽ sớm
+                liên hệ để xác nhận và giao sản phẩm đến quý khách hàng
+            </div>
+
+            <div>
+                <button class="button" onclick="window.location.href='/'">Về trang chủ</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

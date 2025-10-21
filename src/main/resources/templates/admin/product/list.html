@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
+    <style>
+        th,td{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="admin-content">
@@ -23,7 +28,7 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Category</th>
+                <th>Translations</th>
                 <th>Image</th>
                 <th class="text-end">Actions</th>
             </tr>
@@ -33,18 +38,24 @@
                 <td th:text="${i.index + 1}"></td>
                 <td th:text="${p.name}"></td>
                 <td>
-                    <span th:text="${categoryMap[p.categoryId]}"></span>
+                    <span th:if="${p.hasOtherTranslations}">
+                        <span><img src="https://flagcdn.com/gb.svg" width="20" alt="UK flag" style="vertical-align:middle"></span>
+                    </span>
+                    <span th:if="${!p.hasOtherTranslations}">
+                        <span>No Translations(en)</span>
+                    </span>
                 </td>
+
                 <td>
-                    <img th:if="${p.image}" th:src="${p.image}" alt="image" style="height:40px">
+                    <img th:if="${p.images.size() > 0}" th:src="${p.images[0]}" alt="images" style="height:40px">
                 </td>
                 <td class="text-end">
-                    <a class="btn btn-sm btn-info me-1" th:href="@{'/admin/products/' + ${p.id} + '/variants'}" title="View Variants">
-                        <i class="fa fa-layer-group"></i>
-                    </a>
-                    <a class="btn btn-sm btn-success me-1" th:href="@{'/admin/products/' + ${p.id} + '/variants/create'}" title="Create Variant">
-                        <i class="fa fa-plus"></i>
-                    </a>
+<!--                    <a class="btn btn-sm btn-info me-1" th:href="@{'/admin/products/' + ${p.id} + '/variants'}" title="View Variants">-->
+<!--                        <i class="fa fa-layer-group"></i>-->
+<!--                    </a>-->
+<!--                    <a class="btn btn-sm btn-success me-1" th:href="@{'/admin/products/' + ${p.id} + '/variants/create'}" title="Create Variant">-->
+<!--                        <i class="fa fa-plus"></i>-->
+<!--                    </a>       -->
                     <a class="btn btn-sm btn-secondary me-1" th:href="@{'/admin/products/edit/' + ${p.id}}" title="Edit Product">
                         <i class="fa fa-pen"></i>
                     </a>

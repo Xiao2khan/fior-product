@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/website/main}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/website/product-detail.css}">
+    <link rel="stylesheet" th:href="@{/css/website/product-page.css}">
+</head>
+<body>
+<div layout:fragment="website-content">
+    <div class="container">
+        <div class="header">
+            <h1>Chứng nhận của chúng tôi</h1>
+            <p>Trạng thái: Chứng nhận</p>
+            <img src="broccoli.png" alt="Broccoli Icon">
+        </div>
+        <div class="content d-flex flex-column" style="max-width: 840px">
+            <h2>Đảm bảo chất lượng</h2>
+            <p>Sản phẩm của chúng tôi được đảm bảo bởi các chứng nhận quốc tế nhằm bảo vệ người tiêu dùng.</p>
+            <div class="logos d-flex flex-column">
+                <div class="d-flex">
+                    <img src="/image/golobal.png" alt="GLOBALG.A.P.">
+                    <img src="/image/bioagricultura.png" alt="Bio Agricoltura">
+                </div>
+                <div class="d-flex">
+                    <img src="/image/brgs.png" alt="BRGS">
+                    <img src="/image/csqa.png" alt="CSQA">
+                    <img src="/image/sedex.png" alt="Sedex">
+                    <img src="/image/klbd.png" alt="KLD">
+                </div>
+                <div>
+                    <img src="/image/iqnet.png" alt="IQNet">
+                </div>
+                <div>
+                    <img src="/image/877c3afcd166d1d1de93600694f246d8c361c444.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

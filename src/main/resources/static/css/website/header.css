@@ -33,3 +33,29 @@ header {
 #navbarWebsite .navbar-nav .nav-item .nav-link:hover, :active {
     color: #2C6E1F;
 }
+#cart-count{
+    position:absolute;
+    top:-5px;
+    right:-10px;
+    background:#dc3545;
+    color:#fff;
+    border-radius:50%;
+    font-size:12px;
+    width:18px;
+    height:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+
+@media (max-width: 990px){
+    #cart-count{
+        left: 52% !important;
+        text-align:center !important;
+    }
+    #cart-icon{
+        text-align:center !important;
+    }
+}
+
+

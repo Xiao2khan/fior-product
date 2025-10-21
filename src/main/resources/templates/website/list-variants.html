@@ -14,40 +14,54 @@
     <section>
         <div class="d-flex justify-content-center" style="margin: 40px 0 60px 0">
             <form method="get" th:action="|/${lang}/products|" class="search-form w-50 position-relative">
-                <input type="hidden" name="categoryId" th:value="${selectedCategoryId}"
-                       th:if="${selectedCategoryId != null}">
+                <input type="hidden" name="categoryId" th:value="${selectedCategoryId}" th:if="${selectedCategoryId != null}">
                 <input type="hidden" name="sort" th:value="${selectedSort}" th:if="${selectedSort != null}">
                 <input type="hidden" name="page" value="0">
                 <input type="hidden" name="size" th:value="${pageSize}">
 
-                <input type="text" name="search"
-                       th:value="${search}"
-                       class="search-input w-100"
-                       id="searchInput"
-                       style="border:unset; border-radius: 24px;padding: 10px 50px 10px 15px;gap: 8px;opacity: 1;background: rgba(255, 255, 255, 1); box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.08);"
-                       onkeypress="if(event.key==='Enter'){event.preventDefault();this.closest('form').submit();}">
+                <div class="input-group position-relative">
+                    <i class="fas fa-magnifying-glass position-absolute" style="left: 15px; top: 50%; transform: translateY(-50%); font-size: 1.2rem; color: #6c757d;"></i>
+                    <input type="text" name="search"
+                           th:value="${search}"
+                           class="search-input w-100"
+                           id="searchInput"
+                           style="border: unset; border-radius: 24px; padding: 10px 15px 10px 40px; gap: 8px; opacity: 1; background: rgba(255, 255, 255, 1); box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.08);"
+                           onkeypress="if(event.key==='Enter'){event.preventDefault();this.closest('form').submit();}">
+                </div>
             </form>
         </div>
     </section>
     <section class="category-section">
         <div class="category-container container">
-            <div class="d-flex align-items-center justify-content-between">
-                <div class="category-list d-flex gap-3">
+            <div class="d-flex align-items-center justify-content-between gap-4">
+                <div class="category-list d-flex gap-3 d-none d-md-flex">
                     <div class="category-item">
-                        <a th:href="|/${lang}/products?page=0&size=${pageSize}| + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|"
+                        <a th:href="|/${lang}/products?page=0&size=${pageSize}|"
                            th:classappend="${selectedCategoryId == null || selectedCategoryId == ''} ? 'active'"
-                           class="category-link">
-                            Tất cả
-                        </a>
+                           class="category-link">Tất cả</a>
                     </div>
                     <div class="category-item" th:each="categorie : ${categories}">
-                        <a th:href="|/${lang}/products?page=0&size=${pageSize}&categoryId=${categorie.id}| + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|"
+                        <a th:href="|/${lang}/products?page=0&size=${pageSize}&categoryId=${categorie.id}|"
                            th:text="${categorie.name}"
                            th:classappend="${selectedCategoryId == categorie.id} ? 'active'"
-                           class="category-link">
-                        </a>
+                           class="category-link"></a>
                     </div>
                 </div>
+
+                <div class="category-dropdown d-block d-md-none w-100">
+                    <select id="categorySelect" class="form-select">
+                        <option th:value="|/${lang}/products?page=0&size=${pageSize}|"
+                                th:selected="${selectedCategoryId == null || selectedCategoryId == ''}">
+                            Tất cả
+                        </option>
+                        <option th:each="categorie : ${categories}"
+                                th:value="|/${lang}/products?page=0&size=${pageSize}&categoryId=${categorie.id}|"
+                                th:text="${categorie.name}"
+                                th:selected="${selectedCategoryId == categorie.id}">
+                        </option>
+                    </select>
+                </div>
+
                 <div class="sort-dropdown">
                     <div class="dropdown">
                         <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center justify-content-between"
@@ -84,10 +98,11 @@
     <section class="product-section">
         <div class="product-container container">
             <div class="product-content-row row align-items-center justify-content-center">
-                <div class="product-content-col col-xs-12 col-md-6 col-lg-4 col-xl-3"
-                     th:each="variant: ${variants}">
+                <div class="product-content-col col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                     th:each="product: ${products}">
                     <div></div>
-                    <div class="product-content-detail">
+                    <a th:href="|/${lang}/product/${product.id}|" class="product-link text-decoration-none text-dark">
+                        <div class="product-content-detail">
                         <div class="image-content">
                             <div class="image-detail d-flex flex-column">
                                 <div class="icon d-flex justify-content-end">
@@ -95,44 +110,95 @@
                                 </div>
                                 <div class="image d-flex align-items-center justify-content-center">
                                     <div>
-                                        <img th:src="${variant.productImage}" alt="" class="h-100">
+                                        <img th:src="${!#lists.isEmpty(product.images) ? product.images[0] : '/image/No_image_available.svg.webp'}" alt="" class="h-100">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="text-content">
                             <div class="text-detail d-flex flex-column fw-bolder">
-                                <div class="text-title" th:text="${variant.productName}"></div>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="text-price" th:text="${variant.variant.price}"></div>
+                                <div class="text-title" th:text="${product.name}"></div>
+                                <div class="d-flex align-items-center justify-content-between detail">
+                                    <div class="text-price">
+                                    <span class="price-value"
+                                          th:text="${(product.variants != null and !#lists.isEmpty(product.variants))
+                                                      ? product.variants[0].price
+                                                      : product.defaultPrice}">
+                                    </span> VNĐ
+                                    </div>
                                     <div class="buy-btn">Mua</div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
             </div>
             <nav aria-label="Page navigation" class="mt-4" th:if="${totalPages > 1}">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                <ul class="pagination justify-content-center" style="gap: 8px;">
+                    <!-- Nút Previous: Ẩn khi currentPage == 0, nhãn là "<" -->
+                    <li class="page-item" th:if="${currentPage > 0}">
                         <a class="page-link"
                            th:href="|/${lang}/products?page=${currentPage - 1}&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|">
-                            Previous
-                        </a>
-                    </li>
-                    <li class="page-item"
-                        th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
-                        th:classappend="${i == currentPage} ? 'active'">
-                        <a class="page-link"
-                           th:text="${i + 1}"
-                           th:href="|/${lang}/products?page=${i}&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|">
+                            <i class="fa-solid fa-arrow-left"></i>
                         </a>
                     </li>
 
-                    <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+                    <!-- Hiển thị tất cả nếu totalPages <= 4 -->
+                    <th:block th:if="${totalPages <= 4}">
+                        <li class="page-item"
+                            th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                            th:classappend="${i == currentPage} ? 'active'">
+                            <a class="page-link"
+                               th:text="${i + 1}"
+                               th:href="|/${lang}/products?page=${i}&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|">
+                            </a>
+                        </li>
+                    </th:block>
+
+                    <!-- Hiển thị với ellipsis nếu totalPages > 4 -->
+                    <th:block th:if="${totalPages > 4}">
+                        <!-- Trang 1 -->
+                        <li class="page-item" th:classappend="${currentPage == 0} ? 'active'">
+                            <a class="page-link"
+                               th:href="|/${lang}/products?page=0&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|">
+                                1
+                            </a>
+                        </li>
+                        <!-- Ellipsis trước nếu currentPage >= 3 -->
+                        <li class="page-item" th:if="${currentPage >= 3}">
+                            <span class="page-link" style="padding: 4px 8px;">...</span>
+                        </li>
+
+                        <!-- Range: Tối đa 3 trang xung quanh currentPage -->
+                        <th:block th:each="i : ${#numbers.sequence(
+                        currentPage <= 1 ? 1 : (currentPage >= totalPages - 2 ? totalPages - 3 : currentPage - 1),
+                        currentPage <= 1 ? 2 : (currentPage >= totalPages - 2 ? totalPages - 1 : currentPage + 1))}">
+                            <li class="page-item" th:classappend="${i == currentPage} ? 'active'">
+                                <a class="page-link"
+                                   th:text="${i + 1}"
+                                   th:href="|/${lang}/products?page=${i}&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|">
+                                </a>
+                            </li>
+                        </th:block>
+
+                        <!-- Ellipsis sau nếu currentPage < totalPages - 2 -->
+                        <li class="page-item" th:if="${currentPage < totalPages - 3}">
+                            <span class="page-link" style="padding: 4px 8px;">...</span>
+                        </li>
+                        <!-- Trang cuối -->
+                        <li class="page-item" th:if="${currentPage < totalPages - 2}">
+                            <a class="page-link"
+                               th:text="${totalPages}"
+                               th:href="|/${lang}/products?page=${totalPages - 1}&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|">
+                            </a>
+                        </li>
+                    </th:block>
+
+                    <li class="page-item" th:if="${currentPage < totalPages - 1}">
                         <a class="page-link"
                            th:href="|/${lang}/products?page=${currentPage + 1}&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + (${selectedSort != null} ? '&sort=' + ${selectedSort} : '')|">
-                            Next
+                            <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
                 </ul>
@@ -140,7 +206,7 @@
         </div>
     </section>
 </div>
-
+<th:block layout:fragment="scripts">
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('searchInput');
@@ -152,6 +218,97 @@
             });
         }
     });
+    let lastBreakpoint = null;
+    let initialized = false;
+
+    function getBreakpoint() {
+        const width = window.innerWidth;
+        if (width >= 1024) return 'desktop';
+        if (width >= 768) return 'tablet';
+        return 'mobile';
+    }
+
+    function getPageSize(breakpoint) {
+        switch (breakpoint) {
+            case 'mobile': return 6;
+            case 'tablet': return 8;
+            default: return 20; // desktop
+        }
+    }
+
+    function adjustPageSize(force = false) {
+        const url = new URL(window.location.href);
+        const container = document.querySelector('.product-title') || document.querySelector('.product-container');
+        if (!container) return;
+
+        const currentPage = parseInt(container.dataset.currentPage || '0', 10);
+        const currentSize = parseInt(container.dataset.pageSize || '12', 10);
+        const newBreakpoint = getBreakpoint();
+        const newSize = getPageSize(newBreakpoint);
+
+        // 🔹 Nếu chưa khởi tạo lần đầu → chỉ gán mà KHÔNG reload
+        if (!initialized) {
+            lastBreakpoint = newBreakpoint;
+            container.dataset.pageSize = newSize;
+            initialized = true;
+            return;
+        }
+
+        // 🔹 Nếu breakpoint không đổi thì bỏ qua
+        if (newBreakpoint === lastBreakpoint && !force) return;
+
+        // 🔹 Nếu kích thước trang trùng thì không làm gì
+        if (newSize === currentSize) {
+            lastBreakpoint = newBreakpoint;
+            return;
+        }
+
+        // 🔹 Lưu vị trí cuộn hiện tại
+        const scrollY = window.scrollY;
+
+        // 🔹 Tính trang mới và cập nhật URL
+        const newPage = Math.floor(currentPage * currentSize / newSize);
+        const params = url.searchParams;
+        params.set('page', newPage);
+        params.set('size', newSize);
+
+        const newUrl = url.pathname + '?' + params.toString();
+        container.dataset.pageSize = newSize;
+        lastBreakpoint = newBreakpoint;
+
+        // 🔹 Cập nhật URL mà không reload
+        history.replaceState(null, '', newUrl);
+
+        // 🔹 Nếu có renderProducts() thì gọi lại, không reload
+        if (typeof renderProducts === 'function') {
+            renderProducts();
+            window.scrollTo({ top: scrollY, behavior: 'instant' });
+        } else {
+            // Trường hợp không có renderProducts -> reload 1 lần
+            window.location.reload();
+            window.scrollTo(0, scrollY);
+        }
+    }
+
+    // 🔹 Khởi tạo
+    document.addEventListener('DOMContentLoaded', () => {
+        lastBreakpoint = getBreakpoint();
+        adjustPageSize(false); // KHÔNG ép reload
+    });
+
+    // 🔹 Lắng nghe resize (khi breakpoint thay đổi)
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const newBreakpoint = getBreakpoint();
+            if (newBreakpoint !== lastBreakpoint) {
+                adjustPageSize(true);
+            }
+        }, 250);
+    });
+
 </script>
+</th:block>
 </body>
 </html>

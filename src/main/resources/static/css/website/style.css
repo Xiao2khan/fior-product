@@ -1,24 +1,119 @@
 /* Basic website styles */
 body {
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 0;
-  font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0;
+    font-size: 20px;
+    background-color: #F5F5F5; /* giữ background từ nhánh Stashed changes */
 }
 
 .site-hero {
-  background: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
 }
 
 .site-content {
-  min-height: 60vh;
+    min-height: 60vh;
 }
 
 footer a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 img {
-  width: 100%;
-  object-fit: cover;
+    width: 100%;
+    object-fit: cover;
 }
+
+
+
+footer a:hover { text-decoration: underline; }
+
+@media (max-width: 768px){
+    .position-sticky{
+        padding:12px
+    }
+}
+
+.position-sticky{
+    background-color: #fff
+}
+
+/* Overlay mờ nền */
+#mini-cart-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    opacity: 0; visibility: hidden;
+    transition: 0.3s;
+    z-index: 999;
+}
+
+/* Sidebar cart */
+#mini-cart {
+    position: fixed;
+    top: 0; right: -400px;
+    width: 360px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+    padding: 20px;
+    z-index: 1000;
+    transition: right 0.4s ease;
+    overflow-y: auto;
+    border-radius: 8px 0 0 8px;
+}
+
+/* Hiển thị khi mở */
+#mini-cart.active {
+    right: 0;
+}
+#mini-cart-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Product item */
+.cart-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.cart-item img {
+    width: 60px; height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-item .info {
+    flex: 1;
+    font-size: 14px;
+}
+.cart-item .info .name {
+    font-weight: 600;
+}
+.cart-item .info .price {
+    color: #2C6E1F;
+    font-weight: 500;
+}
+.cart-item span {
+    transition: 0.2s;
+}
+#mini-cart .btn-outline-secondary {
+    border:0;
+}
+#mini-cart .btn-outline-secondary:hover{
+    background: #2C6E1F;
+}
+#checkout-btn{
+    background: #2C6E1F;
+    height: 56px;
+}
+
+a {
+    text-decoration: none;
+}
+>>>>>>> Stashed changes
