@@ -14,18 +14,13 @@
         <div class="row g-3">
             <div class="col-md-4">
                 <label class="form-label">Size (gram)</label>
-                <input type="number" min="0" class="form-control" th:field="*{sizeGram}" required>
-                <div class="text-danger" th:if="${#fields.hasErrors('sizeGram')}" th:errors="*{sizeGram}"></div>
+                <input type="number" min="0" class="form-control" th:field="*{size}" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('size')}" th:errors="*{size}"></div>
             </div>
             <div class="col-md-4">
                 <label class="form-label">Price</label>
                 <input type="number" min="0" class="form-control" th:field="*{price}" required>
                 <div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
-            </div>
-            <div class="col-md-4">
-                <label class="form-label">Quantity</label>
-                <input type="number" min="0" class="form-control" th:field="*{quantity}" required>
-                <div class="text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
             </div>
         </div>
 

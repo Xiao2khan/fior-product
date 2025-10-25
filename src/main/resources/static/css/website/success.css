@@ -1,0 +1,48 @@
+.order-success{
+    text-align: center;
+    height: 406px;
+    box-shadow: 0px 4px 24px 0px #0000001F;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.order-success .button{
+    border-radius: 16px;
+    height: 64px;
+    text-align: center;
+    width: 340px;
+    background: #2C6E1F;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+}
+.order-success .message{
+    font-size: 18px;
+    font-weight: 500;
+    color: #666666;
+}
+.order-success .title{
+    font-size: 36px;
+    font-weight: 600;
+    color: #2C6E1F;
+}
+.order-success .checkmark {
+    width: 80px;
+    height: 80px;
+    background-color: #2C6E1F;
+    color: #fff;
+    font-size: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 15px;
+    gap: 10px;
+    opacity: 1;
+}
+.breadcrumb{
+    font-size: 14px;
+    font-weight: 500;
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/website/main}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/website/card.css}">
+</head>
+<body>
+<div layout:fragment="website-content">
+    <div class="container breadcrumb" style="margin-top:30px;padding: 12px;font-size:14px;font-weight: 600">
+        <div>
+            <p>Trang Chủ > Giỏ Hàng</p>
+        </div>
+    </div>
+    <div class="container cart-page">
+        <h4 class="mb-4 fw-bold">Giỏ hàng</h4>
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card-box">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                        <tr>
+                            <th>SẢN PHẨM</th>
+                            <th>SỐ LƯỢNG</th>
+                            <th>GIÁ</th>
+                            <th>TỔNG</th>
+                        </tr>
+                        </thead>
+                        <tbody id="cart-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <!-- Đơn hàng -->
+            <div class="col-lg-4">
+                <div class="card p-4">
+                    <div>
+                        <h5 class="fw-bold mb-3">Đơn hàng của bạn</h5>
+                        <div class="total">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Tổng tất cả sản phẩm:</span>
+                                <span id="subtotal">0đ</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Phí vận chuyển:</span>
+                                <span id="shipping">100.000đ</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between fw-bold">
+                                <span style="color:#2C6E1F">Tổng:</span>
+                                <span id="price_total">0đ</span>
+                            </div>
+                        </div>
+                        </div>
+                    <div>
+                            <button id="order" class="btn btn-success w-100 mt-4" style="background: #2C6E1F">Đặt hàng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="scripts">
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const orderBtn = document.getElementById("order");
+            let lang = window.location.pathname.split("/")[1] || "vi";
+            if (orderBtn) {
+                orderBtn.addEventListener("click", () => {
+                    window.location.href = `/${lang}/order`;
+                });
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartBody = document.getElementById("cart-body");
+            const subtotalEl = document.getElementById("subtotal");
+            const totalEl = document.getElementById("price_total");
+            const cartCount = document.getElementById("cart-count");
+            const shipping = 100000;
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            function updateCartCount() {
+                if (!cartCount) return;
+                const count = cart.length;
+                cartCount.textContent = count;
+                cartCount.style.display = count > 0 ? "flex" : "none";
+            }
+
+            function renderCart() {
+                cartBody.innerHTML = "";
+                let subtotal = 0;
+
+                if (!cart || cart.length === 0) {
+                    cartBody.innerHTML = `
+            <tr>
+                <td colspan="4" class="text-center py-4 text-muted">
+                    Giỏ hàng của bạn đang trống.
+                </td>
+            </tr>`;
+                    subtotalEl.textContent = "0đ";
+                    totalEl.textContent = shipping.toLocaleString("vi-VN") + "đ";
+                    updateCartCount();
+                    return;
+                }
+
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+
+                    const row = document.createElement("tr");
+                    row.dataset.index = index;
+                    row.innerHTML = `
+                <td>
+                    <div class="name d-flex align-items-center" style="gap:60px">
+                        <img src="${item.image}" class="rounded" style="width:120px;height:120px;">
+                        <div>
+                            <div>${item.name}</div>
+                            <small class="text-muted">${item.variantText}</small>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-sm btn-outline-success" onclick="updateQty(${index}, -1)">−</button>
+                        <span class="mx-2 quantity">${item.quantity}</span>
+                        <button class="btn btn-sm btn-outline-success" onclick="updateQty(${index}, 1)">+</button>
+                    </div>
+                </td>
+                <td class="price">${item.price.toLocaleString("vi-VN")}đ</td>
+                <td class="item-total">${itemTotal.toLocaleString("vi-VN")}đ</td>
+            `;
+                    cartBody.appendChild(row);
+                });
+
+                subtotalEl.textContent = subtotal.toLocaleString("vi-VN") + "đ";
+                totalEl.textContent = (subtotal + shipping).toLocaleString("vi-VN") + "đ";
+                updateCartCount();
+            }
+
+            window.updateQty = (index, delta) => {
+                const newQuantity = Math.max(0, cart[index].quantity + delta);
+
+                if (newQuantity === 0) {
+                    cart.splice(index, 1);
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    renderCart();
+                    return;
+                }
+
+                cart[index].quantity = newQuantity;
+                localStorage.setItem("cart", JSON.stringify(cart));
+
+                const row = cartBody.querySelector(`tr[data-index="${index}"]`);
+                if (row) {
+                    const quantityEl = row.querySelector(".quantity");
+                    const itemTotalEl = row.querySelector(".item-total");
+
+                    quantityEl.textContent = newQuantity;
+                    itemTotalEl.textContent = (cart[index].price * newQuantity).toLocaleString("vi-VN") + "đ";
+                }
+
+                let subtotal = 0;
+                cart.forEach((item) => subtotal += item.price * item.quantity);
+                subtotalEl.textContent = subtotal.toLocaleString("vi-VN") + "đ";
+                totalEl.textContent = (subtotal + shipping).toLocaleString("vi-VN") + "đ";
+                updateCartCount();
+            };
+
+            renderCart();
+        });
+    </script>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin/main}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Order Form</title>
+</head>
+
+<body>
+<div layout:fragment="admin-content">
+    <div class="container mt-4">
+        <h2>Order Details</h2>
+        <form th:action="@{'/admin/orders/edit/' + ${order.get().id}}" th:method="post">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Customer Information
+                </div>
+                <div class="card-body">
+                    <p><strong>Full Name:</strong> <span th:text="${order.get().customer.fullName}"></span></p>
+                    <p><strong>Phone:</strong> <span th:text="${order.get().customer.phone}"></span></p>
+                    <p><strong>Email:</strong> <span th:text="${order.get().customer.email}"></span></p>
+                    <p><strong>Address:</strong>
+                        <span th:text="${order.get().customer.street}"></span>,
+                        <span th:text="${order.get().customer.ward}"></span>,
+                        <span th:text="${order.get().customer.district}"></span>,
+                        <span th:text="${order.get().customer.city}"></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    Products
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${order.get().items}">
+                            <td>
+                                <div class="name d-flex align-items-center" style="gap:60px">
+                                    <img th:src="${item.image}" class="rounded" style="width:120px;height:120px;">
+                                    <div>
+                                        <div>
+                                            <a th:href="@{'/admin/products/edit/' + ${item.productId}}" th:text="${item.productName}" style="text-decoration: none;color:unset">
+                                            </a>
+                                        </div>
+                                        <small class="text-muted" th:text="${item.variantName}"></small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="mx-2 quantity" th:text="${item.quantity}"></span>
+                            </td>
+                            <td class="price" th:text="${item.price}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    Payment Information
+                </div>
+                <div class="card-body">
+                    <p><strong>Subtotal:</strong> <span th:text="${order.get().subtotal}"></span></p>
+                    <p><strong>Shipping:</strong> <span th:text="${order.get().shipping}"></span></p>
+                    <p><strong>Total:</strong> <span th:text="${order.get().total}"></span></p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    Order Status
+                </div>
+                <div class="card-body">
+                    <label for="status">Status</label>
+                    <select id="status" name="status" class="form-select">
+                        <option th:selected="${order.get().status == 'PENDING'}" value="PENDING">PENDING</option>
+                        <option th:selected="${order.get().status == 'REFUND'}" value="REFUND">REFUND</option>
+                        <option th:selected="${order.get().status == 'SHIPPING'}" value="SHIPPING">SHIPPING</option>
+                        <option th:selected="${order.get().status == 'SHIPPED'}" value="SHIPPED">SHIPPED</option>
+                        <option th:selected="${order.get().status == 'COMPLETED'}" value="COMPLETED">COMPLETED</option>
+                        <option th:selected="${order.get().status == 'CANCELLED'}" value="CANCELLED">CANCELLED</option>
+                        <option th:selected="${order.get().status =='DELIVERED'}" value="DELIVERED">DELIVERED</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Update Status</button>
+        </form>
+    </div>
+</div>
+<!-- ✅ Scripts -->
+<th:block layout:fragment="scripts">
+</th:block>
+</body>
+</html>

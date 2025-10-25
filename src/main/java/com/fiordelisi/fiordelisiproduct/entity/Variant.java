@@ -8,7 +8,8 @@ import lombok.*;
 public class Variant {
     private String id;
     private String productId;
-    private Integer sizeGram;
+    private Integer size;
     private Integer price;
-    private Integer quantity;
+    private boolean instock;
+    private String unit;
 }

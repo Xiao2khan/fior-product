@@ -15,7 +15,7 @@ public class VariantDto {
     private String id;
 
     @NotNull(message = "Please enter size (grams)")
-    private Integer sizeGram;
+    private Integer size;
 
     @NotNull(message = "Please enter price (VND)")
     @Min(value = 0, message = "Price must not be negative")
@@ -23,7 +23,8 @@ public class VariantDto {
 
     @NotNull(message = "Please enter quantity")
     @Min(value = 0, message = "Quantity must not be negative")
-    private Integer quantity;
+    private boolean instock;
+    private String unit;
 }
 
 

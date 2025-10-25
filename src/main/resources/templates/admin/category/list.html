@@ -5,6 +5,9 @@
     <title>Categories</title>
     <style>
         .action-btn { margin-right: 8px; }
+        th,td{
+            text-align: center;
+        }
     </style>
     <th:block layout:fragment="styles"></th:block>
 </head>
@@ -28,6 +31,7 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Translations</th>
                 <th class="text-end">Actions</th>
             </tr>
             </thead>
@@ -36,6 +40,14 @@
                 <td th:text="${i.index + 1}"></td>
                 <td th:text="${c.name}"></td>
                 <td th:text="${c.description}"></td>
+                <td>
+                    <span th:if="${c.hasOtherTranslations}">
+                        <span><img src="https://flagcdn.com/gb.svg" width="20" alt="UK flag" style="vertical-align:middle"></span>
+                    </span>
+                    <span th:if="${!c.hasOtherTranslations}">
+                        <span>No Translations (en)</span>
+                    </span>
+                </td>
                 <td class="text-end">
                     <a class="btn btn-sm btn-secondary action-btn" th:href="@{'/admin/categories/edit/' + ${c.id}}">
                         <i class="fa fa-pen"></i>

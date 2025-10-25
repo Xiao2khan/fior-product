@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ProductService {
     List<Product> findAll();
 
-    Page<Product> search(String query, Pageable pageable);
+    Page<Product> search(String query, String languageCode, Pageable pageable);
 
     Optional<Product> findById(String id);
 
@@ -33,6 +33,10 @@ public interface ProductService {
     Product saveFromDto(ProductDto dto);
 
     ProductDto getProductDtoForForm(String id);
+
+    Page<Product> findAll(Pageable pageable);
+    Page<Product> findByCategoryId(String categoryId, Pageable pageable);
+    Page<Product> findByCategoryIdAndNameContainingIgnoreCase(String categoryId, String keyword,String languageCode, Pageable pageable);
 }
 
 

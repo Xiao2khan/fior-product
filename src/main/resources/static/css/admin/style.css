@@ -4,6 +4,12 @@
     align-items: stretch;
 }
 
+.variant-error {
+    font-size: 0.85rem;
+    color: #dc3545; /* Bootstrap đỏ */
+}
+
+
 .navbar {
     padding: 15px 10px;
     background: #fff;

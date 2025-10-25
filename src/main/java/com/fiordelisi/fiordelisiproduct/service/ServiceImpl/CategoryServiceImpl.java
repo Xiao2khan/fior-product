@@ -1,23 +1,20 @@
 package com.fiordelisi.fiordelisiproduct.service.ServiceImpl;
 
+import com.fiordelisi.fiordelisiproduct.constant.Language;
 import com.fiordelisi.fiordelisiproduct.dto.CategoryDto;
-import com.fiordelisi.fiordelisiproduct.dto.ProductVariantDto;
+import com.fiordelisi.fiordelisiproduct.dto.ProductDto;
 import com.fiordelisi.fiordelisiproduct.entity.Category;
+import com.fiordelisi.fiordelisiproduct.entity.LocalizedText;
 import com.fiordelisi.fiordelisiproduct.entity.Product;
+import com.fiordelisi.fiordelisiproduct.entity.response.TranslationEntry;
 import com.fiordelisi.fiordelisiproduct.repository.CategoryRepository;
 import com.fiordelisi.fiordelisiproduct.repository.ProductRepository;
 import com.fiordelisi.fiordelisiproduct.service.CategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,31 +60,49 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category saveFromDto(CategoryDto dto) {
+        String lang = dto.getLanguage() != null ? dto.getLanguage() : Language.VI.getCode();
+
+        Set<LocalizedText> names = new HashSet<>();
+        Set<LocalizedText> descriptions = new HashSet<>();
+
+        names.add(new LocalizedText(lang, dto.getName()));
+        descriptions.add(new LocalizedText(lang, dto.getDescription()));
+
+        if (dto.getTranslations() != null) {
+            for (TranslationEntry t : dto.getTranslations()) {
+                if (t.getLanguage() != null && t.getName() != null && !t.getName().isBlank()) {
+                    names.add(new LocalizedText(t.getLanguage(), t.getName()));
+                    descriptions.add(new LocalizedText(t.getLanguage(), t.getDescription()));
+                }
+            }
+        }
+
         Category category = Category.builder()
                 .id(dto.getId())
-                .name(dto.getName())
-                .description(dto.getDescription())
+                .name(names)
+                .description(descriptions)
                 .build();
+
         if (dto.getId() == null || dto.getId().isBlank()) {
             return create(category);
         }
         return update(dto.getId(), category);
     }
 
+
     @Override
     public CategoryDto getCategoryDtoForForm(String id) {
         if (id == null) return new CategoryDto();
+
         Category category = findById(id).orElse(new Category());
+        String lang = Language.EN.getCode();
+
         return CategoryDto.builder()
                 .id(category.getId())
-                .name(category.getName())
-                .description(category.getDescription())
+                .name(category.getNameByLanguage(lang))
+                .description(category.getDescriptionByLanguage(lang))
+                .language(lang)
                 .build();
-    }
-
-    @Override
-    public Map<String, String> getIdToNameMap() {
-        return findAll().stream().collect(Collectors.toMap(Category::getId, Category::getName));
     }
 
     @Override
@@ -95,67 +110,30 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findAll();
         }
 
-    public Page<ProductVariantDto> getAllProductVariant(String categoryId, String keyword, String sort, int page, int size) {
-        List<Product> allProducts;
-        if (categoryId != null && !categoryId.isEmpty() && keyword != null && !keyword.isEmpty()) {
-            allProducts = productRepository.findAll().stream()
-                    .filter(product -> product.getCategoryId() != null && 
-                                     product.getCategoryId().equals(categoryId) &&
-                                     product.getName() != null &&
-                                     product.getName().toLowerCase().contains(keyword.toLowerCase()))
-                    .collect(Collectors.toList());
-        } else if (categoryId != null && !categoryId.isEmpty()) {
-            allProducts = productRepository.findAllByCategoryId(categoryId);
-        } else if (keyword != null && !keyword.isEmpty()) {
-            allProducts = productRepository.findAll().stream()
-                    .filter(product -> product.getName() != null &&
-                                     product.getName().toLowerCase().contains(keyword.toLowerCase()))
-                    .collect(Collectors.toList());
-        } else {
-            allProducts = productRepository.findAll();
-        }
 
-        List<ProductVariantDto> allVariants = allProducts.stream()
-                .flatMap(product -> product.getVariants().stream()
-                        .map(variant -> ProductVariantDto.builder()
-                                .productId(product.getId())
-                                .productName(product.getName())
-                                .productImage(product.getImage())
-                                .variant(variant)
-                                .build()))
-                .collect(Collectors.toList());
 
-        if (sort != null && !sort.isEmpty()) {
+    private Pageable createPageable(String sort, int page, int size) {
+        Sort sorting = Sort.unsorted();
+
+        if (sort != null && !sort.isBlank()) {
             switch (sort) {
                 case "price_asc":
-                    allVariants.sort((a, b) -> Double.compare(a.getVariant().getPrice(), b.getVariant().getPrice()));
+                    sorting = Sort.by(Sort.Order.asc("variants.price"));
                     break;
                 case "price_desc":
-                    allVariants.sort((a, b) -> Double.compare(b.getVariant().getPrice(), a.getVariant().getPrice()));
+                    sorting = Sort.by(Sort.Order.desc("variants.price"));
                     break;
                 case "name_asc":
-                    allVariants.sort((a, b) -> a.getProductName().compareToIgnoreCase(b.getProductName()));
+                    sorting = Sort.by(Sort.Order.asc("name"));
                     break;
                 case "name_desc":
-                    allVariants.sort((a, b) -> b.getProductName().compareToIgnoreCase(a.getProductName()));
+                    sorting = Sort.by(Sort.Order.desc("name"));
                     break;
                 default:
                     break;
             }
         }
 
-        int start = page * size;
-        int end = Math.min(start + size, allVariants.size());
-        
-        List<ProductVariantDto> pageContent;
-        if (start >= allVariants.size()) {
-            pageContent = new ArrayList<>();
-        } else {
-            pageContent = allVariants.subList(start, end);
-        }
-
-        return new PageImpl<>(pageContent, PageRequest.of(page, size), allVariants.size());
+        return PageRequest.of(Math.max(page, 0), Math.max(size, 1), sorting);
     }
 }
-
-
