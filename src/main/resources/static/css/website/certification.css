@@ -1,0 +1,35 @@
+.certification-content .logos img {
+    box-shadow: 0px 4px 24px 0px #0000000A;
+    border-radius: 10px;
+    background: #FFFFFF;
+}
+
+.title-content {
+    width: 840px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 32px;
+    color: #2C6E1F;
+}
+
+@media (max-width: 992px) {
+    .title-content {
+        width: 408px;
+        text-align: center;
+    }
+
+    .icons {
+        flex-direction: column;
+    }
+
+    .big-icon {
+        max-width: 408px;
+    }
+}
+
+.breadcrumb {
+    margin-bottom: 1rem;
+}

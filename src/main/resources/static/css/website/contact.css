@@ -1,0 +1,51 @@
+.hero-section .title-content .title {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 64px;
+    text-align: center;
+    color: #020808;
+}
+
+.hero-section .search-content {
+    width: 80%
+}
+
+.block-content {
+    width: 356px;
+    gap: 24px;
+    border-radius: 24px;
+    padding: 38px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 24px 0px #0000001F;
+}
+
+.block-content .line-content {
+    border: 0.375px solid #999999;
+    width: 90%;
+}
+
+.block-content .text-content {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    text-align: center;
+    color: #2C6E1F;
+}
+
+.text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #666666;
+}
+
+.btn-contact {
+    text-align: center;
+    border-radius: 13px;
+    padding: 16px 0;
+    background: #2C6E1F;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF
+}

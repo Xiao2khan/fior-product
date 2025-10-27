@@ -67,11 +67,54 @@ section.info .row {
 
 /* Responsive fonts */
 @media (max-width: 1024px) {
-    section.contact h1  { font-size: 28px; }
-    section.contact p { font-size: 18px; line-height: 28px; }
+    section.contact h1 {
+        font-size: 28px;
+    }
+
+    section.contact p {
+        font-size: 18px;
+        line-height: 28px;
+    }
 }
 
 @media (max-width: 768px) {
-    section.contact h1 { font-size: 24px; }
-    section.contact p { font-size: 16px; line-height: 24px; }
+    section.contact h1 {
+        font-size: 24px;
+    }
+
+    section.contact p {
+        font-size: 16px;
+        line-height: 24px;
+    }
 }
+
+.footer-section {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF
+}
+
+@media (min-width: 1200px) {
+    .footer-content {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 992px) {
+    .contact-footer {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+    .footer-section .footer-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+    .certificate-footer {
+        align-items: center;
+    }
+}
+

@@ -7,65 +7,81 @@
 </head>
 <body>
 <div layout:fragment="website-content">
-    <div class="container-fluid p-0 support-page">
-        <!-- Breadcrumb -->
-        <div class="breadcrumb-bar py-2 px-3 small text-muted">
-            <a href="/" class="text-decoration-none text-muted">Trang chủ</a> > Hỗ trợ
+    <section class="container" style="padding:30px 0 20px">
+        Trang chủ > Hỗ trợ
+    </section>
+    <section class="position-relative">
+        <img src="/image/support.png" style="height: 60vh">
+    </section>
+    <section class="container hero-section d-flex flex-column align-items-center position-relative"
+             style="margin-top: -45vh;z-index: 2;gap: 60px">
+        <div class="title-content">
+            <div class="title">Fiordelisi giúp được gì cho bạn?</div>
         </div>
-
-        <!-- Hero Section (ảnh + overlay + nội dung đè lên) -->
-        <section class="hero-section position-relative d-flex justify-content-center align-items-center">
-            <div class="overlay"></div>
-
-            <!-- Nội dung đè lên ảnh -->
-            <div class="hero-content position-absolute d-flex flex-column align-items-center text-center text-white">
-                <h2 class="fw-bold mb-3">FIORDELISI giúp được gì cho bạn?</h2>
-
-                <!-- Ô tìm kiếm -->
-                <div class="search-bar mb-5">
-                    <input type="text" class="form-control rounded-pill shadow-sm"
-                           placeholder="Nhập từ khóa (mã giảm giá, hủy đơn hàng...)" />
+        <div class="search-content">
+            <input type="text" class="w-100" placeholder="Nhập từ khóa ( mã giảm giá, hủy đơn hàng,...)">
+        </div>
+        <div class="d-flex justify-content-center" style="flex-flow: wrap; gap: 24px">
+            <div class="block-content d-flex flex-column align-items-center">
+                <div class="image-content">
+                    <img src="/image/shopping-cart.png" alt="">
                 </div>
-
-                <!-- 3 khối hỗ trợ -->
-                <div class="d-flex flex-wrap justify-content-center gap-4 support-boxes">
-                    <div class="card support-card text-center">
-                        <div class="card-body">
-                            <i class="bi bi-cart3 fs-1 mb-3 text-success"></i>
-                            <h6 class="fw-semibold">Hỗ trợ mua hàng</h6>
-                        </div>
-                    </div>
-                    <div class="card support-card text-center">
-                        <div class="card-body">
-                            <i class="bi bi-credit-card fs-1 mb-3 text-success"></i>
-                            <h6 class="fw-semibold">Hỗ trợ thanh toán</h6>
-                        </div>
-                    </div>
-                    <div class="card support-card text-center">
-                        <div class="card-body">
-                            <i class="bi bi-arrow-repeat fs-1 mb-3 text-success"></i>
-                            <h6 class="fw-semibold">Hỗ trợ đổi trả</h6>
-                        </div>
-                    </div>
+                <div class="line-content">
+                </div>
+                <div class="text-content">
+                    Hỗ trợ mua hàng
                 </div>
             </div>
-        </section>
-
-        <!-- FAQ -->
-        <section class="container mb-5 mt-5">
-            <h5 class="fw-bold mb-4">Một số câu hỏi thường gặp</h5>
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">[Mua hàng] Cách “Mua ngay” sản phẩm trên website</a>
-                <a href="#" class="list-group-item list-group-item-action">[Mua hàng] Làm thế nào để đặt hàng qua website?</a>
-                <a href="#" class="list-group-item list-group-item-action">[Trả hàng/Hoàn tiền] Website có sẵn dịch vụ hoàn tiền không?</a>
-                <a href="#" class="list-group-item list-group-item-action">[Trả hàng/Hoàn tiền] Cần mang Trả hàng hoàn tiền tới đâu?</a>
-                <a href="#" class="list-group-item list-group-item-action">[Trả hàng/Hoàn tiền] Tôi có thể trả hàng/hoàn tiền cho sản phẩm hư hỏng như thế nào?</a>
+            <div class="block-content d-flex flex-column align-items-center">
+                <div class="image-content">
+                    <img src="/image/bag-tick-2.png" alt="">
+                </div>
+                <div class="line-content">
+                </div>
+                <div class="text-content">
+                    Hỗ trợ thanh toán
+                </div>
             </div>
-            <div class="d-flex justify-content-end mt-4">
-                <button class="btn btn-success rounded-pill px-4">Xem thêm ngay</button>
+            <div class="block-content d-flex flex-column align-items-center">
+                <div class="image-content">
+                    <img src="/image/refresh-circle.png" alt="">
+                </div>
+                <div class="line-content">
+                </div>
+                <div class="text-content">
+                    Hỗ trợ đổi trả
+                </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+    <section class="container support-page">
+        <div class="support-page-content d-flex flex-column">
+            <div class="title">
+                Một số câu hỏi thường gặp
+            </div>
+            <div class="d-flex flex-column" style="gap: 28px">
+                <div class="d-flex flex-column" style="gap: 16px">
+                    <div class="question-content">
+                        [Mua hàng] Cách "Mua ngay" sản phẩm trên website
+                    </div>
+                    <div class="question-content">
+                        [Mua hàng] Làm thế nào để tôi đặt hàng qua website?
+                    </div>
+                    <div class="question-content">
+                        [Trả hàng] Website sẽ đánh giá hàng hoàn trả dựa trên những tiêu chí nào?
+                    </div>
+                    <div class="question-content">
+                        [Trả hàng/Hoàn tiền] Cẩm nang Trả hàng hoàn tiền
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <div class="btn-see-more d-flex">
+                        Xem thêm ngay
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 </body>
 </html>

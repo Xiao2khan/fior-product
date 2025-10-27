@@ -40,6 +40,11 @@ public class RootRedirectController {
     public String success(){
         return "/website/success";
     }
+
+    @GetMapping({"vi/contact","en/contact"})
+    public String contact(){
+        return "/website/contact";
+    }
 }
 
 
