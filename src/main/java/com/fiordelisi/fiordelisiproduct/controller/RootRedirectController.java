@@ -13,41 +13,41 @@ public class RootRedirectController {
 
     @GetMapping({"/en/about","/vi/about"})
     public String about() {
-        return "/website/about";
+        return "website/about";
     }
 
     @GetMapping({"vi/certification","en/certification"})
     public String certification(){
-        return "/website/certification";
+        return "website/certification";
     }
 
     @GetMapping({"vi/cart","en/cart"})
     public String cart(){
-        return "/website/cart";
+        return "website/cart";
     }
 
     @GetMapping({"vi/placeOrder","en/placeOrder"})
     public String order(){
-        return "/website/placeOrder";
+        return "website/placeOrder";
     }
 
     @GetMapping({"vi/placeOrder/success","en/placeOrder/success"})
     public String success(){
-        return "/website/success";
+        return "website/success";
     }
 
     @GetMapping({"vi/contact","en/contact"})
     public String contact(){
-        return "/website/contact";
+        return "website/contact";
     }
 
     @GetMapping({"vi/contact-us","en/contact-us"})
     public String contactUs(){
-        return "/website/contact-us";
+        return "website/contact-us";
     }
     @GetMapping({"vi/contact-us/success","en/contact-us/success"})
     public String contactUsSuccess(){
-        return "/website/contact-success";
+        return "website/contact-success";
     }
 }
 
