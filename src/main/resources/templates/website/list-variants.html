@@ -4,6 +4,27 @@
 <head>
     <link rel="stylesheet" th:href="@{/css/website/product-page.css}">
     <link rel="stylesheet" th:href="@{/css/website/product-detail.css}">
+    <script>
+        function getBreakpoint() {
+            const width = window.innerWidth;
+            if (width >= 1024) return 'desktop';
+            if (width >= 768) return 'tablet';
+            return 'mobile';
+        }
+        function getPageSize(breakpoint) {
+            switch (breakpoint) {
+                case 'mobile': return 6;
+                case 'tablet': return 8;
+                default: return 20;
+            }
+        }
+        const bp = getBreakpoint();
+        const params = new URLSearchParams(window.location.search);
+        if (!params.has('size')) {
+            params.set('size', getPageSize(bp));
+            window.location.replace(`${window.location.pathname}?${params.toString()}`);
+        }
+    </script>
 </head>
 <body>
 <div layout:fragment="website-content">
@@ -260,6 +281,8 @@
             container.dataset.pageSize = newSize;
             lastBreakpoint = newBreakpoint;
             history.replaceState(null, '', newUrl);
+
+
             return;
         }
 
@@ -293,10 +316,11 @@
     }
 
 
-    document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('load', () => {
         lastBreakpoint = getBreakpoint();
         adjustPageSize(true);
     });
+
 
     let resizeTimeout;
     window.addEventListener('resize', () => {
