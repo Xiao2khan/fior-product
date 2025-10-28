@@ -69,13 +69,14 @@
         <div class="product-container container d-flex flex-column" style="gap:32px">
             <div class="product-title position-relative" th:attr="data-lang=${lang}">
                 <div class="text-title text-center fw-bold" th:text="#{productTitle.title}"></div>
+                <div  th:if="${products != null and !#lists.isEmpty(products)}">>
+                    <div id="prev-btn" class="icon position-absolute start-0 d-flex align-items-center justify-content-center" style="cursor:pointer;">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </div>
 
-                <div id="prev-btn" class="icon position-absolute start-0 d-flex align-items-center justify-content-center" style="cursor:pointer;">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </div>
-
-                <div id="next-btn" class="icon position-absolute end-0 d-flex align-items-center justify-content-center" style="cursor:pointer;">
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <div id="next-btn" class="icon position-absolute end-0 d-flex align-items-center justify-content-center" style="cursor:pointer;">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
                 </div>
             </div>
 
@@ -84,7 +85,8 @@
                  th:data-products="${products}">
             </div>
 
-            <nav aria-label="Page navigation" class="mt-4">
+            <nav aria-label="Page navigation" class="mt-4"
+                 th:if="${products != null and !#lists.isEmpty(products)}">
                 <ul class="pagination justify-content-center" id="pagination" style="gap: 8px;"></ul>
             </nav>
 

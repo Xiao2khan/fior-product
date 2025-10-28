@@ -93,11 +93,11 @@
             $(document).on('click', '.btn-delete', function(){
                 const form = $(this).closest('form');
                 Swal.fire({
-                    title: 'Delete this product?',
+                    title: 'Bạn chắc chắn muốn xóa sản phẩm ?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete',
-                    cancelButtonText: 'Cancel'
+                    confirmButtonText: 'Đúng, xóa',
+                    cancelButtonText: 'Bỏ qua'
                 }).then((res)=>{ if(res.isConfirmed){ form.submit(); } });
             });
         });
