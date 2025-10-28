@@ -23,7 +23,9 @@ img {
     width: 100%;
     object-fit: cover;
 }
-
+.breadcrumb-content a{
+    color:unset
+}
 
 
 footer a:hover { text-decoration: underline; }

@@ -4,10 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fiordelisi.fiordelisiproduct.dto.CategoryDto;
 import com.fiordelisi.fiordelisiproduct.dto.ProductDto;
+import com.fiordelisi.fiordelisiproduct.dto.QuestionDto;
 import com.fiordelisi.fiordelisiproduct.entity.Category;
 import com.fiordelisi.fiordelisiproduct.entity.Product;
+import com.fiordelisi.fiordelisiproduct.entity.Question;
 import com.fiordelisi.fiordelisiproduct.service.CategoryService;
 import com.fiordelisi.fiordelisiproduct.service.ProductService;
+import com.fiordelisi.fiordelisiproduct.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
@@ -30,6 +33,7 @@ public class WebsiteController {
 
     private final ProductService productService;
     private final CategoryService categoryService;
+    private final QuestionService questionService;
 
     @GetMapping("/{lang}")
     public String index(
@@ -131,7 +135,26 @@ public class WebsiteController {
         model.addAttribute("search", search != null ? search : "");
         model.addAttribute("selectedSort", sort);
 
-        log.info("Products: {}", products);
         return "website/list-variants";
+    }
+
+    @GetMapping("/{lang}/support")
+    public  String support(@PathVariable String lang,
+            @RequestParam(required = false) String search,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "4") int size,
+            Model model){
+        String languageCode = lang.toLowerCase();
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Question> questionPage;
+        questionPage = questionService.search(search,languageCode, pageable);
+        log.info(questionPage.toString());
+
+        List<QuestionDto> questions = questionPage.getContent().stream()
+                .map(question -> QuestionDto.toDto(question, lang.toUpperCase()))
+                .toList();
+
+        model.addAttribute("questions", questions);
+        return "website/support";
     }
 }

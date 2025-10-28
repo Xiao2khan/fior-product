@@ -2,7 +2,7 @@ package com.fiordelisi.fiordelisiproduct.service.ServiceImpl;
 
 import com.fiordelisi.fiordelisiproduct.dto.OrderDto;
 import com.fiordelisi.fiordelisiproduct.entity.Order;
-import com.fiordelisi.fiordelisiproduct.repository.OrderRespository;
+import com.fiordelisi.fiordelisiproduct.repository.OrderRepository;
 import com.fiordelisi.fiordelisiproduct.service.EmailService;
 import com.fiordelisi.fiordelisiproduct.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderRespository orderRespository;
+    private final OrderRepository orderRespository;
     private final EmailService emailService;
 
     @Override

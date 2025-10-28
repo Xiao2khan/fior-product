@@ -7,23 +7,24 @@
 </head>
 <body>
 <div layout:fragment="website-content">
-    <div class="container breadcrumb" style="margin-top:30px;padding: 12px;font-size:14px;font-weight: 600">
+    <div class="container breadcrumb" style="margin-top:30px;padding: 12px;font-size:14px;font-weight: 500">
         <div>
-            <p>Trang Chủ > Giỏ Hàng</p>
+            <a th:href="@{/{lang}(lang=${#locale.language})}" style="color:unset"><span th:text="#{home}"></span></a> >
+            <span th:text="#{cart}"></span>
         </div>
     </div>
     <div class="container cart-page">
-        <h4 class="mb-4 fw-bold">Giỏ hàng</h4>
+        <h4 class="mb-4 fw-bold" th:text="#{cart}"></h4>
         <div class="row g-4">
             <div class="col-lg-8">
                 <div class="card-box">
                     <table class="table align-middle mb-0">
                         <thead>
                         <tr>
-                            <th>SẢN PHẨM</th>
-                            <th>SỐ LƯỢNG</th>
-                            <th>GIÁ</th>
-                            <th>TỔNG</th>
+                            <th th:with="prod=#{product}" th:text="${prod.toUpperCase()}"></th>
+                            <th th:with="qty=#{quantity}" th:text="${qty.toUpperCase()}"></th>
+                            <th th:with="price=#{price}" th:text="${price.toUpperCase()}"></th>
+                            <th th:with="total=#{total}" th:text="${total.toUpperCase()}"></th>
                         </tr>
                         </thead>
                         <tbody id="cart-body"></tbody>
@@ -36,25 +37,25 @@
             <div class="col-lg-4">
                 <div class="card p-4">
                     <div>
-                        <h5 class="fw-bold mb-3">Đơn hàng của bạn</h5>
+                        <h5 class="fw-bold mb-3" th:text="#{yourOrder}"></h5>
                         <div class="total">
                             <div class="d-flex justify-content-between mb-2">
-                                <span>Tổng tất cả sản phẩm:</span>
+                                <span th:text="#{subtotal}"></span>
                                 <span id="subtotal">0đ</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
-                                <span>Phí vận chuyển:</span>
+                                <span th:text="#{shippingCost}">Phí vận chuyển:</span>
                                 <span id="shipping">100.000đ</span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between fw-bold">
-                                <span style="color:#2C6E1F">Tổng:</span>
+                                <span style="color:#2C6E1F" th:text="#{total}">Tổng :</span>
                                 <span id="price_total">0đ</span>
                             </div>
                         </div>
                         </div>
                     <div>
-                            <button id="order" class="btn btn-success w-100 mt-4" style="background: #2C6E1F">Đặt hàng</button>
+                            <button id="order" class="btn btn-success w-100 mt-4" style="background: #2C6E1F" th:text="#{placeOrder}"></button>
                     </div>
                 </div>
             </div>
@@ -69,7 +70,7 @@
             let lang = window.location.pathname.split("/")[1] || "vi";
             if (orderBtn) {
                 orderBtn.addEventListener("click", () => {
-                    window.location.href = `/${lang}/order`;
+                    window.location.href = `/${lang}/placeOrder`;
                 });
             }
         });

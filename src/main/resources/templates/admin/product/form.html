@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Product Form</title>
+    <title>Sản phẩm</title>
 
     <style>
         /* ✅ CKEditor */
@@ -59,7 +59,7 @@
 
 <body>
 <div layout:fragment="admin-content">
-    <h3 th:text="${product.id} != null ? 'Edit Product' : 'Create Product'"></h3>
+    <h3 th:text="${product.id} != null ? 'Chỉnh sửa sản phẩm' : 'Tạo sản phẩm'"></h3>
 
     <form id="productForm" th:action="${product.id} != null ? @{'/admin/products/edit/' + ${product.id}} : @{/admin/products/create}"
           method="post"
@@ -70,23 +70,31 @@
 
             <!-- Name -->
             <div class="col-md-6">
-                <label class="form-label">Name</label>
+                <label class="form-label">Tên</label>
                 <input type="text" class="form-control" th:field="*{name}" required>
                 <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             </div>
 
             <!-- Default Price -->
             <div class="col-md-6">
-                <label class="form-label">Default Price</label>
+                <label class="form-label">Giá mặc định</label>
                 <input type="number" class="form-control" th:field="*{defaultPrice}" min="0" step="0.01">
             </div>
 
-            <!-- ✅ Categories -->
+            <div class="col-md-6">
+                <div class="form-check mt-3">
+                    <input type="checkbox" class="form-check-input"
+                           th:field="*{inStock}"
+                           th:checked="*{inStock}">
+                    <label class="form-check-label">Còn hàng</label>
+                </div>
+            </div>
+
             <div class="col-12">
-                <label class="form-label">Categories</label>
+                <label class="form-label">Danh mục</label>
                 <div class="multi-select" id="category-dropdown">
                     <button type="button" class="dropdown-btn" id="category-dropdown-btn">
-                        Select categories
+                        Chọn danh mục
                     </button>
                     <div class="dropdown-content" id="category-dropdown-content">
                         <div id="category-options">
@@ -108,7 +116,7 @@
 
             <!-- Images -->
             <div class="row mt-3">
-                <label class="form-label">Current Images</label>
+                <label class="form-label">Ảnh trước đó</label>
                 <div class="row" id="existingImages">
                     <div class="col-md-3 mb-3" th:each="img, iter : ${product.images}">
                         <div class="position-relative image-preview-wrapper">
@@ -127,14 +135,14 @@
             </div>
 
             <div class="form-group mt-3">
-                <label class="form-label">Upload New Images</label>
+                <label class="form-label">Thêm ảnh mới</label>
                 <input type="file" name="imageFiles" id="newImages" class="form-control" multiple accept="image/*">
                 <div id="newImagePreview" class="row mt-2"></div>
             </div>
 
             <!-- Description -->
             <div class="col-12">
-                <label class="form-label">Description</label>
+                <label class="form-label">Mô tả</label>
                 <textarea  id ="description-editor-default" class="form-control" th:field="*{description}" rows="6"></textarea>
                 <div class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
             </div>
@@ -147,13 +155,13 @@
                             <h5 class="mb-3">English (en)</h5>
                             <input type="hidden" th:name="'translations[' + ${iStat.index} + '].language'" th:value="${t.language}">
                             <div class="mb-3">
-                                <label class="form-label">Name (en)</label>
+                                <label class="form-label">Tên (en)</label>
                                 <input type="text" class="form-control"
                                        th:name="'translations[' + ${iStat.index} + '].name'"
                                        th:value="${t.name}" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Description (en)</label>
+                                <label class="form-label">Mô tả (en)</label>
                                 <textarea class="description-editor form-control"
                                           th:name="'translations[' + ${iStat.index} + '].description'"
                                           rows="3"
@@ -166,7 +174,7 @@
 
             <div class="d-flex justify-content-end mb-3">
                 <button type="button" class="btn btn-outline-primary" id="add-lang-btn">
-                    <i class="fa fa-plus me-1"></i> Add English (en)
+                    <i class="fa fa-plus me-1"></i> Thêm tiếng Anh (en)
                 </button>
             </div>
 
@@ -175,7 +183,7 @@
                 <h5 class="d-flex justify-content-between align-items-center">
                     <span>Variants</span>
                     <button type="button" class="btn btn-sm btn-success" id="add-variant-btn">
-                        <i class="fa fa-plus"></i> Add Variant
+                        <i class="fa fa-plus"></i> Thêm Variant
                     </button>
                 </h5>
 
@@ -188,7 +196,7 @@
 
                             <!-- Size -->
                             <div class="col-md-3">
-                                <label class="form-label">Size</label>
+                                <label class="form-label">Kích thước</label>
                                 <input type="number" class="form-control"
                                        th:name="'variants[' + ${i.index} + '].size'"
                                        th:value="${v.size}" required>
@@ -196,7 +204,7 @@
 
                             <!-- Unit Select -->
                             <div class="col-md-3">
-                                <label class="form-label">Unit</label>
+                                <label class="form-label">Đơn vị</label>
                                 <select class="form-select unit-select" th:attr="data-index=${i.index}">
                                     <option value="gram"
                                             th:selected="${v.unit == null or v.unit == 'gram'}">Gram</option>
@@ -215,7 +223,7 @@
 
                             <!-- Custom Unit -->
                             <div class="col-md-3">
-                                <label class="form-label">Custom Unit</label>
+                                <label class="form-label">Đơn vị tùy chỉnh</label>
                                 <input type="text" class="form-control custom-unit"
                                        placeholder="e.g. pack, piece"
                                        th:value="${(v.unit != null and !(#lists.contains({'gram','kilogram','ml','l'}, v.unit))) ? v.unit : ''}"
@@ -225,7 +233,7 @@
 
                             <!-- Price -->
                             <div class="col-md-2">
-                                <label class="form-label">Price (VND)</label>
+                                <label class="form-label">Giá (VND)</label>
                                 <input type="number" step="0.01" min="0" class="form-control"
                                        th:name="'variants[' + ${i.index} + '].price'"
                                        th:value="${v.price}" required>
@@ -237,7 +245,7 @@
                                     <input type="checkbox" class="form-check-input"
                                            th:name="'variants[' + ${i.index} + '].instock'"
                                            th:checked="${v.instock}">
-                                    <label class="form-check-label">In stock</label>
+                                    <label class="form-check-label">Còn hàng</label>
                                 </div>
                             </div>
 
@@ -249,7 +257,7 @@
                             <!-- Remove button -->
                             <div class="col-md-12 text-end">
                                 <button type="button" class="btn btn-danger btn-sm remove-variant"
-                                        th:data-variant-id="${v.id}">Remove</button>
+                                        th:data-variant-id="${v.id}">Xóa</button>
                             </div>
                         </div>
                     </div>
@@ -258,9 +266,9 @@
             <!-- Submit -->
             <div class="d-flex gap-2 mt-4">
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-save me-1"></i> Save
+                    <i class="fa fa-save me-1"></i> Lưu
                 </button>
-                <a th:href="@{/admin/products}" class="btn btn-secondary">Back</a>
+                <a th:href="@{/admin/products}" class="btn btn-secondary">Trở lại</a>
             </div>
         </div>
     </form>
@@ -292,12 +300,12 @@
                 <div class="card p-3 mb-3">
                     <div class="row g-3 align-items-end">
                         <div class="col-md-3">
-                            <label class="form-label">Size</label>
+                            <label class="form-label">Kích thước</label>
                             <input type="number" class="form-control" name="variants[${variantIndex}].size" required>
                         </div>
 
                         <div class="col-md-3">
-                            <label class="form-label">Unit</label>
+                            <label class="form-label">Đơn vị</label>
                             <select class="form-select unit-select" data-index="${variantIndex}">
                                 <option value="gram" selected>Gram</option>
                                 <option value="kilogram">Kilogram</option>
@@ -308,13 +316,13 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label class="form-label">Custom Unit</label>
+                            <label class="form-label">Đơn vị tùy chỉnh</label>
                             <input type="text" class="form-control custom-unit"
                                    placeholder="e.g. pack, piece" data-index="${variantIndex}" disabled>
                         </div>
 
                         <div class="col-md-2">
-                            <label class="form-label">Price (VND)</label>
+                            <label class="form-label">Giá (VND)</label>
                             <input type="number" class="form-control" name="variants[${variantIndex}].price" step="0.01" min="0" required>
                         </div>
 
@@ -322,7 +330,7 @@
                             <div class="form-check mt-3">
                                 <input type="checkbox" class="form-check-input"
                                        name="variants[${variantIndex}].instock" id="instock_${variantIndex}" checked>
-                                <label class="form-check-label" for="instock_${variantIndex}">In stock</label>
+                                <label class="form-check-label" for="instock_${variantIndex}">Còn hàng</label>
                             </div>
                         </div>
 
@@ -330,7 +338,7 @@
                         <input type="hidden" name="variants[${variantIndex}].unit" class="unit-hidden" value="gram">
 
                         <div class="col-md-12 text-end">
-                            <button type="button" class="btn btn-danger btn-sm remove-variant">Remove</button>
+                            <button type="button" class="btn btn-danger btn-sm remove-variant">Xóa</button>
                         </div>
                     </div>
                 </div>

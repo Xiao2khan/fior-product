@@ -9,62 +9,72 @@
     <title>Giới Thiệu</title>
 </head>
 <body>
-<div layout:fragment="website-content" class = "container my-5 d-flex flex-column gap-5 about">
-    <section class="row align-items-start gy-4 gx-5">
-        <div class="col-md-6 order-md-1 text">
-            <h2 th:text="#{about.section_1.title}"></h2>
-            <p th:text="#{about.section_1.description}"></p>
+<div layout:fragment="website-content">
+    <div class="breadcrumb-banner">
+        <img src="/image/breadcrumb.jpg" alt="breadcrumb background">
+        <div class="breadcrumb-content">
+            <h1 th:text="#{about}"></h1>
+            <p><a th:href="@{/{lang}(lang=${#locale.language})}"><span th:text="#{home}"></span></a> >
+                <span th:text="#{about}"></span>
+            </p>
         </div>
-        <div class="col-md-6 order-md-2 text-center image">
-            <img th:src="@{/image/image.png}" alt="Antonio Fiodelisi" class = "img-rounded-shadow">
-        </div>
-    </section>
-
-    <section class="row align-items-start gy-4 gx-5 flex-md-row-reverse">
-        <div class="col-md-6 text">
-            <h2 th:text="#{about.section_2.title}"></h2>
-            <p th:text="#{about.section_2.description}"></p>
-        </div>
-        <div class="col-md-6 text-center image">
-            <img th:src="@{/image/image_2.png}" alt="" class ="img-rounded-shadow">
-        </div>
-    </section>
-
-    <section class="row align-items-start gy-4 gx-5">
-        <div class="col-md-6 text">
-            <p th:text="#{about.section_3.description}"></p>
-        </div>
-        <div class="col-md-6 text-center image">
-            <img th:src="@{/image/image_3.png}" alt="" class = "img-rounded-shadow">
-        </div>
-    </section>
-
-    <section class="row align-items-start gy-4 gx-5 flex-md-row-reverse">
-        <div class="col-md-6 text">
-            <h2 th:text="#{about.section_4.title}"></h2>
-            <p th:text="#{about.section_4.description}"></p>
-        </div>
-        <div class="col-md-6 text-center image">
-            <img th:src="@{/image/image_4.png}" alt="" class = "img-rounded-shadow">
-        </div>
-    </section>
-
-    <section class="row align-items-stretch gy-4 gx-5">
-        <div class="col-md-6 d-flex flex-column justify-content-between">
-            <div>
-                <h2 th:text="#{about.section_5.title}"></h2>
-                <p th:text="#{about.section_5.description}"></p>
+    </div>
+    <div  class = "container my-5 d-flex flex-column gap-5 about">
+        <section class="row align-items-start gy-4 gx-5">
+            <div class="col-md-6 order-md-1 text">
+                <h2 th:text="#{about.section_1.title}"></h2>
+                <p th:text="#{about.section_1.description}"></p>
             </div>
-            <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap mt-3">
-                <img th:src="@{/image/logo_1.png}" alt="" class="img-fluid w-48">
-                <img th:src="@{/image/logo_2.png}" alt="" class="img-fluid w-48">
+            <div class="col-md-6 order-md-2 text-center image">
+                <img th:src="@{/image/image.png}" alt="Antonio Fiodelisi" class = "img-rounded-shadow">
             </div>
-        </div>
-        <div class="col-md-6 text-center image">
-            <img th:src="@{/image/image_5.png}" alt="" class = "img-rounded-shadow">
-        </div>
-    </section>
+        </section>
 
+        <section class="row align-items-start gy-4 gx-5 flex-md-row-reverse">
+            <div class="col-md-6 text">
+                <h2 th:text="#{about.section_2.title}"></h2>
+                <p th:text="#{about.section_2.description}"></p>
+            </div>
+            <div class="col-md-6 text-center image">
+                <img th:src="@{/image/image_2.png}" alt="" class ="img-rounded-shadow">
+            </div>
+        </section>
+
+        <section class="row align-items-start gy-4 gx-5">
+            <div class="col-md-6 text">
+                <p th:utext="#{about.section_3.description}"></p>
+            </div>
+            <div class="col-md-6 text-center image">
+                <img th:src="@{/image/image_3.png}" alt="" class = "img-rounded-shadow">
+            </div>
+        </section>
+
+        <section class="row align-items-start gy-4 gx-5 flex-md-row-reverse">
+            <div class="col-md-6 text">
+                <h2 th:text="#{about.section_4.title}"></h2>
+                <p th:utext="#{about.section_4.description}"></p>
+            </div>
+            <div class="col-md-6 text-center image">
+                <img th:src="@{/image/image_4.png}" alt="" class = "img-rounded-shadow">
+            </div>
+        </section>
+
+        <section class="row align-items-stretch gy-4 gx-5">
+            <div class="col-md-6 d-flex flex-column justify-content-between">
+                <div class="text">
+                    <h2 th:text="#{about.section_5.title}"></h2>
+                    <p th:text="#{about.section_5.description}"></p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap mt-3">
+                    <img th:src="@{/image/logo_1.png}" alt="" class="img-fluid w-48">
+                    <img th:src="@{/image/logo_2.png}" alt="" class="img-fluid w-48">
+                </div>
+            </div>
+            <div class="col-md-6 text-center image">
+                <img th:src="@{/image/image_5.png}" alt="" class = "img-rounded-shadow">
+            </div>
+        </section>
+    </div>
 </div>
 </body>
 </html>

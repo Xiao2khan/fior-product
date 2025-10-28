@@ -78,7 +78,6 @@ public class ProductController {
                 if (relatedProducts.size() >= totalLimit) break;
             }
         }
-        log.info(relatedProducts.toString());
         model.addAttribute("product", productDto);
         model.addAttribute("relatedProducts", relatedProducts);
         return "website/product-detail";

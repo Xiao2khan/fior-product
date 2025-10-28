@@ -8,20 +8,22 @@
 </head>
 <body>
 <div layout:fragment="website-content">
-    <div class="container breadcrumb" style="margin-top:1rem">Trang chủ > Giỏ hàng > Đặt hàng > Hoàn tất</div>
+    <div class="container breadcrumb" style="margin-top:1rem;gap:5px">
+        <a th:href="@{/{lang}(lang=${#locale.language})}" style="color:unset"><span th:text="#{home}"></span></a> >
+        <a th:href="@{/{lang}/cart(lang=${#locale.language})}" style="color:unset"><span th:text="#{cart}"></span></a> >
+        <a th:href="@{/{lang}/contact(lang=${#locale.language})}" style="color:unset"><span th:text="#{placeOrder}"></span></a> >
+        <span th:text="#{success}"></span>
+    </div>
     <div class="order-success container">
         <div class="order-success-container d-flex flex-column" style="gap:24px;width: 60%">
             <div class="d-flex justify-content-center">
                 <p class="checkmark m-0">✔</p>
             </div>
-            <div class="title"><h3>Đặt hàng thành công</h3></div>
-            <div class="message d-flex flex-column"  style="gap:24px">
-                Đơn hàng của quý khách đã được đặt thành công, chúng tôi sẽ sớm
-                liên hệ để xác nhận và giao sản phẩm đến quý khách hàng
+            <div class="title"><h3 th:text="#{placeOrderSuccessTitle}"></h3></div>
+            <div class="message d-flex flex-column"  style="gap:24px" th:text="#{placeOrderSuccessContent}">
             </div>
-
             <div>
-                <button class="button" onclick="window.location.href='/'">Về trang chủ</button>
+                <button class="button" onclick="window.location.href='/'" th:text="#{placeOrderSuccessButton}"></button>
             </div>
         </div>
     </div>

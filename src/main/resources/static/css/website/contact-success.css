@@ -1,4 +1,4 @@
-.order-success{
+.contact-success{
     text-align: center;
     height: 406px;
     box-shadow: 0px 4px 24px 0px #0000001F;
@@ -8,7 +8,8 @@
     align-items: center;
     justify-content: center;
 }
-.order-success .button{
+
+.contact-success .button{
     border-radius: 16px;
     height: 64px;
     text-align: center;
@@ -18,17 +19,17 @@
     font-weight: 600;
     border: none;
 }
-.order-success .message{
+.contact-success .message{
     font-size: 18px;
     font-weight: 500;
     color: #666666;
 }
-.order-success .title{
-    font-size: 36px;
+.contact-success .title h3{
+    font-size: 32px;
     font-weight: 600;
     color: #2C6E1F;
 }
-.order-success .checkmark {
+.contact-success .checkmark {
     width: 80px;
     height: 80px;
     background-color: #2C6E1F;
@@ -45,9 +46,4 @@
 .breadcrumb{
     font-size: 14px;
     font-weight: 500;
-}
-@media (max-width: 576px) {
-    .order-success .button{
-        width: 100%;
-    }
 }

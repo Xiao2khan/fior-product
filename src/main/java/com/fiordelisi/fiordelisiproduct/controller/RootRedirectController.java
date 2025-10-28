@@ -21,22 +21,17 @@ public class RootRedirectController {
         return "/website/certification";
     }
 
-    @GetMapping({"vi/support","en/support"})
-    public String help(){
-        return "/website/support";
-    }
-
     @GetMapping({"vi/cart","en/cart"})
     public String cart(){
         return "/website/cart";
     }
 
-    @GetMapping({"vi/order","en/order"})
+    @GetMapping({"vi/placeOrder","en/placeOrder"})
     public String order(){
-        return "/website/order";
+        return "/website/placeOrder";
     }
 
-    @GetMapping({"vi/order/success","en/order/success"})
+    @GetMapping({"vi/placeOrder/success","en/placeOrder/success"})
     public String success(){
         return "/website/success";
     }
@@ -44,6 +39,15 @@ public class RootRedirectController {
     @GetMapping({"vi/contact","en/contact"})
     public String contact(){
         return "/website/contact";
+    }
+
+    @GetMapping({"vi/contact-us","en/contact-us"})
+    public String contactUs(){
+        return "/website/contact-us";
+    }
+    @GetMapping({"vi/contact-us/success","en/contact-us/success"})
+    public String contactUsSuccess(){
+        return "/website/contact-success";
     }
 }
 

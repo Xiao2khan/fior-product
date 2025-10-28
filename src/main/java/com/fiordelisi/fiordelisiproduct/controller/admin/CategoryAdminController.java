@@ -44,13 +44,12 @@ public class CategoryAdminController extends BaseController {
         Pageable pageable = PageRequest.of(Math.max(page, 0), Math.max(size, 1), Sort.by(Sort.Order.asc("name")));
         Page<com.fiordelisi.fiordelisiproduct.entity.Category> result = categoryService.search(q, pageable);
 
-        // 🔹 Map entity -> DTO
         List<CategoryDto> dtoList = result.getContent().stream()
                 .map(cat -> CategoryDto.toDto(cat, Language.VI.getCode()))
                 .toList();
 
         model.addAttribute("page", result);
-        model.addAttribute("categories", dtoList); // DTO thay vì entity
+        model.addAttribute("categories", dtoList);
         model.addAttribute("q", q);
 
         return "admin/category/list";
@@ -128,14 +127,14 @@ public class CategoryAdminController extends BaseController {
         }
         dto.setId(id);
         categoryService.saveFromDto(dto);
-        ra.addFlashAttribute("success", id == null ? "Category created successfully" : "Category updated successfully");
+        ra.addFlashAttribute("success", id == null ? "Tạo danh mục thành công" : "Cập nhật danh mục thành công");
         return "redirect:/admin/categories";
     }
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable String id, RedirectAttributes ra) {
         categoryService.deleteById(id);
-        ra.addFlashAttribute("success", "Category deleted successfully");
+        ra.addFlashAttribute("success", "Xóa danh mục thành công");
         return "redirect:/admin/categories";
     }
 

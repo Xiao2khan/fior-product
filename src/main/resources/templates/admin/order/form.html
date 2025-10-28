@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Order Form</title>
+    <title>Đơn hàng</title>
 </head>
 
 <body>
@@ -15,13 +15,13 @@
         <form th:action="@{'/admin/orders/edit/' + ${order.get().id}}" th:method="post">
             <div class="card mb-3">
                 <div class="card-header">
-                    Customer Information
+                    Thông tin khách hàng
                 </div>
                 <div class="card-body">
-                    <p><strong>Full Name:</strong> <span th:text="${order.get().customer.fullName}"></span></p>
-                    <p><strong>Phone:</strong> <span th:text="${order.get().customer.phone}"></span></p>
+                    <p><strong>Họ và tên:</strong> <span th:text="${order.get().customer.fullName}"></span></p>
+                    <p><strong>Số điện thoại:</strong> <span th:text="${order.get().customer.phone}"></span></p>
                     <p><strong>Email:</strong> <span th:text="${order.get().customer.email}"></span></p>
-                    <p><strong>Address:</strong>
+                    <p><strong>Địa chỉ:</strong>
                         <span th:text="${order.get().customer.street}"></span>,
                         <span th:text="${order.get().customer.ward}"></span>,
                         <span th:text="${order.get().customer.district}"></span>,
@@ -38,9 +38,9 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá tiền</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -70,7 +70,7 @@
 
             <div class="card mb-3">
                 <div class="card-header">
-                    Payment Information
+                    Thông tin thanh toán
                 </div>
                 <div class="card-body">
                     <p><strong>Subtotal:</strong> <span th:text="${order.get().subtotal}"></span></p>
@@ -81,18 +81,18 @@
 
             <div class="card mb-3">
                 <div class="card-header">
-                    Order Status
+                    Trạng thái Order
                 </div>
                 <div class="card-body">
                     <label for="status">Status</label>
                     <select id="status" name="status" class="form-select">
-                        <option th:selected="${order.get().status == 'PENDING'}" value="PENDING">PENDING</option>
-                        <option th:selected="${order.get().status == 'REFUND'}" value="REFUND">REFUND</option>
-                        <option th:selected="${order.get().status == 'SHIPPING'}" value="SHIPPING">SHIPPING</option>
-                        <option th:selected="${order.get().status == 'SHIPPED'}" value="SHIPPED">SHIPPED</option>
-                        <option th:selected="${order.get().status == 'COMPLETED'}" value="COMPLETED">COMPLETED</option>
-                        <option th:selected="${order.get().status == 'CANCELLED'}" value="CANCELLED">CANCELLED</option>
-                        <option th:selected="${order.get().status =='DELIVERED'}" value="DELIVERED">DELIVERED</option>
+                        <option th:selected="${order.get().status == 'PENDING'}" value="PENDING">Đang xử lý</option>
+                        <option th:selected="${order.get().status == 'REFUND'}" value="REFUND">Hoàn tiền</option>
+                        <option th:selected="${order.get().status == 'SHIPPING'}" value="SHIPPING">Đang vận chuyển</option>
+                        <option th:selected="${order.get().status == 'SHIPPED'}" value="SHIPPED">Đã vận chuyển</option>
+                        <option th:selected="${order.get().status == 'COMPLETED'}" value="COMPLETED">Hoàn thành</option>
+                        <option th:selected="${order.get().status == 'CANCELLED'}" value="CANCELLED">Hủy Đơn hàng</option>
+                        <option th:selected="${order.get().status =='DELIVERED'}" value="DELIVERED">Đã giao hàng</option>
                     </select>
                 </div>
             </div>
