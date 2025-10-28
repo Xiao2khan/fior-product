@@ -236,14 +236,26 @@
 @media (max-width: 1200px) {
     .category-dropdown,.sort-dropdown{
         width: 50%!important;
+        height: 46px!important;
     }
     #categorySelect{
         width: 100%;
+        height: 100%;
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
     .product-content-col{
-        width:60%;
+        width:80% !important;
+    }
+    .search-form{
+        width: 60% !important;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .search-form{
+        width: 80% !important;
     }
 }

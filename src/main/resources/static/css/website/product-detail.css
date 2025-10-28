@@ -451,11 +451,11 @@ select {
 /* === Small mobile (màn hình nhỏ hơn 576px) === */
 @media (max-width: 576px) {
     .breadcrumb-content h1 {
-        font-size: 18px;
+        font-size: 24px;
     }
 
     .breadcrumb-content p {
-        font-size: 10px;
+        font-size: 16px;
     }
     .product-section {
         margin-top: 1rem;
