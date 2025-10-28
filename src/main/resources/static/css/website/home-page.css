@@ -466,6 +466,9 @@
 }
 
 @media (max-width: 768px) {
+    .product-content-col{
+        width:80% !important;
+    }
     .hero-content {
     gap: 16px;
     }
@@ -493,11 +496,6 @@
         text-align: center;
     }
 }
-@media (max-width: 576px) {
-    .product-content-col{
-        width:60%;
-    }
-}
 
 @media (max-width: 526px) {
     .detail {
@@ -508,4 +506,3 @@
     }
 
 }
->>>>>>> Stashed changes

@@ -4,6 +4,17 @@
       layout:decorate="~{layout/website/main}">
 <head>
     <link rel="stylesheet" th:href="@{/css/website/placeOrder.css}">
+    <style>
+        .error-message {
+            color: red;
+            font-size: 13px;
+            margin-top: 3px;
+            display: none;
+        }
+        input.error {
+            border-color: red;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="website-content">
@@ -27,33 +38,46 @@
                         <div class="col-12">
                             <label class="form-label fw-semibold" th:text="#{fullName}"></label>
                             <input type="text" class="form-control" name = "fullName" placeholder="Nguyễn Văn An" />
+                            <div class="error-message" data-error-for="fullName"></div>
+
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label fw-semibold" th:text="#{phoneNumber}">Số điện thoại</label>
                             <input type="text" class="form-control" name = "phone" placeholder="0912345678" />
+                            <div class="error-message" data-error-for="phone"></div>
+
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-semibold">Email</label>
                             <input type="email" name = "email" class="form-control w-100" placeholder="abc@gmail.com" style="height: auto; box-shadow: unset;"/>
+                            <div class="error-message" data-error-for="email"></div>
+
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label fw-semibold" th:text="#{city}">Thành phố / tỉnh</label>
                             <input type="text" name="city" class="form-control" placeholder="Hà Nội" />
+                            <div class="error-message" data-error-for="city"></div>
+
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-semibold" th:text="#{district}">Quận / huyện</label>
                             <input type="text" name="district" class="form-control" th:placeholder="#{districtEx}" />
+                            <div class="error-message" data-error-for="district"></div>
+
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label fw-semibold" th:text="#{ward}">Phường / xã</label>
                             <input type="text" name="ward" class="form-control" th:placeholder="#{wardEx}" />
+                            <div class="error-message" data-error-for="ward"></div>
+
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-semibold" th:text="#{neighborhood}">Tổ dân phố / thôn</label>
                             <input type="text" name="street"  class="form-control" th:placeholder="#{neighborhoodEx}" />
+                            <div class="error-message" data-error-for="street"></div>
                         </div>
                     </form>
                 </div>
@@ -88,6 +112,7 @@
     </div>
 </div>
 <th:block layout:fragment="scripts">
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const subtotalEl = document.getElementById("subtotal");
@@ -97,6 +122,32 @@
             const form = document.querySelector("form");
             const phoneInput = form.querySelector("input[name='phone']");
 
+            const showError = (name, message) => {
+                const input = form.querySelector(`input[name="${name}"]`);
+                const error = form.querySelector(`.error-message[data-error-for="${name}"]`);
+                input.classList.add("error");
+                error.textContent = message;
+                error.style.display = "block";
+            };
+
+            const clearError = (name) => {
+                const input = form.querySelector(`input[name="${name}"]`);
+                const error = form.querySelector(`.error-message[data-error-for="${name}"]`);
+
+                input.classList.remove("error");
+                error.textContent = "";
+                error.style.display = "none";
+            };
+
+            phoneInput.addEventListener("input", function () {
+                this.value = this.value.replace(/[^0-9]/g, '');
+                if (this.value.length > 11) {
+                    this.value = this.value.slice(0, 11);
+                    showError("phone", "Số điện thoại không được vượt quá 11 chữ số!");
+                } else {
+                    clearError("phone");
+                }
+            });
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
             let lang = window.location.pathname.split("/")[1] || "vi";
             let subtotal = 0;
@@ -125,14 +176,6 @@
             });
 
 
-            phoneInput.addEventListener("input", function () {
-                this.value = this.value.replace(/[^0-9]/g, '');
-                if (this.value.length > 11) {
-                    this.value = this.value.slice(0, 11);
-                    alert("Số điện thoại không được vượt quá 11 chữ số!");
-                }
-            });
-
             orderButton.addEventListener("click", async (event) => {
                 event.preventDefault();
 
@@ -146,18 +189,41 @@
                     ward: form.querySelector("input[name='ward']").value,
                     street: form.querySelector("input[name='street']").value
                 };
-                const emailRegex =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-                if (!formData.fullName || !formData.phone || !formData.email || !formData.city || !formData.district || !formData.ward) {
-                    alert("Vui lòng điền đầy đủ thông tin!");
-                    return;
+                Object.keys(formData).forEach(clearError);
+
+                for (const key in formData) {
+                    if (!formData[key]) {
+                        showError(key, "Vui lòng điền thông tin này!");
+                        form.querySelector(`input[name="${key}"]`).focus();
+                        return;
+                    }
                 }
-
 
                 if (!emailRegex.test(formData.email)) {
-                    alert("Email không hợp lệ! Vui lòng nhập đúng định dạng (vd: abc@gmail.com).");
+                    showError("email", "Email không hợp lệ (vd: abc@gmail.com).");
+                    form.querySelector(`input[name="email"]`).focus();
                     return;
                 }
+
+                if (!/^[0-9]{10,11}$/.test(formData.phone)) {
+                    showError("phone", "Số điện thoại phải gồm 10-11 chữ số.");
+                    form.querySelector(`input[name="phone"]`).focus();
+                    return;
+                }
+                // const emailRegex =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+                // if (!formData.fullName || !formData.phone || !formData.email || !formData.city || !formData.district || !formData.ward) {
+                //     alert("Vui lòng điền đầy đủ thông tin!");
+                //     return;
+                // }
+                //
+                //
+                // if (!emailRegex.test(formData.email)) {
+                //     alert("Email không hợp lệ! Vui lòng nhập đúng định dạng (vd: abc@gmail.com).");
+                //     return;
+                // }
 
                 const orderData = {
                     customer: formData,

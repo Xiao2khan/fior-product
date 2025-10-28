@@ -248,27 +248,30 @@
         const newBreakpoint = getBreakpoint();
         const newSize = getPageSize(newBreakpoint);
 
-        // 🔹 Nếu chưa khởi tạo lần đầu → chỉ gán mà KHÔNG reload
         if (!initialized) {
             lastBreakpoint = newBreakpoint;
             container.dataset.pageSize = newSize;
             initialized = true;
+            const newPage = Math.floor(currentPage * currentSize / newSize);
+            const params = url.searchParams;
+            params.set('page', newPage);
+            params.set('size', newSize);
+            const newUrl = url.pathname + '?' + params.toString();
+            container.dataset.pageSize = newSize;
+            lastBreakpoint = newBreakpoint;
+            history.replaceState(null, '', newUrl);
             return;
         }
 
-        // 🔹 Nếu breakpoint không đổi thì bỏ qua
         if (newBreakpoint === lastBreakpoint && !force) return;
 
-        // 🔹 Nếu kích thước trang trùng thì không làm gì
         if (newSize === currentSize) {
             lastBreakpoint = newBreakpoint;
             return;
         }
 
-        // 🔹 Lưu vị trí cuộn hiện tại
         const scrollY = window.scrollY;
 
-        // 🔹 Tính trang mới và cập nhật URL
         const newPage = Math.floor(currentPage * currentSize / newSize);
         const params = url.searchParams;
         params.set('page', newPage);
@@ -278,15 +281,12 @@
         container.dataset.pageSize = newSize;
         lastBreakpoint = newBreakpoint;
 
-        // 🔹 Cập nhật URL mà không reload
         history.replaceState(null, '', newUrl);
 
-        // 🔹 Nếu có renderProducts() thì gọi lại, không reload
         if (typeof renderProducts === 'function') {
             renderProducts();
             window.scrollTo({ top: scrollY, behavior: 'instant' });
         } else {
-            // Trường hợp không có renderProducts -> reload 1 lần
             window.location.reload();
             window.scrollTo(0, scrollY);
         }
@@ -295,7 +295,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         lastBreakpoint = getBreakpoint();
-        adjustPageSize(false);
+        adjustPageSize(true);
     });
 
     let resizeTimeout;

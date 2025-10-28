@@ -31,8 +31,8 @@ img {
 footer a:hover { text-decoration: underline; }
 
 @media (max-width: 768px){
-    .position-sticky{
-        padding:12px
+    .navbar-toggler{
+        margin-right: 10px;
     }
 }
 
