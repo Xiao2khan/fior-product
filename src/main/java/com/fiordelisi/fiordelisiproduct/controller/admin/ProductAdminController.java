@@ -111,7 +111,7 @@ public class ProductAdminController extends BaseController {
         productService.saveFromDto(productDto);
 
         redirectAttributes.addFlashAttribute("success",
-                id == null ? "Product created successfully" : "Product updated successfully");
+                id == null ? "Tạo sản phẩm hoàn tất" : "Cập nhật sản phẩm hoàn tất");
 
         return "redirect:/admin/products";
     }
@@ -120,7 +120,7 @@ public class ProductAdminController extends BaseController {
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable String id, RedirectAttributes ra) {
         productService.deleteById(id);
-        ra.addFlashAttribute("success", "Product deleted successfully");
+        ra.addFlashAttribute("success", "Xóa sản phẩm hoàn tất");
         return "redirect:/admin/products";
     }
 }
