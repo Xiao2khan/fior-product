@@ -8,13 +8,17 @@
 </head>
 <body>
 <div layout:fragment="website-content">
-    <div class="position-relative breadcrumb">
-        <img src="/image/breadcrumb.jpg">
-        <div class="position-absolute" style="top:30%;left:40%">
-            <h1 style="text-align: center">Chi tiết Sản phẩm</h1>
-            <p>Trang Chủ > Sản Phẩm > Chi tiết sản phẩm</p>
+    <div class="breadcrumb-banner">
+        <img src="/image/breadcrumb.jpg" alt="breadcrumb background">
+        <div class="breadcrumb-content">
+            <h1 th:text="#{productDetail}"></h1>
+            <p><a th:href="@{/{lang}(lang=${#locale.language})}"><span th:text="#{home}"></span></a> >
+                <a th:href="@{/{lang}/products(lang=${#locale.language})}"><span th:text="#{products}"></span></a> >
+                <span th:text="#{productDetail}"></span>
+            </p>
         </div>
     </div>
+
     <section class="product-section container">
         <div class="product-detail d-flex" style="gap:64px">
             <div class="product-gallery">
@@ -36,8 +40,8 @@
                     <div class="d-flex flex-column gap-12">
                         <h1 class="product-name" id="product-name" th:text="${product.name}" style="font-size: 40px;color:#2C6E1F"></h1>
                         <p class="stock-status"
-                           th:text="${!#lists.isEmpty(product.variants) ? (product.variants[0].instock ? 'Còn hàng' : 'Hết hàng') : (product.instock ? 'Còn hàng' : 'Hết hàng')}"
-                           th:classappend="${!#lists.isEmpty(product.variants) ? (product.variants[0].instock ? ' in-stock' : ' out-stock') : (product.instock ? ' in-stock' : ' out-stock')}">
+                           th:text="${!#lists.isEmpty(product.variants) ? (product.variants[0].instock ? 'Còn hàng' : 'Hết hàng') : (product.inStock ? 'Còn hàng' : 'Hết hàng')}"
+                           th:classappend="${!#lists.isEmpty(product.variants) ? (product.variants[0].instock ? ' in-stock' : ' out-stock') : (product.inStock ? ' in-stock' : ' out-stock')}">
                         </p>
                     </div>
                     <p class="price" style="color:#020808">
@@ -51,7 +55,7 @@
                     <div class="d-flex flex-column" style="gap:32px;font-weight: 600">
                         <div class="variant-quantity">
                             <div class="quantity d-flex flex-column">
-                                <span>Số Lượng</span>
+                                <span th:text="#{quantity}">Số Lượng</span>
                                 <div class="quantity-control">
                                     <button type="button" onclick="changeQty(-1)">−</button>
                                     <input id="quantity" value="1" min="1">
@@ -59,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="variant d-flex flex-column">
-                                <span>Kích Thước</span>
+                                <span th:text="#{size}"></span>
                                 <div th:if="${!#lists.isEmpty(product.variants)}">
                                     <select id="variant-select">
                                         <option th:each="variant,iterStat : ${product.variants}"
@@ -71,21 +75,21 @@
                                         </option>
                                     </select>
                                 </div>
-                                <!-- Nếu không có variant, hiển thị option mặc định -->
+
                                 <div th:if="${#lists.isEmpty(product.variants)}" hidden>
                                     <select id="variant-select">
                                         <option th:value="${product.id}"
                                                 th:data-price="${product.defaultPrice}"
-                                                th:data-stock="${product.instock}">
-                                            Mặc định
+                                                th:data-stock="${product.inStock}" th:text="#{default}">
+
                                         </option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="action-buttons d-flex flex-column" style="gap:32px">
-                            <button class="btn btn-cart" style="max-width:395px;height:56px" th:disabled="${!#lists.isEmpty(product.variants) ? !product.variants[0].instock : !product.instock}">Thêm vào giỏ hàng</button>
-                            <button class="btn btn-buy" style="height:80px" th:disabled="${!#lists.isEmpty(product.variants) ? !product.variants[0].instock : !product.instock}">Đặt hàng</button>
+                            <button class="btn btn-cart" style="max-width:395px;height:56px" th:disabled="${!#lists.isEmpty(product.variants) ? !product.variants[0].instock : !product.inStock}">Thêm vào giỏ hàng</button>
+                            <button class="btn btn-buy" style="height:80px" th:disabled="${!#lists.isEmpty(product.variants) ? !product.variants[0].instock : !product.inStock}">Đặt hàng</button>
                             <input th:value="${product.id}" id="product-id" hidden>
                         </div>
                     </div>
@@ -93,10 +97,10 @@
                 <div class="product-desc" th:utext="${product.description}"></div>
             </div>
         </div>
-        <!-- Sản phẩm liên quan -->
+
         <div class="related-products">
             <div class="d-flex align-items-center justify-content-center position-relative mb-4">
-                <h2 class="m-0 text-center flex-grow-1">Sản phẩm liên quan</h2>
+                <h2 id="related-products-title" class="m-0 text-center flex-grow-1">Sản phẩm liên quan</h2>
                 <div class="btn-page position-absolute d-flex align-items-center">
                     <div id="prev-btn" class="icon d-flex align-items-center justify-content-center">
                         <i class="fa-solid fa-arrow-left"></i>
@@ -134,7 +138,7 @@
                                                                  : related.defaultPrice}">
                                                 </span> VNĐ
                                             </div>
-                                            <div class="buy-btn">Mua</div>
+                                            <div class="buy-btn" th:text="#{buy.btn}"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -150,6 +154,7 @@
     <!-- Scripts -->
     <th:block layout:fragment="scripts">
         <script>
+
             function changeQty(delta) {
                 const input = document.getElementById('quantity');
                 let value = parseInt(input.value) + delta;
@@ -163,17 +168,23 @@
                 const stockEl = document.querySelector('.stock-status');
                 const cartBtn = document.querySelector('.btn-cart');
                 const buyBtn = document.querySelector('.btn-buy');
+                const titleEl = document.getElementById("related-products-title");
+                if (titleEl) {
+                    titleEl.textContent = t("relatedProducts");
+                }
 
                 function updateFromOption(option) {
                     if (!option) return;
                     const price = Number(option.dataset.price);
                     const inStock = option.dataset.stock === 'true';
-
+                    console.log(option);
                     priceEl.textContent = new Intl.NumberFormat('vi-VN').format(price);
-                    stockEl.textContent = inStock ? 'Còn hàng' : 'Hết hàng';
+                    stockEl.textContent = inStock ? t("inStock") : t("outStock");
                     stockEl.className = inStock ? 'stock-status in-stock' : 'stock-status out-stock';
                     cartBtn.disabled = !inStock;
+                    cartBtn.textContent = t("addToCart");
                     buyBtn.disabled = !inStock;
+                    buyBtn.textContent = t("buy");
                 }
 
                 if (variantSelect) {

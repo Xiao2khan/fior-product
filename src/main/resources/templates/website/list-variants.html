@@ -3,14 +3,19 @@
       layout:decorate="~{layout/website/main}">
 <head>
     <link rel="stylesheet" th:href="@{/css/website/product-page.css}">
+    <link rel="stylesheet" th:href="@{/css/website/product-detail.css}">
 </head>
 <body>
 <div layout:fragment="website-content">
-    <section class="">
-        <div>
-            <img th:src="@{/image/Frame_1000004965.png}" alt="">
+    <div class="breadcrumb-banner">
+        <img src="/image/breadcrumb.jpg" alt="breadcrumb background">
+        <div class="breadcrumb-content">
+            <h1 th:text="#{products}"></h1>
+            <p><a th:href="@{/{lang}(lang=${#locale.language})}"><span th:text="#{home}"></span></a> >
+                <span th:text="#{products}"></span>
+            </p>
         </div>
-    </section>
+    </div>
     <section>
         <div class="d-flex justify-content-center" style="margin: 40px 0 60px 0">
             <form method="get" th:action="|/${lang}/products|" class="search-form w-50 position-relative">
@@ -38,7 +43,7 @@
                     <div class="category-item">
                         <a th:href="|/${lang}/products?page=0&size=${pageSize}|"
                            th:classappend="${selectedCategoryId == null || selectedCategoryId == ''} ? 'active'"
-                           class="category-link">Tất cả</a>
+                           class="category-link" th:text="#{all}"></a>
                     </div>
                     <div class="category-item" th:each="categorie : ${categories}">
                         <a th:href="|/${lang}/products?page=0&size=${pageSize}&categoryId=${categorie.id}|"
@@ -66,29 +71,28 @@
                     <div class="dropdown">
                         <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center justify-content-between"
                                 type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div th:text="${selectedSort == null ? 'Mặc định' : (selectedSort == 'price_asc' ? 'Giá tăng dần' : (selectedSort == 'price_desc' ? 'Giá giảm dần' : (selectedSort == 'name_asc' ? 'Từ A - Z' : (selectedSort == 'name_desc' ? 'Từ Z - A' : 'Mặc định'))))}"></div>
+                            <div th:text="${selectedSort == null ? #messages.msg('default') : (selectedSort == 'price_asc' ? #messages.msg('price.asc') :(selectedSort == 'price_desc' ? #messages.msg('price.desc') :(selectedSort == 'name_asc' ? #messages.msg('name.asc') :(selectedSort == 'name_desc' ? #messages.msg('name.desc') :#messages.msg('default')))))}"></div>
                             <div><img th:src="@{/image/arrow-down.png}" alt=""></div>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="sortDropdown">
                             <li class="d-flex align-items-center"><a class="dropdown-item"
                                                                      th:href="|/${lang}/products?page=0&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '')|"
-                                                                     th:classappend="${selectedSort == null} ? 'active'">Mặc
-                                định</a>
+                                                                     th:classappend="${selectedSort == null} ? 'active'" th:text="#{default}"></a>
                                 <div><img style="transform: rotate(180deg);" th:src="@{/image/arrow-down.png}" alt="">
                                 </div>
                             </li>
                             <li><a class="dropdown-item"
                                    th:href="|/${lang}/products?page=0&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + '&sort=price_asc'|"
-                                   th:classappend="${selectedSort == 'price_asc'} ? 'active'">Giá tăng dần</a></li>
+                                   th:classappend="${selectedSort == 'price_asc'} ? 'active'" th:text="#{price.asc}">Giá tăng dần</a></li>
                             <li><a class="dropdown-item"
                                    th:href="|/${lang}/products?page=0&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + '&sort=price_desc'|"
-                                   th:classappend="${selectedSort == 'price_desc'} ? 'active'">Giá giảm dần</a></li>
+                                   th:classappend="${selectedSort == 'price_desc'} ? 'active'" th:text="#{price.desc}">Giá giảm dần</a></li>
                             <li><a class="dropdown-item"
                                    th:href="|/${lang}/products?page=0&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + '&sort=name_asc'|"
-                                   th:classappend="${selectedSort == 'name_asc'} ? 'active'">Từ A - Z</a></li>
+                                   th:classappend="${selectedSort == 'name_asc'} ? 'active'" th:text="#{name.asc}">Từ A - Z</a></li>
                             <li><a class="dropdown-item"
                                    th:href="|/${lang}/products?page=0&size=${pageSize}| + (${selectedCategoryId != null} ? '&categoryId=' + ${selectedCategoryId} : '') + (${search != ''} ? '&search=' + ${search} : '') + '&sort=name_desc'|"
-                                   th:classappend="${selectedSort == 'name_desc'} ? 'active'">Từ Z - A</a></li>
+                                   th:classappend="${selectedSort == 'name_desc'} ? 'active'" th:text="#{name.desc}">Từ Z - A</a></li>
                         </ul>
                     </div>
                 </div>
@@ -126,7 +130,7 @@
                                                       : product.defaultPrice}">
                                     </span> VNĐ
                                     </div>
-                                    <div class="buy-btn">Mua</div>
+                                    <div class="buy-btn" th:text="#{buy.btn}">Mua</div>
                                 </div>
                             </div>
                         </div>
@@ -143,8 +147,6 @@
                             <i class="fa-solid fa-arrow-left"></i>
                         </a>
                     </li>
-
-                    <!-- Hiển thị tất cả nếu totalPages <= 4 -->
                     <th:block th:if="${totalPages <= 4}">
                         <li class="page-item"
                             th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
@@ -290,13 +292,12 @@
         }
     }
 
-    // 🔹 Khởi tạo
+
     document.addEventListener('DOMContentLoaded', () => {
         lastBreakpoint = getBreakpoint();
-        adjustPageSize(false); // KHÔNG ép reload
+        adjustPageSize(false);
     });
 
-    // 🔹 Lắng nghe resize (khi breakpoint thay đổi)
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);

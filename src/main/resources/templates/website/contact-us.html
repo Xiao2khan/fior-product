@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/website/main}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/website/contact-us.css}">
+</head>
+<body>
+<div layout:fragment="website-content">
+    <section class="contact-section container">
+        <div class="contact-header">
+            <nav class="breadcrumb"><p>
+                <a th:href="@{/{lang}(lang=${#locale.language})}" style="color:unset"><span th:text="#{home}"></span></a> >
+                <a th:href="@{/{lang}/contact(lang=${#locale.language})}" style="color:unset"><span th:text="#{contact}"></span></a> >
+               <span th:text="#{contact-us}"></span>
+            </p></nav>
+            <h2 th:text="#{contact-us}"></h2>
+        </div>
+
+        <div class="contact-content">
+            <div class="contact-image">
+                <img src="/image/contact-tractor.png" alt="Contact illustration">
+            </div>
+
+            <form class="contact-form">
+                <h3 th:text="#{welcome}">Chào mừng,</h3>
+                <p th:text="#{contactFormtext}">
+
+                </p>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label th:text="#{fullName}"></label>
+                        <input type="text" placeholder="Nguyễn Văn A">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="abc@gmail.com">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label th:text="#{address}"></label>
+                        <input type="text" th:placeholder="#{addressPlaceholder}">
+                    </div>
+                    <div class="form-group">
+                        <label th:text="#{phoneNumber}"></label>
+                        <input type="text" placeholder="0912345678">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label th:text="#{title}"></label>
+                        <input type="text" th:placeholder="#{titlePlaceholder}">
+                    </div>
+                    <div class="form-group">
+                        <label th:text="#{department}"></label>
+                        <select>
+                            <option th:text="#{department}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label th:text="#{content}"></label>
+                    <textarea th:placeholder="#{contentPlaceholder}"></textarea>
+                </div>
+
+                <div class="form-group full-width file-group">
+                    <label th:text="#{attached}" ></label>
+                    <label for="fileInput" class="file-box">
+                        <span class="file-placeholder" th:text="#{attachedPlaceholder}"></span>
+                        <i class="fa fa-download"></i>
+                    </label>
+                    <input type="file" id="fileInput" hidden>
+                </div>
+
+
+                <p class="note" th:text="#{note}">
+
+                </p>
+                <div class="d-flex" style="width: 185px">
+                    <a class="btn-contact w-100" th:href="@{/{lang}/contact-us/success(lang=${#locale.language})}" th:text="#{send}"></a>
+                </div>
+            </form>
+        </div>
+    </section>
+
+</div>
+</body>
+</html>

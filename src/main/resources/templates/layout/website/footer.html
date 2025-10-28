@@ -4,48 +4,44 @@
 <footer th:fragment="website-footer" class="footer d-flex flex-column" style="margin-top:100px">
 
     <!-- Contact Section -->
-    <section class="contact text-center w-100 ps-5 pe-5 bg-transparent" style="padding: 60px 20px; margin-bottom:40px">
+    <section class="contact text-center w-100 ps-5 pe-5 bg-transparent"
+             style="padding: 60px 20px; margin-bottom:40px"
+             th:if="${!(currentPath.contains('/contact'))}">
+
         <h1 th:utext="#{contact.title}" class="mb-3"></h1>
         <p th:utext="#{contact.description}"></p>
         <div class="form-group d-flex flex-wrap gap-3 align-items-center justify-content-center">
             <input type="email" th:placeholder="#{contact.placeholder}">
-            <button type="button" class="btn btn-outline-success" th:utext="#{contact.button}"
-                    style="border-radius:12px;">Gửi
+            <button type="button" class="btn btn-outline-success"
+                    th:utext="#{contact.button}" style="border-radius:12px;">Gửi
             </button>
         </div>
     </section>
+
 
     <section class="footer-section" style="background-color: #2C6E1F;">
         <div class="d-flex container footer-content" style="padding: 52px 0; gap:50px">
             <div class="contact-footer d-flex flex-column" style="gap: 16px">
                 <div class="d-flex" style="width: 165px;height: 99px;">
-                    <img src="/image/image_156.png" alt="">
+                    <img src="/image/logo.png" alt="">
                 </div>
-                <div class="text-footer d-flex flex-column" style="gap: 10px">
-                    <div>Fiordelisi</div>
-                    <div>Nhà phân phối: CÔNG TY TNHH THỰC PHẦM VITALY</div>
-                    <div>Địa chỉ: 64 Nguyễn Xuân Khoát, phường An Hải, Thành phố Đà Nẵng</div>
-                    <div>Liên Hệ: 085 795 8866</div>
-                    <div>Email: vitaly.import@gmail.com</div>
+                <div class="text-footer d-flex flex-column" style="gap: 10px" th:utext="#{footer.info}">
                 </div>
             </div>
             <div class="policy-footer d-flex flex-column" style="gap: 10px">
-                <div>Chính sách mua hàng</div>
-                <div>Chính sách thanh toán</div>
-                <div>Chính sách đổi trả</div>
+                <div th:text="#{footer.privacy}"></div>
+                <div th:text="#{footer.terms}"></div>
+                <div th:text="#{footer.returns}"></div>
             </div>
             <div class="certificate-footer d-flex flex-column" style="width: 300px; gap: 24px;">
-                <div class="d-flex flex-column" style="gap: 10px">
-                    <div>Số giấy chứng nhận đăng kí kinh doanh: 0402273550</div>
-                    <div>Ngày cấp lần đầu: 24 tháng 4 năm 2025 do Sở Tài chinh TP Đà Nẵng cấp</div>
+                <div class="d-flex flex-column" style="gap: 10px" th:utext="#{footer.certificate}">
                 </div>
                 <div style="width: 185px; height: 71px">
                     <img src="/image/certifi.png" alt="">
                 </div>
             </div>
         </div>
-        <div style="border-top: 1px solid #FFFFFF; padding: 11px 0;" class="text-center">
-            © Bản quyền thuộc về Fiordelisi | Cung cấp bởi VITALY VIỆT NAM
+        <div style="border-top: 1px solid #FFFFFF; padding: 11px 0;" class="text-center" th:text="#{footer.copyright}">
         </div>
     </section>
 </footer>

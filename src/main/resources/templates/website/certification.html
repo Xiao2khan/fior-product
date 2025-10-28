@@ -10,16 +10,19 @@
     <div class="position-relative breadcrumb d-flex justify-content-center align-items-center" style="margin-bottom: 64px">
         <img src="/image/breadcrumb.jpg">
         <div class="position-absolute">
-            <h1 style="text-align: center; font-weight: 600; font-size: 36px; line-height: 64px;">Chứng nhận của chúng tôi</h1>
-            <p class="text-center">Trang Chủ > Chứng nhận</p>
+            <h1 style="text-align: center; font-weight: 600; font-size: 36px; line-height: 64px;" th:text="#{certification.h}"></h1>
+            <p class="text-center">
+                <a th:href="@{/{lang}(lang=${#locale.language})}" style="color:unset"><span th:text="#{home}"></span></a> >
+                <span th:text="#{certification}"></span>
+            </p>
         </div>
     </div>
     <div class="certification-container container">
         <div class="certification-content content">
             <div class="logos d-flex flex-column align-items-center" style="gap: 24px">
                 <div class="title-content">
-                    <h2>Đảm bảo chất lượng</h2>
-                    <p>Sản phẩm của chúng tôi được đảm bảo bởi các chứng nhận quốc tế nhằm bảo vệ người tiêu dùng.</p>
+                    <h2 th:text="#{certificationContent.title}">Đảm bảo chất lượng</h2>
+                    <p th:text="#{certificationContent.content}"></p>
                 </div>
                 <div class="d-flex justify-content-center icons align-items-center" style="gap: 24px">
                     <div class="big-icon">

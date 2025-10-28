@@ -9,7 +9,6 @@ import java.util.Optional;
 
 public interface CategoryRepository extends MongoRepository<Category, String> {
     Optional<Category> findFirstByNameIgnoreCase(String name);
-
     Page<Category> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }
 

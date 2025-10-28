@@ -7,8 +7,9 @@
 </head>
 <body>
 <div layout:fragment="website-content">
-    <section class="container" style="padding:30px 0 20px">
-        Trang chủ > Liên hệ
+    <section class="container" style="padding:30px 0 20px;font-size:14px">
+        <a th:href="@{/{lang}(lang=${#locale.language})}" style="color:unset"><span th:text="#{home}"></span></a> >
+        <span th:text="#{contact}"></span>
     </section>
     <section class="position-relative">
         <img src="/image/contact.png" style="height: 60vh">
@@ -16,7 +17,7 @@
     <section class="container hero-section d-flex flex-column align-items-center position-relative"
              style="margin-top: -45vh;z-index: 2;gap: 60px">
         <div class="title-content">
-            <div class="title">Bạn muốn liên hệ với Fiordelisi</div>
+            <div class="title" th:text="#{contactContent.title}"></div>
         </div>
         <div class="d-flex justify-content-center" style="flex-flow: wrap; gap: 24px">
             <div class="block-content d-flex flex-column align-items-center">
@@ -26,15 +27,12 @@
                 <div class="line-content">
                 </div>
                 <div class="d-flex flex-column" style="gap: 4px">
-                    <div class="text-content text-center">
-                        Chat với chúng tôi
-                    </div>
-                    <div class="text text-center">
-                        Chat với chúng tôi nếu bạn không thể tìm thấy câu trả lời mà bạn đang tìm kiếm, chúng tôi ở đây để giúp một tay.
+                    <div class="text-content text-center" th:text="#{contactContentChat.title}"></div>
+                    <div class="text text-center" th:text="#{contactContentChat.text}">
                     </div>
                 </div>
                 <div class="d-flex" style="width: 250px">
-                    <div class="btn-contact w-100">Đi đến “Chat"</div>
+                    <div class="btn-contact w-100" th:text="#{contactContentChat.button}"></div>
                 </div>
             </div>
             <div class="block-content d-flex flex-column align-items-center">
@@ -44,15 +42,14 @@
                 <div class="line-content">
                 </div>
                 <div class="d-flex flex-column" style="gap: 4px">
-                    <div class="text-content text-center">
-                        Liên hệ với chúng tôi
+                    <div class="text-content text-center" th:text="#{contactContentForm.title}">
+
                     </div>
-                    <div class="text text-center">
-                        Liên hệ với chúng tôi nếu bạn muốn có câu trả lời chi tiết nhất về vấn đề của bạn, chúng tôi ở đây để giải đáp cho bạn.
+                    <div class="text text-center" th:text="#{contactContentForm.text}">
                     </div>
                 </div>
                 <div class="d-flex" style="width: 250px">
-                    <a class="btn-contact w-100" th:href="@{/{lang}/contact/form(lang=${#locale.language})}">Đi đến "Liên hệ"</a>
+                    <a class="btn-contact w-100" th:href="@{/{lang}/contact-us(lang=${#locale.language})}" th:text="#{contactContentForm.button }"></a>
                 </div>
             </div>
         </div>

@@ -135,7 +135,7 @@ public class ProductServiceImpl implements ProductService {
         product.setCategoryId(dto.getCategoryId() != null ? dto.getCategoryId() : new ArrayList<>());
         product.setDefaultPrice(dto.getDefaultPrice() != null ? dto.getDefaultPrice() : 0);
         product.setImages(dto.getImages() != null ? dto.getImages() : new ArrayList<>());
-
+        product.setInStock(dto.isInStock());
         // Xử lý variants
         List<Variant> currentVariants = product.getVariants() != null ? new ArrayList<>(product.getVariants()) : new ArrayList<>();
 
@@ -176,10 +176,9 @@ public class ProductServiceImpl implements ProductService {
 
         // Lưu product
         if (dto.getId() == null || dto.getId().isBlank()) {
-            log.info("Creating new product: {}", product);
+
             return create(product);
         } else {
-            log.info("Updating product: {}", product);
             return update(dto.getId(), product);
         }
     }
@@ -221,6 +220,7 @@ public class ProductServiceImpl implements ProductService {
                     .defaultPrice(product.getDefaultPrice() != null ? product.getDefaultPrice() : 0)
                     .variants(product.getVariants() != null ? new ArrayList<>(product.getVariants()) : new ArrayList<>())
                     .language(defaultLang)
+                    .inStock(product.isInStock())
                     .translations(translations)
                     .build();
 

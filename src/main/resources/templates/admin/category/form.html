@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin/main}">
 <head>
     <meta charset="UTF-8">
-    <title>Category</title>
+    <title>Danh mục</title>
 </head>
 <body>
 <div layout:fragment="admin-content">
@@ -14,13 +14,13 @@
 
         <!-- 🔹 Mặc định tiếng Việt -->
         <div class="mb-3">
-            <label class="form-label">Name</label>
+            <label class="form-label">Tên</label>
             <input type="text" class="form-control" th:field="*{name}" required>
             <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Description</label>
+            <label class="form-label">Mô tả</label>
             <textarea class="form-control" rows="3" th:field="*{description}"></textarea>
             <div class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
         </div>
@@ -53,13 +53,13 @@
 
         <div class="d-flex justify-content-end mb-3">
             <button type="button" class="btn btn-outline-primary" id="add-lang-btn">
-                <i class="fa fa-plus me-1"></i> Add English (en)
+                <i class="fa fa-plus me-1"></i> Thêm tiếng Anh (en)
             </button>
         </div>
 
         <div class="d-flex gap-2">
-            <button class="btn btn-primary" type="submit"><i class="fa fa-save me-1"></i>Save</button>
-            <a class="btn btn-secondary" th:href="@{/admin/categories}">Back</a>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-save me-1"></i>Lưu</button>
+            <a class="btn btn-secondary" th:href="@{/admin/categories}">Trở lại</a>
         </div>
     </form>
 </div>
@@ -70,11 +70,10 @@
             const addLangBtn = document.getElementById("add-lang-btn");
             const langContainer = document.getElementById("lang-container");
 
-            // Bind sự kiện xóa cho các block có sẵn
             langContainer.querySelectorAll(".lang-block .btn-close").forEach(btn => {
                 btn.addEventListener("click", () => {
                     btn.closest(".lang-block").remove();
-                    addLangBtn.style.display = "block"; // hiện lại nút add nếu xóa block
+                    addLangBtn.style.display = "block";
                 });
             });
 
@@ -91,11 +90,11 @@
                     <h5 class="mb-3">English (en)</h5>
                     <input type="hidden" name="translations[0].language" value="en">
                     <div class="mb-3">
-                        <label class="form-label">Name (en)</label>
+                        <label class="form-label">Tên (en)</label>
                         <input type="text" class="form-control" name="translations[0].name" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Description (en)</label>
+                        <label class="form-label">Mô tả (en)</label>
                         <textarea class="form-control" name="translations[0].description" rows="3"></textarea>
                     </div>
                 `;

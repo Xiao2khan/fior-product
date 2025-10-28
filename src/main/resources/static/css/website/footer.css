@@ -9,7 +9,7 @@ section.contact p {
     margin-bottom: 32px;
 }
 
-input[type="email"] {
+footer input[type="email"] {
     width: 500px;
     height: 56px;
     border-radius: 12px;
@@ -23,13 +23,13 @@ input[type="email"] {
     transition: box-shadow 0.3s ease;
 }
 
-input[type="email"]::placeholder {
+footer input[type="email"]::placeholder {
     color: #999;
 }
 
 /* Khi focus input trong footer */
 footer input[type="email"]:focus {
-    box-shadow: 0px 6px 28px 0px #00000020; /* Bóng đậm hơn khi focus */
+    box-shadow: 0px 6px 28px 0px #00000020;
 }
 
 /* Button trong footer */

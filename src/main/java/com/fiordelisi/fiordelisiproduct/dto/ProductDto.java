@@ -40,18 +40,13 @@ public class ProductDto {
     private String language;
     private List<TranslationEntry> translations = new ArrayList<>();
     private boolean hasOtherTranslations;
+    private boolean inStock = true;
 
     public static ProductDto toDto(Product product, String languageCode) {
 
         String name = getLocalizedValue(product.getName(), languageCode);
         String description = getLocalizedValue(product.getDescription(), languageCode);
 
-//        if (name == null || name.isBlank()) {
-//            name = getLocalizedValue(product.getName(), "vi");
-//        }
-//        if (description == null || description.isBlank()) {
-//            description = getLocalizedValue(product.getDescription(), "vi");
-//        }
 
         boolean hasOtherTranslations = product.getName() != null &&
                 product.getName().stream()
@@ -68,23 +63,7 @@ public class ProductDto {
                 .language(languageCode)
                 .hasOtherTranslations(hasOtherTranslations)
                 .translations(new ArrayList<>())
+                .inStock(product.isInStock())
                 .build();
     }
-
-
-
-//    public static String getLocalizedValue(Set<LocalizedText> localizedTexts, String languageCode) {
-//        if (localizedTexts == null || languageCode == null) return null;
-//
-//        return localizedTexts.stream()
-//                .filter(t -> languageCode.equalsIgnoreCase(t.getLanguage()))
-//                .map(LocalizedText::getValue)
-//                .findFirst()
-//                .or(() -> localizedTexts.stream()
-//                        .filter(t -> Language.EN.getCode().equalsIgnoreCase(t.getLanguage()))
-//                        .map(LocalizedText::getValue)
-//                        .findFirst()
-//                )
-//                .orElse(null);
-//    }
 }

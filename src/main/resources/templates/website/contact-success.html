@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/website/main}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/website/contact-success.css}">
+
+</head>
+<body>
+<div layout:fragment="website-content">
+    <div class="container breadcrumb" style="margin-top:1rem">
+        <a th:href="@{/{lang}(lang=${#locale.language})}" style="color:unset"><span th:text="#{home}"></span></a> >
+        <a th:href="@{/{lang}/cart(lang=${#locale.language})}" style="color:unset"><span th:text="#{contact}"></span></a> >
+        <span th:text="#{contact-us}"></span>
+    </div>
+    <div class="contact-success container">
+        <div class="contact-success-container d-flex flex-column" style="gap:24px;width: 50%">
+            <div class="title"><h3 th:text="#{contactSuccessTitle}"></h3></div>
+            <div class="message d-flex flex-column" th:text="#{contactSuccessContent}">
+            </div>
+
+            <div>
+                <button class="button" onclick="window.location.href='/'" th:text="#{contactSuccessButton}"></button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -12,7 +12,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handleNotFound(NoHandlerFoundException ex, Model model, HttpServletRequest request) {
         String uri = request.getRequestURI();
-        // For any unknown route, redirect to default language home
         if (uri == null || uri.isEmpty() || uri.contains("admin")) {
             return "redirect:/en";
         }

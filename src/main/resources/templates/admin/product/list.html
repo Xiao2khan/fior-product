@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin/main}">
 <head>
     <meta charset="UTF-8">
-    <title>Products</title>
+    <title>Sản phẩm</title>
     <style>
         th,td{
             text-align: center;
@@ -12,7 +12,7 @@
 <body>
 <div layout:fragment="admin-content">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="mb-0">Products</h3>
+        <h3 class="mb-0">Sản phẩm</h3>
         <form class="d-flex" method="get" th:action="@{/admin/products}">
             <input class="form-control form-control-sm me-2" type="search" name="q" placeholder="Search by name" th:value="${q}">
             <button class="btn btn-outline-secondary btn-sm me-2" type="submit"><i class="fa fa-search"></i></button>
@@ -27,10 +27,10 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Translations</th>
-                <th>Image</th>
-                <th class="text-end">Actions</th>
+                <th>Tên</th>
+                <th>Bản dịch</th>
+                <th>Ảnh</th>
+                <th class="text-end">Hành động</th>
             </tr>
             </thead>
             <tbody>
@@ -42,7 +42,7 @@
                         <span><img src="https://flagcdn.com/gb.svg" width="20" alt="UK flag" style="vertical-align:middle"></span>
                     </span>
                     <span th:if="${!p.hasOtherTranslations}">
-                        <span>No Translations(en)</span>
+                        <span>Không có bản dịch (en)</span>
                     </span>
                 </td>
 

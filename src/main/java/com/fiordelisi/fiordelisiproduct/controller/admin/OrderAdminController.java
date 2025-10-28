@@ -59,12 +59,12 @@ public class OrderAdminController extends BaseController {
         }
     }
 
-    @PostMapping({"api/orders"})
+    @PostMapping({"api/placeOrder"})
     public ResponseEntity<?> createOrder(@RequestBody OrderDto dto) {
-        log.info(dto.toString());
+
         try {
             Order savedOrder = orderService.saveFromDto(dto);
-            log.info(dto.toString());
+
             return ResponseEntity.ok(savedOrder);
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class OrderAdminController extends BaseController {
     @PostMapping("/admin/orders/delete/{id}")
     public String delete(@PathVariable String id, RedirectAttributes ra) {
         orderService.delete(id);
-        ra.addFlashAttribute("success", "Order deleted successfully");
+        ra.addFlashAttribute("success", "Xóa order thành công");
         return "redirect:/admin/orders";
     }
 }

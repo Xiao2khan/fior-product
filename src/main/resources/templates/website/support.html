@@ -7,8 +7,11 @@
 </head>
 <body>
 <div layout:fragment="website-content">
-    <section class="container" style="padding:30px 0 20px">
-        Trang chủ > Hỗ trợ
+    <section class="container" style="padding:30px 0 20px;font-size:14px">
+        <p><a th:href="@{/{lang}(lang=${#locale.language})}" style="color:unset"><span th:text="#{home}"></span></a> >
+            <span th:text="#{support}"></span>
+        </p>
+
     </section>
     <section class="position-relative">
         <img src="/image/support.png" style="height: 60vh">
@@ -16,10 +19,17 @@
     <section class="container hero-section d-flex flex-column align-items-center position-relative"
              style="margin-top: -45vh;z-index: 2;gap: 60px">
         <div class="title-content">
-            <div class="title">Fiordelisi giúp được gì cho bạn?</div>
+            <div class="title" th:text="#{support.title}"></div>
         </div>
         <div class="search-content">
-            <input type="text" class="w-100" placeholder="Nhập từ khóa ( mã giảm giá, hủy đơn hàng,...)">
+            <form method="get" th:action="|/${lang}/support|">
+                <input type="text" name="search"
+                       th:value="${search}"
+                       class="w-100"
+                       id="searchInput"
+                       th:placeholder="#{searchPlaceholder}"
+                       onkeypress="if(event.key==='Enter'){event.preventDefault();this.closest('form').submit();}">
+            </form>
         </div>
         <div class="d-flex justify-content-center" style="flex-flow: wrap; gap: 24px">
             <div class="block-content d-flex flex-column align-items-center">
@@ -28,9 +38,7 @@
                 </div>
                 <div class="line-content">
                 </div>
-                <div class="text-content">
-                    Hỗ trợ mua hàng
-                </div>
+                <div class="text-content" th:text="#{support.content1}"></div>
             </div>
             <div class="block-content d-flex flex-column align-items-center">
                 <div class="image-content">
@@ -38,9 +46,8 @@
                 </div>
                 <div class="line-content">
                 </div>
-                <div class="text-content">
-                    Hỗ trợ thanh toán
-                </div>
+                <div class="text-content" th:text="#{support.content2}"></div>
+
             </div>
             <div class="block-content d-flex flex-column align-items-center">
                 <div class="image-content">
@@ -48,36 +55,20 @@
                 </div>
                 <div class="line-content">
                 </div>
-                <div class="text-content">
-                    Hỗ trợ đổi trả
-                </div>
+                <div class="text-content" th:text="#{support.content3}"></div>
             </div>
         </div>
     </section>
     <section class="container support-page">
         <div class="support-page-content d-flex flex-column">
-            <div class="title">
-                Một số câu hỏi thường gặp
+            <div class="title" th:text="#{question.title}">
             </div>
             <div class="d-flex flex-column" style="gap: 28px">
-                <div class="d-flex flex-column" style="gap: 16px">
-                    <div class="question-content">
-                        [Mua hàng] Cách "Mua ngay" sản phẩm trên website
-                    </div>
-                    <div class="question-content">
-                        [Mua hàng] Làm thế nào để tôi đặt hàng qua website?
-                    </div>
-                    <div class="question-content">
-                        [Trả hàng] Website sẽ đánh giá hàng hoàn trả dựa trên những tiêu chí nào?
-                    </div>
-                    <div class="question-content">
-                        [Trả hàng/Hoàn tiền] Cẩm nang Trả hàng hoàn tiền
-                    </div>
+                <div class="d-flex flex-column" style="gap: 16px" th:each="q: ${questions}">
+                    <div class="question-content" th:text="${q.title}"></div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <div class="btn-see-more d-flex">
-                        Xem thêm ngay
-                    </div>
+                    <div class="btn-see-more d-flex" th:text="#{buttonSupport}"></div>
                 </div>
             </div>
         </div>

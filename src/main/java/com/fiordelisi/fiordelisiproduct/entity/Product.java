@@ -26,6 +26,7 @@ public class Product {
     private List<Variant> variants;
     @Builder.Default
     private Integer defaultPrice = 0;
+    private boolean inStock = true;
 
     public String getNameByLanguage(String lang) {
         return name.stream()

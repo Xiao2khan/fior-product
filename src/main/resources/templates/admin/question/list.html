@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/admin/main}">
 <head>
     <meta charset="UTF-8">
-    <title>Danh mục</title>
+    <title>Questions</title>
     <style>
         .action-btn { margin-right: 8px; }
         th,td{
@@ -14,11 +14,11 @@
 <body>
 <div layout:fragment="admin-content">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="mb-0">Danh mục</h3>
-        <form class="d-flex" method="get" th:action="@{/admin/categories}">
+        <h3 class="mb-0">Câu hỏi</h3>
+        <form class="d-flex" method="get" th:action="@{/admin/questions}">
             <input class="form-control form-control-sm me-2" type="search" name="q" placeholder="Search by name" th:value="${q}">
             <button class="btn btn-outline-secondary btn-sm me-2" type="submit"><i class="fa fa-search"></i></button>
-            <a class="btn btn-primary btn-sm" th:href="@{/admin/categories/create}"><i class="fa fa-plus me-1"></i>Thêm</a>
+            <a class="btn btn-primary btn-sm" th:href="@{/admin/questions/create}"><i class="fa fa-plus me-1"></i>Thêm</a>
         </form>
     </div>
 
@@ -29,38 +29,40 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Tên</th>
-                <th>Mô tả</th>
+                <th>Tiêu đề</th>
+                <th>Câu hỏi</th>
+                <th>Trả lời</th>
                 <th>Bản dịch</th>
                 <th class="text-end">Hành động</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="c, i : ${categories}">
+            <tr th:each="q, i : ${questions}">
                 <td th:text="${i.index + 1}"></td>
-                <td th:text="${c.name}"></td>
-                <td th:text="${c.description}"></td>
+                <td th:text="${q.title}"></td>
+                <td th:text="${q.question}"></td>
+                <td th:text="${q.answer}"></td>
                 <td>
-                    <span th:if="${c.hasOtherTranslations}">
+                    <span th:if="${q.hasOtherTranslations}">
                         <span><img src="https://flagcdn.com/gb.svg" width="20" alt="UK flag" style="vertical-align:middle"></span>
                     </span>
-                    <span th:if="${!c.hasOtherTranslations}">
+                    <span th:if="${!q.hasOtherTranslations}">
                         <span>Không có bản dịch (en)</span>
                     </span>
                 </td>
                 <td class="text-end">
-                    <a class="btn btn-sm btn-secondary action-btn" th:href="@{'/admin/categories/edit/' + ${c.id}}">
+                    <a class="btn btn-sm btn-secondary action-btn" th:href="@{'/admin/questions/edit/' + ${q.id}}">
                         <i class="fa fa-pen"></i>
                     </a>
-                    <form th:action="@{'/admin/categories/delete/' + ${c.id}}" method="post" class="d-inline delete-form">
+                    <form th:action="@{'/admin/questions/delete/' + ${q.id}}" method="post" class="d-inline delete-form">
                         <button type="button" class="btn btn-sm btn-danger btn-delete">
                             <i class="fa fa-trash"></i>
                         </button>
                     </form>
                 </td>
             </tr>
-            <tr th:if="${#lists.isEmpty(categories)}">
-                <td colspan="4" class="text-center text-muted">Không có dữ liệu</td>
+            <tr th:if="${#lists.isEmpty(questions)}">
+                <td colspan="4" class="text-center text-muted">No data</td>
             </tr>
             </tbody>
         </table>
@@ -68,13 +70,13 @@
     <nav th:if="${page != null && page.totalPages > 1}" aria-label="Pagination">
         <ul class="pagination pagination-sm justify-content-end">
             <li class="page-item" th:classappend="${page.first} ? 'disabled'">
-                <a class="page-link" th:href="@{/admin/categories(page=${page.number-1}, size=${page.size}, q=${q})}" aria-label="Previous">&laquo;</a>
+                <a class="page-link" th:href="@{/admin/questions(page=${page.number-1}, size=${page.size}, q=${q})}" aria-label="Previous">&laquo;</a>
             </li>
             <li class="page-item" th:each="i : ${#numbers.sequence(0, page.totalPages-1)}" th:classappend="${i==page.number} ? 'active'">
-                <a class="page-link" th:text="${i+1}" th:href="@{/admin/categories(page=${i}, size=${page.size}, q=${q})}">1</a>
+                <a class="page-link" th:text="${i+1}" th:href="@{/admin/questions(page=${i}, size=${page.size}, q=${q})}">1</a>
             </li>
             <li class="page-item" th:classappend="${page.last} ? 'disabled'">
-                <a class="page-link" th:href="@{/admin/categories(page=${page.number+1}, size=${page.size}, q=${q})}" aria-label="Next">&raquo;</a>
+                <a class="page-link" th:href="@{/admin/questions(page=${page.number+1}, size=${page.size}, q=${q})}" aria-label="Next">&raquo;</a>
             </li>
         </ul>
     </nav>
@@ -86,11 +88,11 @@
             $(document).on('click', '.btn-delete', function(){
                 const form = $(this).closest('form');
                 Swal.fire({
-                    title: 'Bạn chắc chắn muốn xóa danh mục này?',
+                    title: 'Delete this question?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Đúng thế, xóa',
-                    cancelButtonText: 'Bỏ qua'
+                    confirmButtonText: 'Yes, delete',
+                    cancelButtonText: 'Cancel'
                 }).then((res)=>{ if(res.isConfirmed){ form.submit(); } });
             });
         });
