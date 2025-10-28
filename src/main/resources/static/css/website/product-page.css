@@ -233,3 +233,17 @@
     background: #DEF8C0;
 }
 
+@media (max-width: 1200px) {
+    .category-dropdown,.sort-dropdown{
+        width: 50%!important;
+    }
+    #categorySelect{
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-content-col{
+        width:60%;
+    }
+}

@@ -98,10 +98,10 @@
             </div>
         </div>
 
-        <div class="related-products">
+        <div class="related-products" >
             <div class="d-flex align-items-center justify-content-center position-relative mb-4">
                 <h2 id="related-products-title" class="m-0 text-center flex-grow-1">Sản phẩm liên quan</h2>
-                <div class="btn-page position-absolute d-flex align-items-center">
+                <div class="btn-page position-absolute d-flex align-items-center"  th:if="${relatedProducts != null and !#lists.isEmpty(relatedProducts)}">
                     <div id="prev-btn" class="icon d-flex align-items-center justify-content-center">
                         <i class="fa-solid fa-arrow-left"></i>
                     </div>
