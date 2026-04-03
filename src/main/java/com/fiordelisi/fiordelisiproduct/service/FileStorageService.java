@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class FileStorageService {
 
-    private final Path rootDir = Paths.get("uploads");
+    private final Path rootDir = Paths.get("/uploads");
 
     public FileStorageService() {
         try {
